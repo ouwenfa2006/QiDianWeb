@@ -40,6 +40,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.foshan.entity.LearningMaterials;
+import com.foshan.util.PageUtil;
 
 @Controller
 @RequestMapping(value="/systemController")
@@ -120,18 +121,20 @@ public class SystemController extends BaseController{
 	@RequestMapping(value="/getAllLeanrningMaterials")
 	public String getAllLeanrningMaterials(HttpServletRequest request) throws UnsupportedEncodingException{
 		//取得辅导资料页面传过来的参数
-		String page=request.getParameter("page");
 		String grade=request.getParameter("grade");
 		String courseName=request.getParameter("courseName");
-		String searchFile=request.getParameter("searchFile");	
+		String searchFile=request.getParameter("searchFile");
+		//符合条件的搜索
 		List<LearningMaterials> all_learns=getLearningMaterialsService().findAllLearningMaterials(1,1500,grade,courseName,searchFile);
-		//保存页面参数，以作分页或查询操作
+		//保存，以作分页操作
 		getSession().removeAttribute("all_learns");
 		getSession().setAttribute("all_learns", all_learns);
 		if(all_learns!=null&&all_learns.size()>0){
-			List<LearningMaterials> learn_list=getShow(all_learns,1,pageSize);
+			//每一页的结果
+			List<LearningMaterials> learn_list=PageUtil.getShow(all_learns,1,pageSize);
 			request.setAttribute("learn_list", learn_list);
 		}
+		//保存页面参数
 		request.setAttribute("page",1);
 		getSession().removeAttribute("totalPage");
 		int result=all_learns.size()%pageSize;
@@ -142,19 +145,6 @@ public class SystemController extends BaseController{
 		}
 		
 		return "/CounselingInformation/counselingInformations_list";
-	}
-	private List<LearningMaterials> getShow(List<LearningMaterials> all_learns,int page,int pageSize) {
-		List<LearningMaterials> list=new LinkedList<LearningMaterials>();
-		int start=(page-1)*pageSize;
-		int end=page*pageSize;
-		for (int i = start; i <end; i++){
-			if(i<all_learns.size()){
-				list.add(all_learns.get(i));
-			}else{
-				break;
-			}
-		}
-		return list;
 	}
 	/**
 	 * 从搜索的结果集中进行分页显示
@@ -171,7 +161,7 @@ public class SystemController extends BaseController{
 			page="1";
 		}
 		List<LearningMaterials> all_learns=(List<LearningMaterials>) getSession().getAttribute("all_learns");
-		List<LearningMaterials> learn_list=getShow(all_learns,Integer.parseInt(page),3);
+		List<LearningMaterials> learn_list=PageUtil.getShow(all_learns,Integer.parseInt(page),pageSize);
 		request.setAttribute("page", Integer.parseInt(page));
 		request.setAttribute("learn_list", learn_list);
 		return "/CounselingInformation/counselingInformations_list";

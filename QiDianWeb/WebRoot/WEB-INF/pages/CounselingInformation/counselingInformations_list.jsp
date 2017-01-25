@@ -84,7 +84,11 @@
     	$(function(){
     		//跳转
     		$("#inputPage").change(function(){
-    			createFormAndSubmit($(this).val());
+        		if(parseInt($(this).val())>parseInt("${totalPage}")){
+        			alert("已经没有更多的数据");
+        			return;
+        		}
+        		createFormAndSubmit($(this).val());	
     		});		
     	});
     	//首页
@@ -97,7 +101,7 @@
     	}
     	//后一页
     	function nextPage(){
-    		var size="${fn:length(learn_list)}";
+    		var size="${fn:length(learn_list)}";//每页显示的数量
     		if(parseFloat(size)<parseInt("${totalPage}")){
     			alert("已经没有更多的数据");
     			return;
