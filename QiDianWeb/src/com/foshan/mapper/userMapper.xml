@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foshan.mapper.UserMapper">
+    <resultMap type="com.foshan.entity.User" id="userMapper">
+        <id property="id" column="id" />
+        <result property="userName" column="userName" />
+      	<result property="password" column="password"></result>
+    	<!-- <collection property="roles" ofType="com.foshan.entity.Role" autoMapping="true"></collection> -->
+    </resultMap> 
+    
+    <resultMap type="com.foshan.entity.User" id="userAndMaterialsMapper" extends="userMapper">
+    	<!-- 包装有问题.. -->
+    	<collection property="learningMaterials_list"  ofType="com.foshan.entity.LearningMaterials"  autoMapping="true">
+    	</collection>
+    </resultMap>
+    <resultMap type="com.foshan.entity.User" id="userAndRolesMapper" extends="userMapper">
+    	<collection property="roles" ofType="com.foshan.entity.Role" autoMapping="true"></collection>
+    </resultMap>
+    <select id="findUserAndMaterialsById"  parameterType="int" resultMap="userAndMaterialsMapper">
+   		select u.id,u.userName,l.id,l.fileName from user u,learningMaterials l 
+   		<where>
+   			u.id=#{id} and u.id=l.uploadUserId
+   		</where>
+   	</select>
+    <insert id="addUser" parameterType="com.foshan.entity.User">
+    	insert into user(userName,password) values(#{userName},#{password})
+    </insert>
+    <select id="findUserByUserName" parameterType="com.foshan.entity.User" resultMap="userMapper">
+    	select * from user u where u.userName=#{userName}
+    </select>
+    <select id="findUserById" parameterType="int" resultMap="userMapper">
+    	select * from user u where u.id=#{id}
+    </select>
+   	<select id="findUserAndRolesById" parameterType="int" resultMap="userAndRolesMapper">
+   		select * from user u,role r,user_role ur where u.id=#{id} and u.id=ur.userId and r.id=ur.role_id
+   	</select>
+    <delete id="deleteUserById" parameterType="int">
+    	delete from user where id=#{id}
+    </delete>
+</mapper>
+<!-- association必须放到最后 ,加载结果默认是懒加载，可通过mybatis的配置文件修改-->
+      	<!-- <association property="role" javaType="com.srpingmvc.entity.Role" column="role_Id">
+      		这里可以通过延迟加载来获得role的信息
+      		<id property="roleId" column="role_Id"/>
+      		 <result property="roleName" column="roleName"/>  
+      	</association>  -->
+      	<!-- 集合配置,也role成员变量的配置类似，查询时也必须查其他表才有值,extend baseMap技巧注意使用 -->
+      	<!-- <collection property=""></collection>    -->
+<!-- <resultMap type="com.srpingmvc.entity.User" id="userRoleMap" extends="userMap">
+          	
+    </resultMap> -->    
+    <!-- 使同时查询多个关联表的值，则必须同时对多个表查询，否则只能取得其他表的id -->
+<!--     <select id="findUser" resultMap="userRoleMap" parameterType="com.srpingmvc.entity.User">
+    	select * from mvc_user u,mvc_role r,mvc_user_role ur where u.userId=#{userId} and u.userId=ur.user_Id and r.roleId=ur.role_id
+    </select> -->
+    
+  	<!-- <select id="findUser" parameterType="com.srpingmvc.entity.User"  resultType="com.srpingmvc.entity.User">
+    		select * from mvc_USER where username=#{userName} and password=#{password}
+    </select> -->
+    
+    
+    <!-- 
+    <select id="findRoleByUserId" parameterType="java.lang.Integer" resultType="com.srpingmvc.entity.Role">
+    	select * from mvc_role where roleId=#(roleId)
+    </select>
+     -->
+    <!--  <select id="findRoleByUserId" parameterType="java.lang.Integer" resultType="com.srpingmvc.entity.Role">
+    	select * from mvc_role where roleId=#(roleId)
+    </select> -->
+    <!-- 此处select标签的id值对应Mapper类中方法名 -->
+    <!-- userMap才能取得成员变量的ID -->
+    <!-- <select id="findUserByName" parameterType="java.lang.String" resultType="com.srpingmvc.entity.User">
+            此处写sql语句,#{Mapper类传入的参数}
+            select * from mvc_USER where username = #{userName}
+    </select> -->
+    <!-- <select id="findUser" parameterType="com.srpingmvc.entity.User"  resultType="com.srpingmvc.entity.User">
+    		select * from mvc_USER where username=#{userName} and password=#{password}
+    </select> -->
+    <!-- <select id="findAllUsers" resultMap="userMap">
+    	select userid,userName,password,role_Id,email,createDate,userBirthday from mvc_USER
+    </select>
+    <select id="getMaxId" resultType="java.lang.Integer">
+    	select max(userId) from mvc_user
+    </select>
+   <insert id="addUser" parameterType="com.srpingmvc.entity.User">
+   		   insert into mvc_user(userid,username,password,email,createDate,userBirthday) values(#{userId},#{userName},#{password},#{email},#{createDate},#{userBirthday})
+   </insert>
+   <insert id="addUser_Role" parameterType="com.srpingmvc.entity.User" >
+   		insert into mvc_user_role(user_Id,role_Id) values(#{userId},1)
+   </insert>
+   <delete id="deleteUser" parameterType="java.lang.Integer">
+   		delete from mvc_user where userId=#{userId}
+   </delete>
+   <delete id="deleteUser_Role" parameterType="java.lang.Integer">
+   		delete from mvc_user_role where user_Id=#{userId}
+   </delete>
+   <select id="findByUsereId" parameterType="java.lang.Integer" resultMap="userMap">
+   		select userid,userName,password,role_Id,email,createDate,userBirthday from mvc_USER where userId=#{userId}
+   </select>
+   <select id="findUsersByProperties" parameterType="com.srpingmvc.entity.User"  resultMap="userMap">
+  	
+   		select * from mvc_user
+   		<where>
+   			<if test="userName!=null and userName!=''">
+   		and userName like CONCAT(CONCAT('%', #{userName}),'%')
+   		
+   		</if>
+   		<if test="role!=null">
+   			and role_id=#{role.roleId}
+   		</if>
+   		</where>
+   </select> -->
