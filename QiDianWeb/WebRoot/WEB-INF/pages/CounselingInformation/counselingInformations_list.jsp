@@ -62,6 +62,12 @@
     						<span class="pull-left">页&nbsp;&nbsp;第</span>
     						<span class="pull-left" style="color: red;">${page }</span>
     						<span class="pull-left">页</span>
+    						<span class="pull-left">&nbsp;&nbsp;共</span>
+    						<span class="pull-left" style="color: red;">${fn:length(all_learns) }</span>
+    						<span class="pull-left">条记录</span>
+    						<span class="pull-left">&nbsp;&nbsp;共</span>
+    						<span class="pull-left" style="color: red;">${totalPage }</span>
+    						<span class="pull-left">页</span>
     				</div>
     			</div>
     			
@@ -70,12 +76,13 @@
     	</div>
     	<script type="text/javascript">
     	var page="${page}";//当前页
-		var courseName="${courseName}";//科目名称
+		/* var courseName="${courseName}";//科目名称
 		var gradeName="${grade}";//年级
-		var searchFile="${searchFile}";//搜索的文件名称
+		var searchFile="${searchFile}";//搜索的文件名称 */
 		var pPage="${page-1}";//下一页
 		var nPage="${page+1}";//前一页
     	$(function(){
+    		//跳转
     		$("#inputPage").change(function(){
     			createFormAndSubmit($(this).val());
     		});		
@@ -91,7 +98,7 @@
     	//后一页
     	function nextPage(){
     		var size="${fn:length(learn_list)}";
-    		if(parseFloat(size)<5){
+    		if(parseFloat(size)<parseInt("${totalPage}")){
     			alert("已经没有更多的数据");
     			return;
     		}
@@ -99,13 +106,9 @@
     	}
     	//创建临时提交表单
     	function createFormAndSubmit(page){
-    		var url="../systemController/getAllLeanrningMaterials";
-    		var searchFile=$(window.parent.document).find("#search").val();
-    		alert(searchFile)
+    		var url="../systemController/getFilesFromList";
 			var string='';
 			string+='<form id="fm" action="'+url+'" method="post" target="rightIframe" style="displasy:none;">';
-			string+='<input name="courseName" value="'+courseName+'">';
-			string+='<input name="grade" value="'+gradeName+'">';
 			string+='<input name="page" value="'+page+'">';
 			string+='</form>';
 			$("body").append(string);

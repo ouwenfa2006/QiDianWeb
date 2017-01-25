@@ -8,6 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,6 +45,7 @@ import com.foshan.entity.LearningMaterials;
 @RequestMapping(value="/systemController")
 public class SystemController extends BaseController{
 	public static Logger logger=Logger.getLogger(SystemController.class);
+	private int pageSize=3;
 	/**
 	 * 回到主页
 	 */
@@ -122,19 +124,56 @@ public class SystemController extends BaseController{
 		String grade=request.getParameter("grade");
 		String courseName=request.getParameter("courseName");
 		String searchFile=request.getParameter("searchFile");	
+		List<LearningMaterials> all_learns=getLearningMaterialsService().findAllLearningMaterials(1,1500,grade,courseName,searchFile);
+		//保存页面参数，以作分页或查询操作
+		getSession().removeAttribute("all_learns");
+		getSession().setAttribute("all_learns", all_learns);
+		if(all_learns!=null&&all_learns.size()>0){
+			List<LearningMaterials> learn_list=getShow(all_learns,1,pageSize);
+			request.setAttribute("learn_list", learn_list);
+		}
+		request.setAttribute("page",1);
+		getSession().removeAttribute("totalPage");
+		int result=all_learns.size()%pageSize;
+		if(result==0){
+			getSession().setAttribute("totalPage", all_learns.size()/pageSize);
+		}else{
+			getSession().setAttribute("totalPage", all_learns.size()/pageSize+1);
+		}
+		
+		return "/CounselingInformation/counselingInformations_list";
+	}
+	private List<LearningMaterials> getShow(List<LearningMaterials> all_learns,int page,int pageSize) {
+		List<LearningMaterials> list=new LinkedList<LearningMaterials>();
+		int start=(page-1)*pageSize;
+		int end=page*pageSize;
+		for (int i = start; i <end; i++){
+			if(i<all_learns.size()){
+				list.add(all_learns.get(i));
+			}else{
+				break;
+			}
+		}
+		return list;
+	}
+	/**
+	 * 从搜索的结果集中进行分页显示
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="getFilesFromList")
+	public String getFilesFromList(HttpServletRequest request){
+		String page=request.getParameter("page");
 		if(page==null){
 			page="1";
 		}
 		if(page.equals("0")){
 			page="1";
 		}
-		List<LearningMaterials> learn_list=getLearningMaterialsService().findAllLearningMaterials(Integer.parseInt(page),5,grade,courseName,searchFile);
-		//保存页面参数，以作分页或查询操作
-		request.setAttribute("learn_list", learn_list);
+		List<LearningMaterials> all_learns=(List<LearningMaterials>) getSession().getAttribute("all_learns");
+		List<LearningMaterials> learn_list=getShow(all_learns,Integer.parseInt(page),3);
 		request.setAttribute("page", Integer.parseInt(page));
-		request.setAttribute("grade", grade);
-		request.setAttribute("courseName", courseName);
-		request.setAttribute("searchFile", searchFile);
+		request.setAttribute("learn_list", learn_list);
 		return "/CounselingInformation/counselingInformations_list";
 	}
 	/**

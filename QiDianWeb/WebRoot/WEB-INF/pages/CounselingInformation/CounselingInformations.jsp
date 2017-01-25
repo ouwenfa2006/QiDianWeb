@@ -85,7 +85,7 @@ display: inline-block;
 			<div style="margin-top:9px;margin-left:-76px;">
 				<button class="btn btn-sm btn-info" type="button" style="float:left;" id="upload_btn">上传文件</button>
 				<input id="search" type="text" class="search" style="float:left;margin-top:1px;">
-				<button class="btn btn-sm btn-info" style="float:left;margin-left:8px;" type="button">搜索</button>
+				<button id="search_btn" class="btn btn-sm btn-info" style="float:left;margin-left:8px;" type="button">搜索</button>
 			</div>
 			<iframe id="rightIframe" name="rightIframe" scrolling="no"
 				frameborder="0"
@@ -116,7 +116,7 @@ display: inline-block;
 	}, {
 		id : 11,
 		pId : 1,
-		name : "中学"
+		name : "科目"
 	}, {
 		id : 111,
 		pId : 11,
@@ -146,6 +146,10 @@ display: inline-block;
 		pId : 111,
 		name : "高三"
 	}, {
+		id : 1117,
+		pId : 111,
+		name : "小学"
+	}, {
 		id : 112,
 		pId : 11,
 		name : "语文"
@@ -174,6 +178,10 @@ display: inline-block;
 		pId : 112,
 		name : "高三"
 	}, {
+		id : 1127,
+		pId : 112,
+		name : "小学"
+	}, {
 		id : 113,
 		pId : 11,
 		name : "英语"
@@ -201,6 +209,10 @@ display: inline-block;
 		id : 1136,
 		pId : 113,
 		name : "高三"
+	}, {
+		id : 1137,
+		pId : 113,
+		name : "小学"
 	}, {
 		id : 114,
 		pId : 11,
@@ -281,25 +293,7 @@ display: inline-block;
 		id : 1172,
 		pId : 117,
 		name : "高中"
-	}, {
-		id : 12,
-		pId : 1,
-		name : "小学"
-	}, {
-		id : 121,
-		pId : 12,
-		name : "语文"
-	}, {
-		id : 122,
-		pId : 12,
-		name : "数学"
-	}, {
-		id : 123,
-		pId : 12,
-		name : "英语"
-	},
-
-	];
+	}];
 
 	var log, className = "dark";
 	function beforeClick(treeId, treeNode, clickFlag) {
@@ -311,44 +305,29 @@ display: inline-block;
 		//取得选中的对象
 		var treeObj = $.fn.zTree.getZTreeObj("tree");
 		var sNodes = treeObj.getSelectedNodes();
-		
-		if(treeNode.name=="初一"||treeNode.name=="初二"||treeNode.name=="初三"||treeNode.name=="高一"||treeNode.name=="高二"||treeNode.name=="高三"||treeNode.name=="初中"||treeNode.name=="高中"){
+		if(treeNode.name=="初一"||treeNode.name=="初二"||treeNode.name=="初三"||treeNode.name=="高一"||treeNode.name=="高二"||treeNode.name=="高三"||treeNode.name=="初中"||treeNode.name=="高中"||treeNode.name=="小学"){
 			if (sNodes.length > 0) {
+				$("#search").val("");
 				var grade = sNodes[0].getParentNode();//父节点	
-				var url="../systemController/getAllLeanrningMaterials";
-				var string='';
-				string+='<form id="fm" action="'+url+'" method="post" target="rightIframe" style="displasy:none;">';
-				string+='<input name="courseName" value="'+grade.name+'">';
-				string+='<input name="grade" value="'+treeNode.name+'">';
-				string+='<input name="page" value="'+1+'">';
-				string+='</form>';
-				$("body").append(string);
-				$("#fm").submit();
-				$("#fm").remove();
+				createFormAndSubmit(grade.name, treeNode.name,null);
 				return;
 			}
 		}
-		if(treeNode.name=="语文"||treeNode.name=="数学"||treeNode.name=="英语"){
-			if (sNodes.length > 0) {
-				var grade = sNodes[0].getParentNode();//父节点
-				if(grade.name=="小学"){
-					var url="../systemController/getAllLeanrningMaterials";
-					var string='';
-					string+='<form id="fm" action="'+url+'" method="post" target="rightIframe" style="displasy:none;">';
-					string+='<input name="grade" value="'+grade.name+'">';
-					string+='<input name="courseName" value="'+treeNode.name+'">';
-					string+='<input name="page" value="'+1+'">';
-					string+='</form>';
-					$("body").append(string);
-					$("#fm").submit();
-					$("#fm").remove();
-					return;
-				}
-			}
-		}
-		
 	}
-	
+	//创建临时菜单并提交
+	function createFormAndSubmit(gradeName,treeNodeName,searchFile){
+		var url="../systemController/getAllLeanrningMaterials";
+		var string='';
+		string+='<form id="fm" action="'+url+'" method="post" target="rightIframe" style="displasy:none;">';
+		string+='<input name="courseName" value="'+gradeName+'">';
+		string+='<input name="grade" value="'+treeNodeName+'">';
+		string+='<input name="page" value="'+1+'">';
+		string+='<input name="searchFile" value="'+searchFile+'">';
+		string+='</form>';
+		$("body").append(string);
+		$("#fm").submit();
+		$("#fm").remove();
+	}
 
 	$(document).ready(function() {
 		//初始化树形菜单
@@ -359,6 +338,11 @@ display: inline-block;
 			upload_div.show();
 			top_bg_div.show();
 			upload_div.find("input[type='file']").click();
+		});
+		
+		$("#search_btn").click(function(){
+			//搜索以搜索的内容作为主体
+			createFormAndSubmit(null, null, $("#search").val());
 		});
 	});
 </script>
