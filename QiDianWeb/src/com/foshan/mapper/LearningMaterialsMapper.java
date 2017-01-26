@@ -13,4 +13,5 @@ public interface LearningMaterialsMapper {
 	void deleteByIds(int...ids);
 	List<LearningMaterials> findLearningMaterialsByFileName(String fileName);
 	void update(LearningMaterials learningMaterials);
+	List<LearningMaterials> findLearningMaterials(@Param("grade")String grade,@Param("courseName")String courseName,@Param("start")int start,@Param("pageSize")int pageSize);
 }

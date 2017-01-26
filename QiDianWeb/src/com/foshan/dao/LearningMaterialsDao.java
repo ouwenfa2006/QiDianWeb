@@ -11,4 +11,5 @@ public interface LearningMaterialsDao {
 	void deleteByIds(int...ids);
 	List<LearningMaterials> findLearningMaterialsByFileName(String fileName);
 	void update(LearningMaterials learningMaterials);
+	List<LearningMaterials> findLearningMaterials(String grade,String courseName,int start,int pageSize);
 }

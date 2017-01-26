@@ -1,5 +1,6 @@
 package com.foshan.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 
@@ -8,7 +9,8 @@ import java.util.List;
  * @author Administrator
  *
  */
-public class Role {
+public class Role implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String roleName;
 	private List<Action> privileges;

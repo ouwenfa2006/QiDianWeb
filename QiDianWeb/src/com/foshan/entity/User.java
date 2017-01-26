@@ -2,13 +2,15 @@ package com.foshan.entity;
 
 
 
+import java.io.Serializable;
 import java.util.List;
 /**
  * 用户类
  * @author Administrator
  *
  */
-public class User {
+public class User implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String userName;
 	private String password;

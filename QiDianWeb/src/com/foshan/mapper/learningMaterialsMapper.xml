@@ -29,6 +29,9 @@
     <select id="findLearningMaterialsByFileName" resultMap="learningMaterialsMapper">
     	select * from LearningMaterials where fileName like  CONCAT(CONCAT('%', #{fileName}),'%')
     </select>
+    <select id="findLearningMaterials" resultMap="learningMaterialsMapper">
+    	select * from LearningMaterials l,user u where l.grade=#{grade} and l.courseName=#{courseName} and l.uploadUserId=u.id order by l.id desc limit #{start},#{pageSize}
+    </select>
     <update id="update" parameterType="com.foshan.entity.LearningMaterials" >
     	update LearningMaterials set downloadCount=#{downloadCount} where id=#{id}
     </update>

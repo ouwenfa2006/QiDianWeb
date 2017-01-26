@@ -3,8 +3,6 @@ package com.foshan.util;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.foshan.entity.LearningMaterials;
-
 public class PageUtil {
 	public static List getShow(List all,int page,int pageSize) {
 		List list=new LinkedList();

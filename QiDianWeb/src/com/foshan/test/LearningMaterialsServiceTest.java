@@ -36,11 +36,12 @@ public class LearningMaterialsServiceTest {
 //		}
 	}
 	public static void test_findByFileName(){
-		List<LearningMaterials> learningMaterials=learningMaterialsService.findLearningMaterialsByFileName("欧文发");
-		/*for (LearningMaterials learningMaterials2 : learningMaterials) {
+		List<LearningMaterials> learningMaterials=learningMaterialsService.findLearningMaterialsByFileName("数学");
+		
+		for (LearningMaterials learningMaterials2 : learningMaterials) {
 			System.out.println(learningMaterials2.getId());
 			System.out.println(learningMaterials2.getFileName());
-		}*/
+		}
 	}
 	public static void test_findAllLearningMaterials(){
 //		List<LearningMaterials> learningMaterials=learningMaterialsService.findAllLearningMaterials();
@@ -51,8 +52,15 @@ public class LearningMaterialsServiceTest {
 //		
 //		}
 	}
+	public static void test_findByGradeAndCourseName(){
+		List<LearningMaterials> learningMaterials=learningMaterialsService.findAllLearningMaterials(1, 10, "初三", "数学");
+		for (LearningMaterials learningMaterials2 : learningMaterials) {
+			System.out.println(learningMaterials2.getFileName());
+		}
+	}
 	public static void main(String[] args) {
 		//test_findAllLearningMaterials();
-		test_findAll();
+		test_findByFileName();
+		//test_findByGradeAndCourseName();
 	}
 }

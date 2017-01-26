@@ -3,66 +3,26 @@ import java.io.BufferedInputStream;
 import java.io.File;  
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.List;    
 import java.util.UUID;
 
-import javax.ejb.FinderException;
 import javax.servlet.http.HttpServletRequest;    
-import javax.servlet.http.HttpServletResponse;    
-import javax.servlet.http.HttpSession;    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-import javax.validation.Valid;
-
-import org.apache.commons.fileupload.FileItem;  
-import org.apache.commons.fileupload.FileItemFactory;    
-import org.apache.commons.fileupload.ProgressListener;    
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;    
-import org.apache.commons.fileupload.servlet.ServletFileUpload;    
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.lang.time.DateFormatUtils;
 import org.apache.log4j.Logger;    
-import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;    
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;    
 import org.springframework.web.bind.annotation.RequestMethod;    
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;    
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView; 
-
 import com.foshan.entity.LearningMaterials;
 import com.foshan.entity.User;
-import com.mysql.fabric.xmlrpc.base.Data;
 @Controller
 @RequestMapping(value="/uploadFileAndDownController")
 /*@Scope("prototype")*/
@@ -95,7 +55,6 @@ public class UploadFileAndDownController extends BaseController{
 	 */
 	private void uploadFile_1(MultipartFile file, String courseName,
 			String grade,HttpServletRequest request){
-		System.out.println(courseName);
 		try {
 			//清空判断标志
 			setMessage(null);
@@ -103,7 +62,7 @@ public class UploadFileAndDownController extends BaseController{
 			byte[] bytes = file.getBytes();
 			// 2获得upload的绝对路径
 			String path = request.getServletContext().getRealPath("/WEB-INF/upload_files");
-			System.out.println("上传的路径是:"+path);
+			//System.out.println("上传的路径是:"+path);
 			// 3在服务器的upload_files目录下创建File对象
 			String oname = file.getOriginalFilename(); // 上传文件的原始名字
 			String newName = UUID.randomUUID().toString()+"_"+oname;	 

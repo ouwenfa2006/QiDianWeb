@@ -46,7 +46,7 @@ import com.foshan.util.PageUtil;
 @RequestMapping(value="/systemController")
 public class SystemController extends BaseController{
 	public static Logger logger=Logger.getLogger(SystemController.class);
-	private int pageSize=3;
+	private int pageSize=46;
 	/**
 	 * 回到主页
 	 */
@@ -123,10 +123,24 @@ public class SystemController extends BaseController{
 		//取得辅导资料页面传过来的参数
 		String grade=request.getParameter("grade");
 		String courseName=request.getParameter("courseName");
+		//符合条件的搜索
+		List<LearningMaterials> all_learns=getLearningMaterialsService().findAllLearningMaterials(1,1500,grade,courseName);
+		savePageInfos(request, all_learns);
+
+		return "/CounselingInformation/counselingInformations_list";
+	}
+	@RequestMapping("getFilesBySearch")
+	public String getFilesBySearch(HttpServletRequest request){
+		//取得辅导资料页面传过来的参数
 		String searchFile=request.getParameter("searchFile");
 		//符合条件的搜索
-		List<LearningMaterials> all_learns=getLearningMaterialsService().findAllLearningMaterials(1,1500,grade,courseName,searchFile);
+		List<LearningMaterials> all_learns=getLearningMaterialsService().findLearningMaterialsByFileName(searchFile);
 		//保存，以作分页操作
+		savePageInfos(request, all_learns);
+		return "/CounselingInformation/counselingInformations_list";
+	}
+	private void savePageInfos(HttpServletRequest request,
+			List<LearningMaterials> all_learns) {
 		getSession().removeAttribute("all_learns");
 		getSession().setAttribute("all_learns", all_learns);
 		if(all_learns!=null&&all_learns.size()>0){
@@ -143,8 +157,6 @@ public class SystemController extends BaseController{
 		}else{
 			getSession().setAttribute("totalPage", all_learns.size()/pageSize+1);
 		}
-		
-		return "/CounselingInformation/counselingInformations_list";
 	}
 	/**
 	 * 从搜索的结果集中进行分页显示

@@ -49,4 +49,11 @@ public class LearningMaterialsDaoImpl implements LearningMaterialsDao{
 		learningMaterialsMapper.update(learningMaterials);
 	}
 
+	@Override
+	public List<LearningMaterials> findLearningMaterials(String grade,
+			String courseName,int start,int pageSize) {
+		// TODO Auto-generated method stub
+		return learningMaterialsMapper.findLearningMaterials(grade,courseName,start,pageSize);
+	}
+
 }

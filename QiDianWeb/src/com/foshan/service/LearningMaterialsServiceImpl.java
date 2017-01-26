@@ -29,10 +29,12 @@ public class LearningMaterialsServiceImpl implements LearningMaterialsService{
 	}
 
 	@Override
-	public List<LearningMaterials> findAllLearningMaterials(int page,int pageSize,String grade,String courseName,String searchFile) {
+	public List<LearningMaterials> findAllLearningMaterials(int page,int pageSize,String grade,String courseName) {
 		// TODO Auto-generated method stub
 		int start=(page-1)*pageSize;
-		//int end=page*pageSize-1;
+		if(grade!=null&&courseName!=null){
+			return learningMaterialsDao.findLearningMaterials(grade,courseName,start,pageSize);
+		}
 		return learningMaterialsDao.findAllLearningMaterials(start,pageSize);
 	}
 

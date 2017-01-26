@@ -264,11 +264,19 @@ display: inline-block;
 	}, {
 		id : 1161,
 		pId : 116,
-		name : "初中"
+		name : "初三"
 	}, {
 		id : 1162,
 		pId : 116,
-		name : "高中"
+		name : "高一"
+	}, {
+		id : 1163,
+		pId : 116,
+		name : "高二"
+	}, {
+		id : 1164,
+		pId : 116,
+		name : "高三"
 	}, {
 		id : 117,
 		pId : 11,
@@ -278,21 +286,33 @@ display: inline-block;
 		pId : 11,
 		name : "地理"
 	}, {
-		id : 1173,
+		id : 1181,
 		pId : 118,
-		name : "初中"
+		name : "高一"
 	}, {
-		id : 1174,
+		id : 1182,
 		pId : 118,
-		name : "高中"
+		name : "高二"
+	}, {
+		id : 1183,
+		pId : 118,
+		name : "高三"
 	}, {
 		id : 1171,
 		pId : 117,
-		name : "初中"
+		name : "初三"
 	}, {
 		id : 1172,
 		pId : 117,
-		name : "高中"
+		name : "高一"
+	}, {
+		id : 1173,
+		pId : 117,
+		name : "高二"
+	}, {
+		id : 1174,
+		pId : 117,
+		name : "高三"
 	}];
 
 	var log, className = "dark";
@@ -328,7 +348,17 @@ display: inline-block;
 		$("#fm").submit();
 		$("#fm").remove();
 	}
-
+	function createSearchFormAndSubmit(){
+		var url="../systemController/getFilesBySearch";
+		var string='';
+		string+='<form id="fm" action="'+url+'" method="post" target="rightIframe" style="displasy:none;">';
+		string+='<input name="page" value="'+1+'">';
+		string+='<input name="searchFile" value="'+$("#search").val()+'">';
+		string+='</form>';
+		$("body").append(string);
+		$("#fm").submit();
+		$("#fm").remove();
+	}
 	$(document).ready(function() {
 		//初始化树形菜单
 		$.fn.zTree.init($("#tree"), setting, zNodes);
@@ -339,11 +369,16 @@ display: inline-block;
 			top_bg_div.show();
 			upload_div.find("input[type='file']").click();
 		});
-		
 		$("#search_btn").click(function(){
 			//搜索以搜索的内容作为主体
-			createFormAndSubmit(null, null, $("#search").val());
+			createSearchFormAndSubmit();
 		});
+		$(window).keydown(function(event){
+			 if(event.keyCode==13&&$("#search").val().trim()!=""){
+				 createSearchFormAndSubmit();
+			 }
+		});
+	
 	});
 </script>
 </body>

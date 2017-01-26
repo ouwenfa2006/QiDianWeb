@@ -1,5 +1,6 @@
 package com.foshan.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -7,7 +8,8 @@ import java.util.Date;
  * @author Administrator
  *
  */
-public class LearningMaterials {
+public class LearningMaterials implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private int id;
 	private String courseName;//科目名称
 	private String grade;//年级

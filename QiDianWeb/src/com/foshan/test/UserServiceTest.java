@@ -1,8 +1,6 @@
 package com.foshan.test;
 
 import java.util.List;
-import java.util.UUID;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
