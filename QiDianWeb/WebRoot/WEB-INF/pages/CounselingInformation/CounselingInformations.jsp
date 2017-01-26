@@ -363,11 +363,17 @@ display: inline-block;
 		//初始化树形菜单
 		$.fn.zTree.init($("#tree"), setting, zNodes);
 		$("#upload_btn").click(function() {
-			var upload_div = $(window.parent.document).find("#upload_div");
-			var top_bg_div=$(window.parent.document).find("#top_bg_div");
-			upload_div.show();
-			top_bg_div.show();
-			upload_div.find("input[type='file']").click();
+			//判断用户是否已经登陆
+			var session_user="${session_user}";
+			if(session_user==""){
+				window.parent.location.href="../loginController/login";
+			}else{
+				var upload_div = $(window.parent.document).find("#upload_div");
+				var top_bg_div=$(window.parent.document).find("#top_bg_div");
+				upload_div.show();
+				top_bg_div.show();
+				upload_div.find("input[type='file']").click();
+			}
 		});
 		$("#search_btn").click(function(){
 			//搜索以搜索的内容作为主体

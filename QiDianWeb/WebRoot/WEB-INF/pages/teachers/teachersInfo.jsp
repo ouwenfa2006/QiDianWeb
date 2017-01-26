@@ -1,28 +1,45 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'teachersInfo.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-
+  	<jsp:include page="/plugins/jsp/base2.jsp"></jsp:include>
+  	<style type="text/css">
+  	.container-fluid {
+	width: 100%;
+	padding: 0px;
+}
+#div_1{
+	line-height: 40px;
+}
+#div_1>i{
+	color: red;
+	margin-top: 12px;
+}
+#div_2>img{
+	width:98.7%; 
+}
+.container-fluid div {
+	padding: 0px;
+}
+  	</style>
   </head>
-  
   <body>
-    This is my JSP page. <br>
+    	<div class="container-fluid">
+    		<div class="col-md-12" id="div_1">
+    			<i class="glyphicon glyphicon-play-circle pull-left"></i>
+    			<span class="pull-left">&nbsp;&nbsp;当前位置：</span>
+    			<a href="#" class="pull-left">启点教育&nbsp;&nbsp;</a>
+    			<span class="pull-left">&gt;&nbsp;&nbsp;</span>
+    			<a href="#" class="pull-left">启点老师</a>
+    		</div>
+    		<div class="col-md-12" id="div_2">
+    			<img alt="" src="../plugins/img/head_1.jpg">
+    		</div>
+    	</div>
+    	<script type="text/javascript">
+    		$(function(){
+    			
+    		});
+    	</script>
   </body>
 </html>

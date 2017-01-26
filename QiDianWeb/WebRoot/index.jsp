@@ -23,26 +23,6 @@
 a[role='qq']:HOVER {
 	color: red;
 }
-
-*
-/
-/* 小屏幕（平板，大于等于 768px） */
-
-
-
-
-
-
-@media ( min-width : @screen-sm-min) {
-}
-
-/* 中等屏幕（桌面显示器，大于等于 992px） */
-@media ( min-width : @screen-md-min) {
-}
-
-/* 大屏幕（大桌面显示器，大于等于 1200px） */
-@media ( min-width : @screen-lg-min) {
-}
 </style>
 </head>
 <jsp:include page="plugins/jsp/base3.jsp"></jsp:include>

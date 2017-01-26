@@ -97,6 +97,11 @@ function getTeachersInfo(){
 }
 //登陆
 function login(){
+	var session_user="${session_user}";
+	if(session_user!=""){
+		alert("你已经登陆了!");
+		return;
+	}
 	window.location.href="${basePath }loginController/login";
 }
 //启点活动
