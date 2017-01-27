@@ -70,8 +70,6 @@
     						<span class="pull-left">页</span>
     				</div>
     			</div>
-    			
-    			
     		</div>
     	</div>
     	<script type="text/javascript">

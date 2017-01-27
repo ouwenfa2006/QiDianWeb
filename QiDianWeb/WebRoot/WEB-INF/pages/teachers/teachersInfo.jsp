@@ -27,6 +27,7 @@
 	border: 1px solid silver;
 	height: 102px;
 	margin-top: 10px;
+	border-bottom:3px solid #F98D45;
 }
 #div_3>div{
 	margin-top: 10px;
@@ -49,6 +50,39 @@
 	background-color: #F98D45;
 	color: white;
 }
+#div_4>div>a{
+	margin-top:20px;
+	width:163px;
+	height:232px;
+	border:1px solid silver;
+	padding:10px;
+}
+#div_4>div>a:HOVER{
+	box-shadow:0px 0px 5px 0px silver;
+}
+#div_4>div>a>img{
+	width:100%;
+}
+#div_4>div>a>span{
+	background-color:black;
+	opacity:0.6;
+	height:54px;
+	margin-top:-79px;
+	color:white;
+	padding-top:6px;
+}
+#div_5{
+	margin-top:10px;
+	height:35px;
+}
+#div_5>div{
+	width:500px;
+}
+#div_5>div>div{
+	width:190px;
+	margin-top:5px;
+}
+
   	</style>
   </head>
   <body>
@@ -85,11 +119,293 @@
     				<a class="btn btn-default btn-sm pull-left">地理</a>	
     			</div>
     		</div>
+    		<div class="col-md-12" id="div_4">
+    			<div class="col-md-12">
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher1.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher2.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher3.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher1.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12" style="">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher1.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12" style="">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    			</div>
+    			
+    			<div class="col-md-12">
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher1.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher2.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher3.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher1.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12" style="">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher1.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12" style="">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    			</div>
+    			
+    			<div class="col-md-12">
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher1.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher2.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher3.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher1.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12" style="">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher1.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12" style="">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    			</div>
+    			
+    			<div class="col-md-12">
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher1.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher2.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher3.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher1.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12" style="">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    				<a href="#" class="thumbnail pull-left">
+    					<img alt="" src="../plugins/img/teacher1.jpg">
+    					<span class="col-md-12">
+							刘婷婷<br>
+							科目：英语老师 
+    					</span>
+    					<span class="col-md-12" style="">
+    						<i class="glyphicon glyphicon-user"></i>
+    						在线咨询
+    					</span>
+    				</a>
+    			</div>
+    		</div>
+    		
+    		<div class="col-md-12" id="div_5">
+    			<div class="pull-left">
+    				<a class="btn btn-info pull-left" href="javaScript:void(0)" style="margin-left: 5px;" onclick="index()">首页</a>
+    				<a class="btn btn-info pull-left" href="javaScript:void(0)" style="margin-left: 5px;" onclick="prePage()">上一页</a>
+    				<a class="btn btn-info pull-left" href="javaScript:void(0)" style="margin-left: 5px;" onclick="nextPage()">下一页</a>
+    				<span class="pull-left" style="margin-left: 5px;margin-top: 5px;">跳转:</span>
+    				<input id="inputPage" class="form-control pull-left" name="page" value="${page }" style="width:55px;">
+    				<div class="pull-left">
+    						<span class="pull-left">页&nbsp;&nbsp;第</span>
+    						<span class="pull-left" style="color: red;">1</span>
+    						<span class="pull-left">页</span>
+    						<span class="pull-left">&nbsp;&nbsp;共</span>
+    						<span class="pull-left" style="color: red;">1</span>
+    						<span class="pull-left">条记录</span>
+    						<span class="pull-left">&nbsp;&nbsp;共</span>
+    						<span class="pull-left" style="color: red;">1</span>
+    						<span class="pull-left">页</span>
+    				</div>
+    			</div>
+    		</div>
     	</div>
     	<script type="text/javascript">
     		$(function(){
-    			
+    			pageCssInit();
     		});
+    		//页面样式初始化
+    		function pageCssInit(){
+    			$("#div_4>div>a").find("span:eq(1)").css({
+    				"height":"25px",
+    				"margin-top":"-25px",
+    				"background-color":"#D64832",
+    				"opacity":1,
+    				"padding-top":"3px",
+    				"padding-left":"32px"
+    			});
+    			$("#div_4>div>a").each(function(i){
+    				$(this).css({
+        				"margin-left":"33px"
+        			});
+    				if(i%5==0){
+    					$(this).css({
+            				"margin-left":"22px"
+            			});
+    				}
+    			});
+    			
+    			var div_5_div_width=$("#div_5>div").width();
+    			var container_width=$(".container-fluid").width();
+    			$("#div_5>div").css({
+    				"margin-left":(container_width-div_5_div_width)/2
+    			});
+    			
+    		}
     	</script>
   </body>
 </html>
