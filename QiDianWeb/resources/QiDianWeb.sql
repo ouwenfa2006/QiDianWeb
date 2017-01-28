@@ -29,9 +29,15 @@ CREATE TABLE `user` (
    PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 insert into user(userName,password) values('scott',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ');
-insert into user(userName,password,grade,courseName) values('ouwenfa',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高一','数学');
-insert into user(userName,password,grade,courseName) values('hello',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高二','物理');
-insert into user(userName,password,grade,courseName) values('jianyongqi',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高一','数学');
+insert into user(userName,password,grade,courseName) values('ouwenfa',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','小学','数学');
+insert into user(userName,password,grade,courseName) values('hello',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','物理');
+insert into user(userName,password,grade,courseName) values('jianyongqi',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','语文');
+insert into user(userName,password,grade,courseName) values('xiaotianshi',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','数学');
+insert into user(userName,password,grade,courseName) values('liuchu',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','英语');
+insert into user(userName,password,grade,courseName) values('jianjieying',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','英语');
+insert into user(userName,password,grade,courseName) values('xiaomogui',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','化学');
+insert into user(userName,password,grade,courseName) values('liudehua',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','政治');
+insert into user(userName,password,grade,courseName) values('wangbaoqiang',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','物理');
 /**
  * 学习资料
  */
@@ -86,9 +92,15 @@ DESCRIPTION VARCHAR(200) DEFAULT NULL COMMENT '描述',
 PRIMARY KEY(imageId),
 FOREIGN KEY(USER_ID) REFERENCES USER(userId)
 )engine=INNODB default charset=utf8;
-insert into IMAGE (user_id,savepath,relativepath,description) values(2,null,'/plugins/img/teacher1.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(3,null,'/plugins/img/teacher2.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(4,null,'/plugins/img/teacher3.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(1,null,'/plugins/img/teacher1.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(2,null,'/plugins/img/teacher2.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(3,null,'/plugins/img/teacher3.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(4,null,'/plugins/img/teacher4.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(5,null,'/plugins/img/teacher_5.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(6,null,'/plugins/img/teacher_6.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(7,null,'/plugins/img/teacher_7.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(8,null,'/plugins/img/teacher_8.jpg',null);
+
 /**
  * 角色权限表
  */
@@ -149,6 +161,10 @@ insert into USER_ROLE values(1,1);
 insert into USER_ROLE values(2,2);
 insert into USER_ROLE values(3,2);
 insert into USER_ROLE values(4,2);
+insert into USER_ROLE values(5,2);
+insert into USER_ROLE values(6,2);
+insert into USER_ROLE values(7,2);
+insert into USER_ROLE values(8,2);
 /**
  * 组人员表
  */

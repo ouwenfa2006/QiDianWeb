@@ -37,7 +37,11 @@
     	select u.*,i.* from user u,image i where u.userId=#{id} and u.userId=i.user_id
     </select>
     <select id="findUsersAndImages" resultMap="userAndImageMapper">
-    	select * from user u,image i,role r,user_role ur where u.userId=i.user_id and u.userId=ur.user_id and r.roleId=ur.role_id
+    	select * from user u,image i,role r
+    	<if test="roleName!=null and roleName!=''">
+    		,user_role ur 
+    	</if>
+    	where u.userId=i.user_id 
     	<if test="grade!=null and grade!=''">
     		and u.grade =#{grade} 
     	</if>
@@ -45,7 +49,7 @@
    			and u.courseName=#{courseName} 
     	</if>
     	<if test="roleName!=null and roleName!=''">
-    		and r.name=#{roleName}
+    		and r.name=#{roleName} and u.userId=ur.user_id and r.roleId=ur.role_id
     	</if>
     	
     	limit #{start},#{pageSize}

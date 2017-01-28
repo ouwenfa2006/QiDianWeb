@@ -94,7 +94,7 @@ public class UserServiceTest {
 		System.out.println("======================================================");
 	};
 	public static void test_finadUsersAndImages(){
-		List<User> users=userService.findUsersAndImagesfindUsersAndImages(1, 100, null,null,null);
+		List<User> users=userService.findUsersAndImagesfindUsersAndImages(1, 100, "高中",null,"teacher");
 		for (User user : users) {
 			System.out.println(user.getUserId());
 			System.out.println(user.getUserName());

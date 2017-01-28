@@ -36,7 +36,7 @@
     						<th style="width:12%;">上传时间</th>
     						<th>文件名称</th>
     						<th style="width: 8%;">下载次数</th>
-    						<th style="width: 8%;">上传者</th>
+    						<th style="width: 12%;">上传者</th>
     					</tr>
     				</thead>
     				<tbody>

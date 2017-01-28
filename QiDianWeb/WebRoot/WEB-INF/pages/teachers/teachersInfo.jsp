@@ -111,8 +111,8 @@
     				<a class="btn btn-default btn-sm pull-left">小学老师</a>	
     			</div>
     			<div style="border: 0px;">
-    				<label class="pull-left">年级:</label>
-    				<a class="btn btn-default btn-sm pull-left div_3_div_a_active">学科</a>
+    				<label class="pull-left">科目:</label>
+    				<a class="btn btn-default btn-sm pull-left div_3_div_a_active">全部</a>
     				<a class="btn btn-default btn-sm pull-left">语文</a>
     				<a class="btn btn-default btn-sm pull-left">数学</a>
     				<a class="btn btn-default btn-sm pull-left">英语</a>	
