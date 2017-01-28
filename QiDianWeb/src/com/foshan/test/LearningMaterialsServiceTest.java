@@ -26,7 +26,7 @@ public class LearningMaterialsServiceTest {
 	}
 	public static void test_findById(){
 		LearningMaterials learningMaterials=learningMaterialsService.findById(2);
-		System.out.println(learningMaterials.getUploadUser().getId());
+		System.out.println(learningMaterials.getUploadUser().getUserId());
 		System.out.println(learningMaterials.getUploadUser().getUserName());
 	}
 	public static void test_findAll(){
@@ -39,7 +39,7 @@ public class LearningMaterialsServiceTest {
 		List<LearningMaterials> learningMaterials=learningMaterialsService.findLearningMaterialsByFileName("数学");
 		
 		for (LearningMaterials learningMaterials2 : learningMaterials) {
-			System.out.println(learningMaterials2.getId());
+			System.out.println(learningMaterials2.getlId());
 			System.out.println(learningMaterials2.getFileName());
 		}
 	}

@@ -1,5 +1,7 @@
 package com.foshan.dao;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Repository;
@@ -39,6 +41,17 @@ public class UserDaoImpl implements UserDao{
 	public User findUserAndRolesById(Integer id) {
 		// TODO Auto-generated method stub
 		return userMapper.findUserAndRolesById(id);
+	}
+	@Override
+	public User findUserAndImageById(Integer id) {
+		// TODO Auto-generated method stub
+		return userMapper.findUserAndImageById(id);
+	}
+	@Override
+	public List<User> findUsersAndImages(int page, int pageSize, String grade,
+			String courseName) {
+		// TODO Auto-generated method stub
+		return userMapper.findUsersAndImages(page,pageSize,grade,courseName);
 	}
 
 }

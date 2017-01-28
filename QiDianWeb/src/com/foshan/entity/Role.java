@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Role implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private Integer id;
+	private Integer roleId;
 	private String roleName;
 	private String description;
 	private List<User> users;
@@ -40,10 +40,10 @@ public class Role implements Serializable{
 	public void setUsers(List<User> users) {
 		this.users = users;
 	}
-	public Integer getId() {
-		return id;
+	public void setRoleId(Integer roleId) {
+		this.roleId = roleId;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public Integer getRoleId() {
+		return roleId;
 	}
 }

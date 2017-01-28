@@ -1,5 +1,7 @@
 package com.foshan.service;
 
+import java.util.List;
+
 import com.foshan.entity.User;
 /**
  * 用户业务类
@@ -14,4 +16,6 @@ public interface UserService {
 	public void delteUserById(Integer...ids);
 	User findUserAndMaterialsById(Integer id);
 	User findUserAndRolesById(Integer id);
+	User findUserAndImageById(Integer id);
+	List<User> findUsersAndImagesfindUsersAndImages(int page, int pageSize, String grade,String courseName);
 }

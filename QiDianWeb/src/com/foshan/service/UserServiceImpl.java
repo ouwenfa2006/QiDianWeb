@@ -1,5 +1,7 @@
 package com.foshan.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.jasypt.util.password.BasicPasswordEncryptor;
@@ -22,8 +24,6 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return userDao.findUserById(id);
 	}
-
-
 	@Override
 	public void addUser(User user) {
 		// TODO Auto-generated method stub
@@ -74,6 +74,17 @@ public class UserServiceImpl implements UserService{
 	public User findUserAndRolesById(Integer id) {
 		// TODO Auto-generated method stub
 		return userDao.findUserAndRolesById(id);
+	}
+	@Override
+	public User findUserAndImageById(Integer id) {
+		// TODO Auto-generated method stub
+		return userDao.findUserAndImageById(id);
+	}
+	@Override
+	public List<User> findUsersAndImagesfindUsersAndImages(int page,
+			int pageSize, String grade, String courseName) {
+		// TODO Auto-generated method stub
+		return userDao.findUsersAndImages(page, pageSize, grade, courseName);
 	}
 	
 }

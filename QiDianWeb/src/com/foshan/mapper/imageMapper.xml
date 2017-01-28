@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foshan.mapper.ImageMapper">
+    <resultMap type="com.foshan.entity.Image" id="imageMapper">
+        <id property="imageId" column="imageId" />
+      	<result property="savePath" column="savePath"/>
+      	<result property="relativePath" column="relativePath"/>
+      	<association property="user" javaType="com.foshan.entity.User" column="user_Id">
+      		<id property="userId" column="userId"/>
+      	</association>
+    </resultMap> 
+    <select id="" parameterType="java.lang.Integer" resultMap="imageMapper">
+    	select u.*,i.* from user u,image i where i.imageId=#{id} and i.user_id=u.userId
+    </select>
+</mapper>
+

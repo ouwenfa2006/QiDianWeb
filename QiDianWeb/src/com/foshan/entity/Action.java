@@ -9,15 +9,15 @@ import java.io.Serializable;
  */
 public class Action implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private Integer id;
+	private Integer actionId;
 	private String name;
 	private Integer parent_Id;
 	private String description;
-	public Integer getId() {
-		return id;
+	public void setActionId(Integer actionId) {
+		this.actionId = actionId;
 	}
-	public void setId(Integer id) {
-		this.id = id;
+	public Integer getActionId() {
+		return actionId;
 	}
 	public String getName() {
 		return name;

@@ -60,9 +60,14 @@
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>
-  <!-- 配置上传学习资料的保存路径 -->
+  <!-- 上传学习资料的保存路径 -->
   <context-param>
   	<param-name>uploadPath</param-name>
   	<param-value>C:/Documents and Settings/Administrator/git/QiDianWeb/QiDianWeb/WebRoot/WEB-INF/upload_files</param-value>
+  </context-param>
+  <!-- 上传图片保存路径 -->
+  <context-param>
+  	<param-name>imgPath</param-name>
+  	<param-value>C:/Documents and Settings/Administrator/git/QiDianWeb/QiDianWeb/WebRoot/plugins/img</param-value>
   </context-param>
 </web-app>

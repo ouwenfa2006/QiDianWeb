@@ -119,8 +119,7 @@ public class UploadFileAndDownController extends BaseController{
 		learningMaterials.setAbsoulteFileName(newName);
 		learningMaterials.setUploadTime(new Date());
 		//===================================================
-		User uploadUser=new User();
-		uploadUser.setId(1);
+		User uploadUser=(User) getSession().getAttribute("session_user");
 		//================================================
 		learningMaterials.setUploadUser(uploadUser);
 		getLearningMaterialsService().addLearningMaterials(learningMaterials);

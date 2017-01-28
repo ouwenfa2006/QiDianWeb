@@ -43,7 +43,7 @@
     					<c:forEach items="${learn_list }" var="m">
     						<tr>
     							<td><fmt:formatDate value="${m.uploadTime}" pattern="yyyy-MM-dd"/></td>
-    							<td><a role="download_a"  href="${basePath }uploadFileAndDownController/downLoad?fileId=${m.id}" target="uploadIframe">${m.fileName }</a></td>
+    							<td><a role="download_a"  href="${basePath }uploadFileAndDownController/downLoad?fileId=${m.lId}" target="uploadIframe">${m.fileName }</a></td>
     							<td>${m.downloadCount }</td>
     							<td>${m.uploadUser.userName }</td>
     						</tr>

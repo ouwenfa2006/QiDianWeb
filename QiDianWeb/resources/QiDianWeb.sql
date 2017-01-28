@@ -6,10 +6,10 @@ use qidianweb;
  */
 DROP TABLE IF EXISTS ROLE;
 create table role(
-id int(10) not null auto_increment,
+roleId int(10) not null auto_increment,
 name varchar(20) default null,
 description varchar(200) default null,
-primary key(id)
+primary key(roleId)
 )engine=INNODB  default charset=utf8;
 insert into role(Name) values('admin');
 insert into role(Name) values('teacher');
@@ -19,23 +19,25 @@ insert into role(Name) values('student');
  */
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `id` int(10) NOT NULL auto_increment,
+  `userId` int(10) NOT NULL auto_increment,
   `userName` varchar(30) DEFAULT NULL,
   `password` varchar(200) DEFAULT NULL,
+  grade varchar(30) default null comment '年级',
+  courseName varchar(30) default null comment '科目',
   email VARCHAR(80) DEFAULT NULL COMMENT '邮箱',
   job_num VARCHAR(80) DEFAULT NULL COMMENT '工号',
-   PRIMARY KEY (`id`)
+   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 insert into user(userName,password) values('scott',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ');
-insert into user(userName,password) values('ouwenfa',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ');
-insert into user(userName,password) values('hello',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ');
-insert into user(userName,password) values('jianyongqi',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ');
+insert into user(userName,password,grade,courseName) values('ouwenfa',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高一','数学');
+insert into user(userName,password,grade,courseName) values('hello',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高二','物理');
+insert into user(userName,password,grade,courseName) values('jianyongqi',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高一','数学');
 /**
  * 学习资料
  */
 DROP TABLE IF EXISTS `LearningMaterials`;
 CREATE TABLE `LearningMaterials` (
-  `id` int(10) NOT NULL auto_increment,
+  `lId` int(10) NOT NULL auto_increment,
   `courseName` varchar(30) DEFAULT NULL,
   `grade` varchar(30) DEFAULT NULL,
    `path` varchar(256) default null,
@@ -44,8 +46,8 @@ CREATE TABLE `LearningMaterials` (
    uploadTime date default null,
    uploadUserId int(10) default null,
    downloadCount int(10) default 0,
-   PRIMARY KEY (`id`),
-   foreign key(uploadUserId) references user(id)
+   PRIMARY KEY (`lId`),
+   foreign key(uploadUserId) references user(userId)
 )engine=INNODB default charset=utf8;
 
 /**
@@ -53,11 +55,11 @@ CREATE TABLE `LearningMaterials` (
  */
 DROP TABLE IF EXISTS ACTION;
 CREATE TABLE ACTION(
-ID INT(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+actionId INT(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
 NAME VARCHAR(40) DEFAULT NULL COMMENT '名字',
 PARENT_ID VARCHAR(40) DEFAULT NULL COMMENT '父类ID',
 DESCRIPTION VARCHAR(200) DEFAULT NULL COMMENT '描述',
-PRIMARY KEY(ID)
+PRIMARY KEY(actionId)
 )engine=INNODB default charset=utf8;
 
 /**
@@ -65,13 +67,28 @@ PRIMARY KEY(ID)
  */
 DROP TABLE IF EXISTS GROUPTYPE;
 CREATE TABLE GROUPTYPE(
-ID INT(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+groupId INT(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
 NAME VARCHAR(40) DEFAULT NULL COMMENT '名字',
 PARENT_ID VARCHAR(40) DEFAULT NULL COMMENT '父类ID',
 DESCRIPTION VARCHAR(200) DEFAULT NULL COMMENT '描述',
-PRIMARY KEY(ID)
+PRIMARY KEY(groupId)
 )engine=INNODB default charset=utf8;
-
+/**
+ * 图片表
+ */
+DROP TABLE IF EXISTS IMAGE;
+CREATE TABLE IMAGE(
+imageId INT(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+USER_ID int(10) DEFAULT NULL COMMENT '关联人物',
+SAVEPATH VARCHAR(300) DEFAULT NULL COMMENT '保存路径',
+RELATIVEPATH VARCHAR(200) DEFAULT NULL COMMENT '相对路径',
+DESCRIPTION VARCHAR(200) DEFAULT NULL COMMENT '描述',
+PRIMARY KEY(imageId),
+FOREIGN KEY(USER_ID) REFERENCES USER(userId)
+)engine=INNODB default charset=utf8;
+insert into IMAGE (user_id,savepath,relativepath,description) values(2,null,'/plugins/img/teacher1.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(3,null,'/plugins/img/teacher2.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(4,null,'/plugins/img/teacher3.jpg',null);
 /**
  * 角色权限表
  */
@@ -80,8 +97,8 @@ CREATE TABLE ROLE_ACTION(
 ROLE_ID INT(20) NOT NULL COMMENT '角色主键',
 ACTION_ID INT(20) NOT NULL COMMENT '权限主键',
 PRIMARY KEY(ROLE_ID,ACTION_ID) COMMENT '联合主键',
-FOREIGN KEY(ROLE_ID) REFERENCES ROLE(ID),
-FOREIGN KEY(ACTION_ID) REFERENCES ACTION(ID)
+FOREIGN KEY(ROLE_ID) REFERENCES ROLE(roleId),
+FOREIGN KEY(ACTION_ID) REFERENCES ACTION(actionId)
 )engine=INNODB default charset=utf8;
 /**
  * 组权限表
@@ -92,8 +109,8 @@ GROUPTYPE_ID INT(20) NOT NULL COMMENT '组主键',
 ACTION_ID INT(20) NOT NULL COMMENT '权限主键',
 ACTIONTYPE INT(1) DEFAULT 0 COMMENT '权限类型', -- 0表示可以访问，1表示不可以访问
 PRIMARY KEY(GROUPTYPE_ID,ACTION_ID) COMMENT '联合主键',
-FOREIGN KEY(GROUPTYPE_ID) REFERENCES GROUPTYPE(ID),
-FOREIGN KEY(ACTION_ID) REFERENCES ACTION(ID)
+FOREIGN KEY(GROUPTYPE_ID) REFERENCES GROUPTYPE(groupId),
+FOREIGN KEY(ACTION_ID) REFERENCES ACTION(actionId)
 )engine=INNODB default charset=utf8;
 /**
  * 组角色表
@@ -103,8 +120,8 @@ CREATE TABLE GROUPTYPE_ROLE(
 GROUPTYPE_ID INT(10) NOT NULL COMMENT '组主键',
 ROLE_ID INT(10) NOT NULL COMMENT '角色主键',
 PRIMARY KEY(GROUPTYPE_ID,ROLE_ID) COMMENT '联合主键',
-FOREIGN KEY(GROUPTYPE_ID) REFERENCES GROUPTYPE(ID),
-FOREIGN KEY(ROLE_ID) REFERENCES ROLE(ID)
+FOREIGN KEY(GROUPTYPE_ID) REFERENCES GROUPTYPE(groupId),
+FOREIGN KEY(ROLE_ID) REFERENCES ROLE(roleId)
 )engine=INNODB default charset=utf8;
 /**
  * 人员权限表
@@ -114,8 +131,8 @@ CREATE TABLE USER_ACTION(
 USER_ID INT(20) NOT NULL COMMENT '人员主键',
 ACTION_ID INT(20) NOT NULL COMMENT '权限主键',
 PRIMARY KEY(USER_ID,ACTION_ID) COMMENT '联合主键',
-FOREIGN KEY(USER_ID) REFERENCES USER(ID),
-FOREIGN KEY(ACTION_ID) REFERENCES ACTION(ID)
+FOREIGN KEY(USER_ID) REFERENCES USER(userId),
+FOREIGN KEY(ACTION_ID) REFERENCES ACTION(actionId)
 )engine=INNODB default charset=utf8;
 /**
  * 人员角色表
@@ -125,8 +142,8 @@ CREATE TABLE USER_ROLE(
 USER_ID INT(20) NOT NULL COMMENT '人员主键',
 ROLE_ID INT(20) NOT NULL COMMENT '角色主键',
 PRIMARY KEY(USER_ID,ROLE_ID) COMMENT '联合主键',
-FOREIGN KEY(USER_ID) REFERENCES USER(ID),
-FOREIGN KEY(ROLE_ID) REFERENCES ROLE(ID)
+FOREIGN KEY(USER_ID) REFERENCES USER(userId),
+FOREIGN KEY(ROLE_ID) REFERENCES ROLE(roleId)
 )engine=INNODB default charset=utf8;
 insert into USER_ROLE values(1,1);
 insert into USER_ROLE values(2,2);
@@ -140,7 +157,9 @@ CREATE TABLE GROUPTYPE_PERSON(
 GROUPTYPE_ID INT(20) NOT NULL COMMENT '组主键',
 USER_ID INT(20) NOT NULL COMMENT '人员主键',
 PRIMARY KEY(GROUPTYPE_ID,USER_ID) COMMENT '联合主键',
-FOREIGN KEY(GROUPTYPE_ID) REFERENCES GROUPTYPE(ID),
-FOREIGN KEY(USER_ID) REFERENCES USER(ID)
+FOREIGN KEY(GROUPTYPE_ID) REFERENCES GROUPTYPE(groupId),
+FOREIGN KEY(USER_ID) REFERENCES USER(userId)
 )COMMENT '组人员表';
+
+
 
