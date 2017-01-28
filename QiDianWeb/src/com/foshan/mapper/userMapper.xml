@@ -37,7 +37,18 @@
     	select u.*,i.* from user u,image i where u.userId=#{id} and u.userId=i.user_id
     </select>
     <select id="findUsersAndImages" resultMap="userAndImageMapper">
-    	select * from user u,image i where u.userId=i.user_id where u.grade like CONCAT(CONCAT('%', #{grade}),'%') and u.courseName=#{courseName}
+    	select * from user u,image i,role r,user_role ur where u.userId=i.user_id and u.userId=ur.user_id and r.roleId=ur.role_id
+    	<if test="grade!=null and grade!=''">
+    		and u.grade =#{grade} 
+    	</if>
+    	<if test="courseName!=null and courseName!=''">
+   			and u.courseName=#{courseName} 
+    	</if>
+    	<if test="roleName!=null and roleName!=''">
+    		and r.name=#{roleName}
+    	</if>
+    	
+    	limit #{start},#{pageSize}
     </select>
     <select id="findUserAndMaterialsById"  parameterType="java.lang.Integer" resultMap="userAndMaterialsMapper">
    		select * from user u,learningMaterials l 

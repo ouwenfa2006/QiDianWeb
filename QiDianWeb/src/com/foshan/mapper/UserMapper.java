@@ -2,6 +2,8 @@ package com.foshan.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.foshan.entity.User;
 
 public interface UserMapper {
@@ -12,5 +14,5 @@ public interface UserMapper {
 	User findUserAndMaterialsById(Integer id);
 	User findUserAndRolesById(Integer id);
 	User findUserAndImageById(Integer id);
-	List<User> findUsersAndImages(int page, int pageSize, String grade,String courseName);
+	List<User> findUsersAndImages(@Param("start")int start,@Param("pageSize") int pageSize,@Param("grade") String grade,@Param("courseName")String courseName,@Param("roleName")String roleName);
 }

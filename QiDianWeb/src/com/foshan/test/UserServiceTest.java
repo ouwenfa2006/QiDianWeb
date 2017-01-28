@@ -93,11 +93,24 @@ public class UserServiceTest {
 		}
 		System.out.println("======================================================");
 	};
+	public static void test_finadUsersAndImages(){
+		List<User> users=userService.findUsersAndImagesfindUsersAndImages(1, 100, null,null,null);
+		for (User user : users) {
+			System.out.println(user.getUserId());
+			System.out.println(user.getUserName());
+			List<Image> images=user.getImages();
+			for (Image image : images) {
+				System.out.println(image.getImageId());
+				System.out.println(image.getRelativePath());
+			}
+			System.out.println("===========================================");
+		}
+	}
 	
 	public static void main(String[] agrs){
 		//test_userService_findUserAndMaterialsById();
-		test_findUserAndImageById();
-		
+		//test_findUserAndImageById();
+		test_finadUsersAndImages();
 	}
 
 }

@@ -9,8 +9,22 @@ public interface UserDao {
 	int addUser(User user);
 	User findUserByUserName(String userName);
 	void deleteUserById(Integer id);
+	/**
+	 * 根据id找用户及上传的辅导资料
+	 * @param id
+	 * @return
+	 */
 	User findUserAndMaterialsById(Integer id);
 	User findUserAndRolesById(Integer id);
-	List<User> findUsersAndImages(int page,int pageSize,String grade,String courseName);
+	/**
+	 * 查找用户及与其关联的头像
+	 * @param start
+	 * @param pageSize
+	 * @param grade 可为空
+	 * @param courseName 可为空
+	 * @param roleName 可为空
+	 * @return
+	 */
+	List<User> findUsersAndImages(int start,int pageSize,String grade,String courseName,String roleName);
 	User findUserAndImageById(Integer id);
 }

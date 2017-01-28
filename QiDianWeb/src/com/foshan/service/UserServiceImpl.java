@@ -82,9 +82,9 @@ public class UserServiceImpl implements UserService{
 	}
 	@Override
 	public List<User> findUsersAndImagesfindUsersAndImages(int page,
-			int pageSize, String grade, String courseName) {
-		// TODO Auto-generated method stub
-		return userDao.findUsersAndImages(page, pageSize, grade, courseName);
+			int pageSize, String grade, String courseName,String roleName) {
+		int start=(page-1)*pageSize;
+		return userDao.findUsersAndImages(start, pageSize, grade, courseName,roleName);
 	}
 	
 }

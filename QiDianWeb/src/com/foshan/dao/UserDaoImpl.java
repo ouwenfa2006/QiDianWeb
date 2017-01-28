@@ -48,10 +48,10 @@ public class UserDaoImpl implements UserDao{
 		return userMapper.findUserAndImageById(id);
 	}
 	@Override
-	public List<User> findUsersAndImages(int page, int pageSize, String grade,
-			String courseName) {
+	public List<User> findUsersAndImages(int start, int pageSize, String grade,
+			String courseName,String roleName) {
 		// TODO Auto-generated method stub
-		return userMapper.findUsersAndImages(page,pageSize,grade,courseName);
+		return userMapper.findUsersAndImages(start,pageSize,grade,courseName,roleName);
 	}
 
 }
