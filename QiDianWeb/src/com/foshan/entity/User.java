@@ -11,29 +11,17 @@ import java.util.List;
  */
 public class User implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private Integer id;
 	private String userName;
 	private String password;
 	private List<LearningMaterials> learningMaterials_list;//学习资料
-	private List<Student> students;
-	private List<Role> roles;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	private List<User> students;
+	private List<Role> roles;	
 	public String getUserName() {
 		return userName;
 	}
 	public void setUserName(String userName) {
 		this.userName = userName;
-	}
-	public List<Student> getStudents() {
-		return students;
-	}
-	public void setStudents(List<Student> students) {
-		this.students = students;
 	}
 	public String getPassword() {
 		return password;
@@ -53,6 +41,18 @@ public class User implements Serializable{
 	public void setLearningMaterials_list(
 			List<LearningMaterials> learningMaterials_list) {
 		this.learningMaterials_list = learningMaterials_list;
+	}
+	public List<User> getStudents() {
+		return students;
+	}
+	public void setStudents(List<User> students) {
+		this.students = students;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 }

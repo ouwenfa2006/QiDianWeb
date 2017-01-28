@@ -10,9 +10,9 @@ import com.foshan.entity.LearningMaterials;
  */
 public interface LearningMaterialsService {
 	void addLearningMaterials(LearningMaterials learningMaterials);
-	LearningMaterials findById(int id);
+	LearningMaterials findById(Integer id);
 	List<LearningMaterials> findAllLearningMaterials(int page,int pageSize,String grade,String courseName);
-	void deleteByIds(int...ids);
+	void deleteByIds(Integer...ids);
 	List<LearningMaterials> findLearningMaterialsByFileName(String fileName);
 	void update(LearningMaterials learningMaterials);
 }

@@ -11,15 +11,11 @@ import java.util.List;
  */
 public class Role implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private Integer id;
 	private String roleName;
+	private String description;
+	private List<User> users;
 	private List<Action> privileges;
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
 	public String getRoleName() {
 		return roleName;
 	}
@@ -31,5 +27,23 @@ public class Role implements Serializable{
 	}
 	public void setPrivileges(List<Action> privileges) {
 		this.privileges = privileges;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public List<User> getUsers() {
+		return users;
+	}
+	public void setUsers(List<User> users) {
+		this.users = users;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

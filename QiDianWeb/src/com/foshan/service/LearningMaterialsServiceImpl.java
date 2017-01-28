@@ -22,7 +22,7 @@ public class LearningMaterialsServiceImpl implements LearningMaterialsService{
 	}
 
 	@Override
-	public LearningMaterials findById(int id) {
+	public LearningMaterials findById(Integer id) {
 		// TODO Auto-generated method stub
 		return learningMaterialsDao.findById(id);
 		
@@ -39,7 +39,7 @@ public class LearningMaterialsServiceImpl implements LearningMaterialsService{
 	}
 
 	@Override
-	public void deleteByIds(int... ids) {
+	public void deleteByIds(Integer... ids) {
 		// TODO Auto-generated method stub
 		for (int id : ids) {
 			learningMaterialsDao.deleteByIds(id);

@@ -10,7 +10,7 @@ import java.util.Date;
  */
 public class LearningMaterials implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private int id;
+	private Integer id;
 	private String courseName;//科目名称
 	private String grade;//年级
 	private String path;//文件保存路径
@@ -30,12 +30,6 @@ public class LearningMaterials implements Serializable{
 	}
 	public void setPath(String path) {
 		this.path = path;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
 	}
 	public String getCourseName() {
 		return courseName;
@@ -72,6 +66,12 @@ public class LearningMaterials implements Serializable{
 	}
 	public void setDownloadCount(int downloadCount) {
 		this.downloadCount = downloadCount;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 	
 }

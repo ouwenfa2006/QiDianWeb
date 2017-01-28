@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	@Transactional(readOnly=true)
-	public User findUserById(int id) {
+	public User findUserById(Integer id) {
 		// TODO Auto-generated method stub
 		return userDao.findUserById(id);
 	}
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
-	public void delteUserById(int...ids) {
+	public void delteUserById(Integer...ids) {
 		// TODO Auto-generated method stub
 		for (int id : ids) {
 			userDao.deleteUserById(id);
@@ -66,12 +66,12 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
-	public User findUserAndMaterialsById(int id) {
+	public User findUserAndMaterialsById(Integer id) {
 		// TODO Auto-generated method stub
 		return userDao.findUserAndMaterialsById(id);
 	}
 	@Override
-	public User findUserAndRolesById(int id) {
+	public User findUserAndRolesById(Integer id) {
 		// TODO Auto-generated method stub
 		return userDao.findUserAndRolesById(id);
 	}

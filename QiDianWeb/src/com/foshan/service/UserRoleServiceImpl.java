@@ -11,7 +11,7 @@ public class UserRoleServiceImpl implements UserRoleService {
 	@Resource(name="userRoleDao")
 	private UserRoleDao userRoleDao;
 	@Override
-	public void add(int userId, int roleId) {
+	public void add(Integer userId, Integer roleId) {
 		// TODO Auto-generated method stub
 		userRoleDao.add(userId, roleId);
 	}

@@ -9,7 +9,7 @@ public class UserRoleDaoImpl implements UserRoleDao{
 	@Resource(name="userRoleMapper")
 	private UserRoleMapper userRoleMapper;
 	@Override
-	public void add(int userId, int roleId) {
+	public void add(Integer userId, Integer roleId) {
 		// TODO Auto-generated method stub
 		userRoleMapper.add(userId, roleId);
 	}

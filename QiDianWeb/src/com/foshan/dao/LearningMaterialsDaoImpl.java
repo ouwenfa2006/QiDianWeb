@@ -19,7 +19,7 @@ public class LearningMaterialsDaoImpl implements LearningMaterialsDao{
 	}
 
 	@Override
-	public LearningMaterials findById(int id) {
+	public LearningMaterials findById(Integer id) {
 		// TODO Auto-generated method stub
 		return learningMaterialsMapper.findById(id);
 	}
@@ -31,7 +31,7 @@ public class LearningMaterialsDaoImpl implements LearningMaterialsDao{
 	}
 
 	@Override
-	public void deleteByIds(int... ids) {
+	public void deleteByIds(Integer... ids) {
 		// TODO Auto-generated method stub
 		learningMaterialsMapper.deleteByIds(ids);
 	}

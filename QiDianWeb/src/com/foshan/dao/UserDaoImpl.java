@@ -11,7 +11,7 @@ public class UserDaoImpl implements UserDao{
 	@Resource(name="userMapper")
 	private UserMapper userMapper;
 	@Override
-	public User findUserById(int id) {
+	public User findUserById(Integer id) {
 		// TODO Auto-generated method stub
 		return userMapper.findUserById(id);
 	}
@@ -26,17 +26,17 @@ public class UserDaoImpl implements UserDao{
 		return userMapper.findUserByUserName(userName);
 	}
 	@Override
-	public void deleteUserById(int  id) {
+	public void deleteUserById(Integer  id) {
 		// TODO Auto-generated method stub
 		userMapper.deleteUserById(id);
 	}
 	@Override
-	public User findUserAndMaterialsById(int id) {
+	public User findUserAndMaterialsById(Integer id) {
 		// TODO Auto-generated method stub
 		return userMapper.findUserAndMaterialsById(id);
 	}
 	@Override
-	public User findUserAndRolesById(int id) {
+	public User findUserAndRolesById(Integer id) {
 		// TODO Auto-generated method stub
 		return userMapper.findUserAndRolesById(id);
 	}

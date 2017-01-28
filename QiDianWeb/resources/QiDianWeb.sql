@@ -8,10 +8,12 @@ DROP TABLE IF EXISTS ROLE;
 create table role(
 id int(10) not null auto_increment,
 name varchar(20) default null,
+description varchar(200) default null,
 primary key(id)
 )engine=INNODB  default charset=utf8;
 insert into role(Name) values('admin');
 insert into role(Name) values('teacher');
+insert into role(Name) values('student');
 /**
  * 用户表
  */
@@ -25,6 +27,9 @@ CREATE TABLE `user` (
    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 insert into user(userName,password) values('scott',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ');
+insert into user(userName,password) values('ouwenfa',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ');
+insert into user(userName,password) values('hello',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ');
+insert into user(userName,password) values('jianyongqi',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ');
 /**
  * 学习资料
  */
@@ -123,6 +128,10 @@ PRIMARY KEY(USER_ID,ROLE_ID) COMMENT '联合主键',
 FOREIGN KEY(USER_ID) REFERENCES USER(ID),
 FOREIGN KEY(ROLE_ID) REFERENCES ROLE(ID)
 )engine=INNODB default charset=utf8;
+insert into USER_ROLE values(1,1);
+insert into USER_ROLE values(2,2);
+insert into USER_ROLE values(3,2);
+insert into USER_ROLE values(4,2);
 /**
  * 组人员表
  */
@@ -134,4 +143,4 @@ PRIMARY KEY(GROUPTYPE_ID,USER_ID) COMMENT '联合主键',
 FOREIGN KEY(GROUPTYPE_ID) REFERENCES GROUPTYPE(ID),
 FOREIGN KEY(USER_ID) REFERENCES USER(ID)
 )COMMENT '组人员表';
-insert into user_role values(1,1);
+

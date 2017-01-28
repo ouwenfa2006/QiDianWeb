@@ -82,7 +82,12 @@
 	width:190px;
 	margin-top:5px;
 }
-
+#div_6{
+	margin-top:20px;
+}
+#div_6>img{
+	width:100%; 
+}
   	</style>
   </head>
   <body>
@@ -373,11 +378,15 @@
     				</div>
     			</div>
     		</div>
+    		<div class="col-md-12" id="div_6">
+    			<img alt="" src="../plugins/img/head_1.jpg">
+    		</div>
     	</div>
     	<script type="text/javascript">
     		$(function(){
     			pageCssInit();
     		});
+    		
     		//页面样式初始化
     		function pageCssInit(){
     			$("#div_4>div>a").find("span:eq(1)").css({
@@ -397,8 +406,7 @@
             				"margin-left":"22px"
             			});
     				}
-    			});
-    			
+    			});	
     			var div_5_div_width=$("#div_5>div").width();
     			var container_width=$(".container-fluid").width();
     			$("#div_5>div").css({
