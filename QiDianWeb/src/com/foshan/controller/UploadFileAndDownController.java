@@ -62,7 +62,7 @@ public class UploadFileAndDownController extends BaseController{
 			byte[] bytes = file.getBytes();
 			// 2获得upload的绝对路径
 			String path = request.getServletContext().getRealPath("/WEB-INF/upload_files");//发布路径
-			//String path=request.getServletContext().getInitParameter("uploadPath");//项目的原有路径
+			//String path=request.getServletContext().getInitParameter("uploadPath");//在web.xml中配置的路径
 			System.out.println("上传的路径是:"+path);
 			// 3在服务器的upload_files目录下创建File对象
 			String oname = file.getOriginalFilename(); // 上传文件的原始名字

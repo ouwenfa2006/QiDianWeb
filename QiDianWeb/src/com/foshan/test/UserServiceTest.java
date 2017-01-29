@@ -11,7 +11,6 @@ import com.foshan.entity.Role;
 import com.foshan.entity.User;
 import com.foshan.service.UserRoleService;
 import com.foshan.service.UserService;
-import com.sun.mail.handlers.image_gif;
 
 public class UserServiceTest {
 	private static ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");

@@ -16,6 +16,7 @@ public class User implements Serializable{
 	private String password;
 	private String grade;
 	private String courseName;
+	private String nickName;
 	private List<LearningMaterials> learningMaterials_list;//学习资料
 	private List<User> students;
 	private List<Role> roles;
@@ -31,6 +32,12 @@ public class User implements Serializable{
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+	public String getNickName() {
+		return nickName;
 	}
 	public List<Role> getRoles() {
 		return roles;

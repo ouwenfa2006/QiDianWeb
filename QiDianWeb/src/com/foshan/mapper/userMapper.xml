@@ -7,6 +7,7 @@
       	<result property="password" column="password"></result>
       	<result property="grade" column="grade"/>
       	<result property="courseName" column="courseName"/>
+      	<result property="nickName" column="nickName"/>
     	<!-- <collection property="roles" ofType="com.foshan.entity.Role" autoMapping="true"></collection> -->
     </resultMap> 
     
@@ -51,7 +52,6 @@
     	<if test="roleName!=null and roleName!=''">
     		and r.name=#{roleName} and u.userId=ur.user_id and r.roleId=ur.role_id
     	</if>
-    	
     	limit #{start},#{pageSize}
     </select>
     <select id="findUserAndMaterialsById"  parameterType="java.lang.Integer" resultMap="userAndMaterialsMapper">

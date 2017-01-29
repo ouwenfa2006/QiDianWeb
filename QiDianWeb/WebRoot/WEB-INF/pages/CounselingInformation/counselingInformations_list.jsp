@@ -74,15 +74,12 @@
     	</div>
     	<script type="text/javascript">
     	var page="${page}";//当前页
-		/* var courseName="${courseName}";//科目名称
-		var gradeName="${grade}";//年级
-		var searchFile="${searchFile}";//搜索的文件名称 */
 		var pPage="${page-1}";//下一页
 		var nPage="${page+1}";//前一页
 		//判断是否是整数
 		function isInteger(obj) {
 			 return Math.floor(obj) === obj;
-			}
+		}
 		$(function(){
     		//跳转
     		$("#inputPage").change(function(){

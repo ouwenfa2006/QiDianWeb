@@ -93,7 +93,7 @@ function initMenus_Fixed(){
 //获取教师信息
 function getTeachersInfo(){
 	
-	window.open("${basePath}systemController/getTeachersInfo","mainIframe");
+	window.open("${basePath}/teacherInfoController/getTeachersInfo","mainIframe");
 }
 //登陆
 function login(){

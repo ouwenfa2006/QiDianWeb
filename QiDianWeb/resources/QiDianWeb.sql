@@ -26,18 +26,19 @@ CREATE TABLE `user` (
   courseName varchar(30) default null comment '科目',
   email VARCHAR(80) DEFAULT NULL COMMENT '邮箱',
   job_num VARCHAR(80) DEFAULT NULL COMMENT '工号',
+  nickName varchar(30) default null comment '昵称',
    PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-insert into user(userName,password) values('scott',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ');
-insert into user(userName,password,grade,courseName) values('ouwenfa',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','小学','数学');
-insert into user(userName,password,grade,courseName) values('hello',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','物理');
-insert into user(userName,password,grade,courseName) values('jianyongqi',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','语文');
-insert into user(userName,password,grade,courseName) values('xiaotianshi',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','数学');
-insert into user(userName,password,grade,courseName) values('liuchu',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','英语');
-insert into user(userName,password,grade,courseName) values('jianjieying',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','英语');
-insert into user(userName,password,grade,courseName) values('xiaomogui',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','化学');
-insert into user(userName,password,grade,courseName) values('liudehua',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','政治');
-insert into user(userName,password,grade,courseName) values('wangbaoqiang',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','物理');
+insert into user(userName,password,nickName) values('scott',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','管理员');
+insert into user(userName,password,grade,courseName,nickName) values('ouwenfa',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','小学','数学','欧晓晴');
+insert into user(userName,password,grade,courseName,nickName) values('hello',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','物理','简琪琪');
+insert into user(userName,password,grade,courseName,nickName) values('jianyongqi',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','语文','简泳琪');
+insert into user(userName,password,grade,courseName,nickName) values('xiaotianshi',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','数学','小天使');
+insert into user(userName,password,grade,courseName,nickName) values('liuchu',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','英语','刘处');
+insert into user(userName,password,grade,courseName,nickName) values('jianjieying',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','英语','简洁莹');
+insert into user(userName,password,grade,courseName,nickName) values('xiaomogui',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','化学','陈三');
+insert into user(userName,password,grade,courseName,nickName) values('liudehua',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','政治','张五');
+insert into user(userName,password,grade,courseName,nickName) values('wangbaoqiang',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','物理','刘六');
 /**
  * 学习资料
  */
@@ -96,7 +97,7 @@ insert into IMAGE (user_id,savepath,relativepath,description) values(1,null,'/pl
 insert into IMAGE (user_id,savepath,relativepath,description) values(2,null,'/plugins/img/teacher2.jpg',null);
 insert into IMAGE (user_id,savepath,relativepath,description) values(3,null,'/plugins/img/teacher3.jpg',null);
 insert into IMAGE (user_id,savepath,relativepath,description) values(4,null,'/plugins/img/teacher4.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(5,null,'/plugins/img/teacher_5.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(5,null,'/plugins/img/teacher5.jpg',null);
 insert into IMAGE (user_id,savepath,relativepath,description) values(6,null,'/plugins/img/teacher_6.jpg',null);
 insert into IMAGE (user_id,savepath,relativepath,description) values(7,null,'/plugins/img/teacher_7.jpg',null);
 insert into IMAGE (user_id,savepath,relativepath,description) values(8,null,'/plugins/img/teacher_8.jpg',null);
