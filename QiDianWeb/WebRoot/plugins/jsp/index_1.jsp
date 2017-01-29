@@ -30,14 +30,13 @@
 	</div>
 </div>
 <script type="text/javascript">
+var session_user="${session_user}";
 $(function(){
 	initMenus_Fixed();
-
-	
 });
 //返回主页
 function index(){
-	var indexPath="${basePath}systemController/index";
+	var indexPath=basePath+"systemController/index";
 	window.location.href=indexPath;
 }
 //发生滚动事件，固定头部样式
@@ -92,35 +91,33 @@ function initMenus_Fixed(){
 } */
 //获取教师信息
 function getTeachersInfo(){
-	
-	window.open("${basePath}/teacherInfoController/getTeachersInfo","mainIframe");
+	window.open(basePath+"teacherInfoController/getTeachersInfo","mainIframe");
 }
 //登陆
 function login(){
-	var session_user="${session_user}";
 	if(session_user!=""){
 		alert("你已经登陆了!");
 		return;
 	}
-	window.location.href="${basePath }loginController/login";
+	window.location.href=basePath+"loginController/login";
 }
 //启点活动
 function getActivities(){
-	window.open("${basePath}systemController/getActivities","mainIframe");
+	window.open(basePath+"systemController/getActivities","mainIframe");
 }
 //启点课堂
 function getClasses(){
-	window.open("${basePath}systemController/getClasses","mainIframe");
+	window.open(basePath+"systemController/getClasses","mainIframe");
 	
 }
 //启点校区
 function getSchools(){
-	window.open("${basePath}systemController/getSchools","mainIframe");
+	window.open(basePath+"systemController/getSchools","mainIframe");
 }
 //辅导资料
 function getCounselingInformation(){
 	
-	window.open("${basePath}systemController/getCounselingInformation","mainIframe");
+	window.open(basePath+"systemController/getCounselingInformation","mainIframe");
 }
 //教学资讯
 function getEduInfos(){
@@ -128,7 +125,7 @@ function getEduInfos(){
 }
 function getQiDianInfos(){
 	
-	window.open("${basePath}systemController/getQiDianInfos");
+	window.open(basePath+"systemController/getQiDianInfos");
 }
 </script>
 

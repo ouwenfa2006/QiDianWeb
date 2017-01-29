@@ -3,20 +3,20 @@ function isInteger(obj) {
 	return Math.floor(obj) === obj;
 }
 //首页
-function index(url){
-	window.location.href=url;
+function index(){
+	window.location.href=iurl;//iurl在页面的js中定义
 }
 //前一页
-function prePage(url){
-	window.location.href=url;
+function prePage(){
+	window.location.href=purl;
 }
 //后一页
-function nextPage(url){
+function nextPage(){
 	if(nPage>parseInt(totalPage)){
 		alert("已经没有更多的数据");
 		return;
 	}
-	window.location.href=url;
+	window.location.href=nurl;
 }
 $(function(){
 	//跳转
@@ -32,6 +32,7 @@ $(function(){
 				alert("已经没有更多的数据");
 				return;
 			}
+			window.location.href=pageUrl+$("#inputPage").val();
 		}else{
 			alert("输入不合法!");
 		}

@@ -74,62 +74,11 @@
     	</div>
     	<script type="text/javascript">
     	var page="${page}";//当前页
-		var pPage="${page-1}";//下一页
-		var nPage="${page+1}";//前一页
-		//判断是否是整数
-		function isInteger(obj) {
-			 return Math.floor(obj) === obj;
-		}
-		$(function(){
-    		//跳转
-    		$("#inputPage").change(function(){
-    			var inputPage=$("#inputPage").val();
-    			var patt1=/^[0-9]{1,3}$/;
-    			var result = patt1.test(inputPage);//判断输入是否合法
-				if(result==true){
-					if($("#inputPage").val()=="0"){
-	    				$("#inputPage").val(1);
-	    			}
-	        		if(parseInt($(this).val())>parseInt("${totalPage}")){
-	        			alert("已经没有更多的数据");
-	        			return;
-	        		}
-	        		createFormAndSubmit($(this).val());	
-	        	
-				}else{
-					alert("输入不合法!");
-				}
-    		});		
-    	});
-    	//首页
-    	function index(){
-    			createFormAndSubmit(1);
-    	}
-    	//前一页
-    	function prePage(){
-    			createFormAndSubmit(pPage);
-    	}
-    	//后一页
-    	function nextPage(){
-    		var size="${fn:length(learn_list)}";//每页显示的数量
-    		if(nPage>parseInt("${totalPage}")){
-    			alert("已经没有更多的数据");
-    			return;
-    		}
-    		createFormAndSubmit(nPage);	
-    	}
-    	//创建临时提交表单
-    	function createFormAndSubmit(page){
-    		var url="../systemController/getFilesFromList";
-			var string='';
-			string+='<form id="fm" action="'+url+'" method="post" target="rightIframe" style="displasy:none;">';
-			string+='<input name="page" value="'+page+'">';
-			string+='</form>';
-			$("body").append(string);
-			$("#fm").submit();
-			$("#fm").remove();
-    	}
- 
+		var pPage="${page-1}";//前一页
+		var nPage="${page+1}";//下一页
+		var size="${fn:length(page_list)}";//每一页的数量
+    	var totalPage=parseInt("${totalPage}");//总共的页数
     	</script>
+    	<script type="text/javascript" src="../plugins/js/counselingInformations_list.js"></script>
   </body>
 </html>

@@ -39,6 +39,15 @@ insert into user(userName,password,grade,courseName,nickName) values('jianjieyin
 insert into user(userName,password,grade,courseName,nickName) values('xiaomogui',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','化学','陈三');
 insert into user(userName,password,grade,courseName,nickName) values('liudehua',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','政治','张五');
 insert into user(userName,password,grade,courseName,nickName) values('wangbaoqiang',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','物理','刘六');
+insert into user(userName,password,grade,courseName,nickName) values('ouwenfa1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','小学','数学','欧静晴');
+insert into user(userName,password,grade,courseName,nickName) values('hello1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','物理','简颖琪');
+insert into user(userName,password,grade,courseName,nickName) values('jianyongqi1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','语文','阮琪');
+insert into user(userName,password,grade,courseName,nickName) values('xiaotianshi1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','数学','小天');
+insert into user(userName,password,grade,courseName,nickName) values('liuchu1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','英语','刘贵');
+insert into user(userName,password,grade,courseName,nickName) values('jianjieying1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','英语','简莹');
+insert into user(userName,password,grade,courseName,nickName) values('xiaomogui1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','化学','张三');
+insert into user(userName,password,grade,courseName,nickName) values('liudehua1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','政治','李四');
+insert into user(userName,password,grade,courseName,nickName) values('wangbaoqiang1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','物理','王五');
 /**
  * 学习资料
  */
@@ -56,7 +65,6 @@ CREATE TABLE `LearningMaterials` (
    PRIMARY KEY (`lId`),
    foreign key(uploadUserId) references user(userId)
 )engine=INNODB default charset=utf8;
-
 /**
  * 权限表
  */
@@ -68,7 +76,6 @@ PARENT_ID VARCHAR(40) DEFAULT NULL COMMENT '父类ID',
 DESCRIPTION VARCHAR(200) DEFAULT NULL COMMENT '描述',
 PRIMARY KEY(actionId)
 )engine=INNODB default charset=utf8;
-
 /**
  * 组表,对权限、人员、角色分组
  */
@@ -101,7 +108,16 @@ insert into IMAGE (user_id,savepath,relativepath,description) values(5,null,'/pl
 insert into IMAGE (user_id,savepath,relativepath,description) values(6,null,'/plugins/img/teacher_6.jpg',null);
 insert into IMAGE (user_id,savepath,relativepath,description) values(7,null,'/plugins/img/teacher_7.jpg',null);
 insert into IMAGE (user_id,savepath,relativepath,description) values(8,null,'/plugins/img/teacher_8.jpg',null);
-
+insert into IMAGE (user_id,savepath,relativepath,description) values(9,null,'/plugins/img/teacher2.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(10,null,'/plugins/img/teacher3.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(11,null,'/plugins/img/teacher4.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(12,null,'/plugins/img/teacher5.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(13,null,'/plugins/img/teacher_6.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(14,null,'/plugins/img/teacher_7.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(15,null,'/plugins/img/teacher_8.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(16,null,'/plugins/img/teacher2.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(17,null,'/plugins/img/teacher3.jpg',null);
+insert into IMAGE (user_id,savepath,relativepath,description) values(18,null,'/plugins/img/teacher4.jpg',null);
 /**
  * 角色权限表
  */
@@ -166,6 +182,16 @@ insert into USER_ROLE values(5,2);
 insert into USER_ROLE values(6,2);
 insert into USER_ROLE values(7,2);
 insert into USER_ROLE values(8,2);
+insert into USER_ROLE values(9,2);
+insert into USER_ROLE values(10,2);
+insert into USER_ROLE values(11,2);
+insert into USER_ROLE values(12,2);
+insert into USER_ROLE values(13,2);
+insert into USER_ROLE values(14,2);
+insert into USER_ROLE values(15,2);
+insert into USER_ROLE values(16,2);
+insert into USER_ROLE values(17,2);
+insert into USER_ROLE values(18,2);
 /**
  * 组人员表
  */

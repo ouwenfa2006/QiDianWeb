@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.foshan.entity.LearningMaterials;
 import com.foshan.entity.User;
 import com.foshan.util.PageUtil;
 
@@ -20,13 +21,40 @@ public class TeacherInfoController extends BaseController{
 	 */
 	@RequestMapping("/getTeachersInfo")
 	public String getTeachersInfo(HttpServletRequest request){
-		//搜索所有结果
+		//搜索所有结果,以前1500记录作为查询范围
 		List<User> teachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, null, null, "teacher");
-		//保存页面参数
+		//保存页面参数,以作分页
 		//savePageInfos(request, teachers);
-		PageUtil.savePageInfos(request, teachers, pageSize);
+		savePageInfos(request, teachers, pageSize);
 		return "/teachers/teachersInfo";
 	}
+	/**
+	 * 从搜索的结果集中进行分页显示
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="getTeachersFromList")
+	public String getTeachersFromList(HttpServletRequest request){
+		getInfosFromList(request, pageSize);
+		return "/teachers/teachersInfo";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * 根据搜索的结果集进页显示
 	 * @param request

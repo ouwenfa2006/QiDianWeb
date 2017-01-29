@@ -84,7 +84,7 @@ public class SystemController extends BaseController{
 		//取得辅导资料页面传过来的参数
 		String grade=request.getParameter("grade");
 		String courseName=request.getParameter("courseName");
-		//符合条件的搜索
+		//符合条件的搜索,以前1500条记录作为查询范围
 		List<LearningMaterials> all_learns=getLearningMaterialsService().findAllLearningMaterials(1,1500,grade,courseName);
 		savePageInfos(request, all_learns);
 

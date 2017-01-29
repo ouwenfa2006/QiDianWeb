@@ -205,40 +205,17 @@
     	</div>
     	<script type="text/javascript">
     	var page="${page}";//当前页
-    	var pPage="${page-1}";//下一页
-    	var nPage="${page+1}";//前一页
-    	var size="${fn:length(page_list)}";
-    	var totalPage=parseInt("${totalPage}");
-    	$(function(){
-    			pageCssInit();		
-    		});
-    		//页面样式初始化
-    		function pageCssInit(){
-    			$("#div_4>div>a").find("span:eq(1)").css({
-    				"height":"25px",
-    				"margin-top":"-25px",
-    				"background-color":"#D64832",
-    				"opacity":1,
-    				"padding-top":"3px",
-    				"padding-left":"32px"
-    			});
-    			$("#div_4>div>a").each(function(i){
-    				$(this).css({
-        				"margin-left":"22px"
-        			});
-    				if(i%4==0){
-    					$(this).css({
-            				"margin-left":"22px"
-            			});
-    				}
-    			});	
-    			var div_5_div_width=$("#div_5>div").width();
-    			var container_width=$(".container-fluid").width();
-    			$("#div_5>div").css({
-    				"margin-left":(container_width-div_5_div_width)/2
-    			});
-    		}
+		var pPage="${page-1}";//前一页
+		var nPage="${page+1}";//下一页
+    	var size="${fn:length(page_list)}";//每一页的数量
+    	var totalPage=parseInt("${totalPage}");//总共的页数
+    	var iurl="../teacherInfoController/getTeachersFromList?page=1";//首页url
+    	var purl="../teacherInfoController/getTeachersFromList?page="+pPage;//上一页url
+    	var nurl="../teacherInfoController/getTeachersFromList?page="+nPage;//下一页url
+    	var pageUrl="../teacherInfoController/getTeachersFromList?page=";//页面跳转url
     	</script>
+    	<script type="text/javascript" src="../plugins/js/teachersInfo.js"></script>
     	<script type="text/javascript" src="../plugins/js/findByPage.js"></script>
+    	
   </body>
 </html>

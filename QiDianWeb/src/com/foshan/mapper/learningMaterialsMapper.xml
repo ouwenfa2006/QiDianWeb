@@ -28,7 +28,7 @@
     	delete from LearningMaterials where lId=#{id}
     </delete>
     <select id="findLearningMaterialsByFileName" resultMap="learningMaterialsMapper">
-    	select * from LearningMaterials where fileName like  CONCAT(CONCAT('%', #{fileName}),'%')
+    	select * from LearningMaterials where fileName like  CONCAT(CONCAT('%', #{fileName}),'%') order by lId desc
     </select>
     <select id="findLearningMaterials" resultMap="learningMaterialsMapper">
     	select * from LearningMaterials l,user u where l.grade=#{grade} and l.courseName=#{courseName} and l.uploadUserId=u.userId order by l.lId desc limit #{start},#{pageSize}
