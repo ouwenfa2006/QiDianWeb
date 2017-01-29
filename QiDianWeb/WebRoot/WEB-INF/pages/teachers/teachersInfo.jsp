@@ -209,47 +209,9 @@
     	var nPage="${page+1}";//前一页
     	var size="${fn:length(page_list)}";
     	var totalPage=parseInt("${totalPage}");
-    	//判断是否是整数
-    	function isInteger(obj) {
-    		return Math.floor(obj) === obj;
-    	}
-    	//首页
-    	function index(url){
-    		
-    	}
-    	//前一页
-    	function prePage(url){
-    		
-    	}
-    	//后一页
-    	function nextPage(url){
-    		if(nPage>parseInt(totalPage)){
-    			alert("已经没有更多的数据");
-    			return;
-    		}
-    	}	
-    	
     	$(function(){
     			pageCssInit();		
-    			//跳转
-        		$("#inputPage").change(function(){
-        			var inputPage=$("#inputPage").val();
-        			var patt1=/^[0-9]{1,3}$/;
-        			var result = patt1.test(inputPage);//判断输入是否合法
-        			if(result==true){
-        				if($("#inputPage").val()=="0"){
-        					$("#inputPage").val(1);
-        				}
-        				if(parseInt($(this).val())>totalPage){
-        					alert("已经没有更多的数据");
-        					return;
-        				}
-        			}else{
-        				alert("输入不合法!");
-        			}
-        		});
     		});
-    		
     		//页面样式初始化
     		function pageCssInit(){
     			$("#div_4>div>a").find("span:eq(1)").css({
@@ -277,5 +239,6 @@
     			});
     		}
     	</script>
+    	<script type="text/javascript" src="../plugins/js/findByPage.js"></script>
   </body>
 </html>
