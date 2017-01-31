@@ -33,9 +33,9 @@
     			<table id="l_table" style="width: 100%;">
     				<thead>
     					<tr>
-    						<th style="width:12%;">上传时间</th>
+    						<th style="width:11%;">上传时间</th>
     						<th>文件名称</th>
-    						<th style="width: 8%;">下载次数</th>
+    						<th style="width: 7%;">下载次数</th>
     						<th style="width: 12%;">上传者</th>
     					</tr>
     				</thead>
@@ -43,7 +43,7 @@
     					<c:forEach items="${learn_list }" var="m">
     						<tr>
     							<td><fmt:formatDate value="${m.uploadTime}" pattern="yyyy-MM-dd"/></td>
-    							<td><a role="download_a"  href="${basePath }uploadFileAndDownController/downLoad?fileId=${m.lId}" target="uploadIframe">${m.fileName }</a></td>
+    							<td><a role="download_a"  href="${basePath }uploadFileAndDownController/downLoad?fileId=${m.lId}" target="uploadIframe" >${m.fileName }</a></td>
     							<td>${m.downloadCount }</td>
     							<td>${m.uploadUser.userName }</td>
     						</tr>

@@ -10,10 +10,7 @@ roleId int(10) not null auto_increment,
 name varchar(20) default null,
 description varchar(200) default null,
 primary key(roleId)
-)engine=INNODB  default charset=utf8;
-insert into role(Name) values('admin');
-insert into role(Name) values('teacher');
-insert into role(Name) values('student');
+)engine=INNODB  default charset=utf8 comment '角色表';
 /**
  * 用户表
  */
@@ -28,26 +25,7 @@ CREATE TABLE `user` (
   job_num VARCHAR(80) DEFAULT NULL COMMENT '工号',
   nickName varchar(30) default null comment '昵称',
    PRIMARY KEY (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-insert into user(userName,password,nickName) values('scott',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','管理员');
-insert into user(userName,password,grade,courseName,nickName) values('ouwenfa',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','小学','数学','欧晓晴');
-insert into user(userName,password,grade,courseName,nickName) values('hello',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','物理','简琪琪');
-insert into user(userName,password,grade,courseName,nickName) values('jianyongqi',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','语文','简泳琪');
-insert into user(userName,password,grade,courseName,nickName) values('xiaotianshi',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','数学','小天使');
-insert into user(userName,password,grade,courseName,nickName) values('liuchu',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','英语','刘处');
-insert into user(userName,password,grade,courseName,nickName) values('jianjieying',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','英语','简洁莹');
-insert into user(userName,password,grade,courseName,nickName) values('xiaomogui',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','化学','陈三');
-insert into user(userName,password,grade,courseName,nickName) values('liudehua',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','政治','张五');
-insert into user(userName,password,grade,courseName,nickName) values('wangbaoqiang',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','物理','刘六');
-insert into user(userName,password,grade,courseName,nickName) values('ouwenfa1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','小学','数学','欧静晴');
-insert into user(userName,password,grade,courseName,nickName) values('hello1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','物理','简颖琪');
-insert into user(userName,password,grade,courseName,nickName) values('jianyongqi1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','语文','阮琪');
-insert into user(userName,password,grade,courseName,nickName) values('xiaotianshi1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','数学','小天');
-insert into user(userName,password,grade,courseName,nickName) values('liuchu1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','英语','刘贵');
-insert into user(userName,password,grade,courseName,nickName) values('jianjieying1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','英语','简莹');
-insert into user(userName,password,grade,courseName,nickName) values('xiaomogui1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','化学','张三');
-insert into user(userName,password,grade,courseName,nickName) values('liudehua1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','初中','政治','李四');
-insert into user(userName,password,grade,courseName,nickName) values('wangbaoqiang1',' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ','高中','物理','王五');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 comment '用户表';
 /**
  * 学习资料
  */
@@ -64,7 +42,7 @@ CREATE TABLE `LearningMaterials` (
    downloadCount int(10) default 0,
    PRIMARY KEY (`lId`),
    foreign key(uploadUserId) references user(userId)
-)engine=INNODB default charset=utf8;
+)engine=INNODB default charset=utf8 comment '辅导资料表';
 /**
  * 权限表
  */
@@ -75,7 +53,7 @@ NAME VARCHAR(40) DEFAULT NULL COMMENT '名字',
 PARENT_ID VARCHAR(40) DEFAULT NULL COMMENT '父类ID',
 DESCRIPTION VARCHAR(200) DEFAULT NULL COMMENT '描述',
 PRIMARY KEY(actionId)
-)engine=INNODB default charset=utf8;
+)engine=INNODB default charset=utf8 comment '权限表';
 /**
  * 组表,对权限、人员、角色分组
  */
@@ -86,7 +64,7 @@ NAME VARCHAR(40) DEFAULT NULL COMMENT '名字',
 PARENT_ID VARCHAR(40) DEFAULT NULL COMMENT '父类ID',
 DESCRIPTION VARCHAR(200) DEFAULT NULL COMMENT '描述',
 PRIMARY KEY(groupId)
-)engine=INNODB default charset=utf8;
+)engine=INNODB default charset=utf8 comment '分组表';
 /**
  * 图片表
  */
@@ -99,25 +77,7 @@ RELATIVEPATH VARCHAR(200) DEFAULT NULL COMMENT '相对路径',
 DESCRIPTION VARCHAR(200) DEFAULT NULL COMMENT '描述',
 PRIMARY KEY(imageId),
 FOREIGN KEY(USER_ID) REFERENCES USER(userId)
-)engine=INNODB default charset=utf8;
-insert into IMAGE (user_id,savepath,relativepath,description) values(1,null,'/plugins/img/teacher1.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(2,null,'/plugins/img/teacher2.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(3,null,'/plugins/img/teacher3.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(4,null,'/plugins/img/teacher4.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(5,null,'/plugins/img/teacher5.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(6,null,'/plugins/img/teacher_6.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(7,null,'/plugins/img/teacher_7.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(8,null,'/plugins/img/teacher_8.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(9,null,'/plugins/img/teacher2.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(10,null,'/plugins/img/teacher3.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(11,null,'/plugins/img/teacher4.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(12,null,'/plugins/img/teacher5.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(13,null,'/plugins/img/teacher_6.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(14,null,'/plugins/img/teacher_7.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(15,null,'/plugins/img/teacher_8.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(16,null,'/plugins/img/teacher2.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(17,null,'/plugins/img/teacher3.jpg',null);
-insert into IMAGE (user_id,savepath,relativepath,description) values(18,null,'/plugins/img/teacher4.jpg',null);
+)engine=INNODB default charset=utf8 comment '图片表';
 /**
  * 角色权限表
  */
@@ -174,24 +134,6 @@ PRIMARY KEY(USER_ID,ROLE_ID) COMMENT '联合主键',
 FOREIGN KEY(USER_ID) REFERENCES USER(userId),
 FOREIGN KEY(ROLE_ID) REFERENCES ROLE(roleId)
 )engine=INNODB default charset=utf8;
-insert into USER_ROLE values(1,1);
-insert into USER_ROLE values(2,2);
-insert into USER_ROLE values(3,2);
-insert into USER_ROLE values(4,2);
-insert into USER_ROLE values(5,2);
-insert into USER_ROLE values(6,2);
-insert into USER_ROLE values(7,2);
-insert into USER_ROLE values(8,2);
-insert into USER_ROLE values(9,2);
-insert into USER_ROLE values(10,2);
-insert into USER_ROLE values(11,2);
-insert into USER_ROLE values(12,2);
-insert into USER_ROLE values(13,2);
-insert into USER_ROLE values(14,2);
-insert into USER_ROLE values(15,2);
-insert into USER_ROLE values(16,2);
-insert into USER_ROLE values(17,2);
-insert into USER_ROLE values(18,2);
 /**
  * 组人员表
  */

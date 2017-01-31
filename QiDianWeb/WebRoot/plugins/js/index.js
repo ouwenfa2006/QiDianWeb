@@ -70,6 +70,10 @@ $(function() {
 				var form = $("#upload_div").find("form");
 				var fileName = $("#upload_div").find(
 				"input[type='file']").val();
+				if(fileName.length>40){
+					alert("文字名字过长，请重命名再上传!");
+					return;
+				}
 				var names = fileName.split(".");
 				var length = $(names).size();
 				//判断上传文件的合法性,如果合法则提交

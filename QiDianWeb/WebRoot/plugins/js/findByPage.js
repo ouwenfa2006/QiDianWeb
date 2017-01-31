@@ -8,7 +8,7 @@ function index(){
 }
 //前一页
 function prePage(){
-	window.location.href=purl;
+	window.location.href=purl;//在页面的js中定义
 }
 //后一页
 function nextPage(){
@@ -16,7 +16,7 @@ function nextPage(){
 		alert("已经没有更多的数据");
 		return;
 	}
-	window.location.href=nurl;
+	window.location.href=nurl;//在页面的js中定义
 }
 $(function(){
 	//跳转
@@ -32,7 +32,7 @@ $(function(){
 				alert("已经没有更多的数据");
 				return;
 			}
-			window.location.href=pageUrl+$("#inputPage").val();
+			window.location.href=pageUrl+$("#inputPage").val();//pageUrl在页面的js中定义
 		}else{
 			alert("输入不合法!");
 		}

@@ -16,7 +16,7 @@ import com.foshan.util.PageUtil;
 @RequestMapping(value="/systemController")
 public class SystemController extends BaseController{
 	public static Logger logger=Logger.getLogger(SystemController.class);
-	private int pageSize=46;
+	private int pageSize=45;
 	/**
 	 * 回到主页
 	 */
