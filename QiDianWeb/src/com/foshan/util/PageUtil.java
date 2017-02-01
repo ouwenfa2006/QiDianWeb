@@ -3,9 +3,6 @@ package com.foshan.util;
 import java.util.LinkedList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 public class PageUtil {
 	public static List getShow(List all,int page,int pageSize) {
 		List list=new LinkedList();
