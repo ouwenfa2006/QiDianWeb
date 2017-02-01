@@ -109,6 +109,7 @@
 	var purl="../teacherInfoController/getTeachersFromList?page="+pPage;//上一页url
 	var nurl="../teacherInfoController/getTeachersFromList?page="+nPage;//下一页url
 	var pageUrl="../teacherInfoController/getTeachersFromList?page=";//页面跳转url
+	var target="t_iframe";
 	var grade="${grade}";//搜索年级
 	var grade="${courseName}";//搜索的科目
 		$(function(){
@@ -136,7 +137,7 @@
 			});	
 			
 			var div_5_div_width=$("#div_5>div").width();
-			var container_width=$(".container-fluid").width();
+			var container_width=$(window.parent.document).find(".container-fluid").width();
 			$("#div_5>div").css({
 				"margin-left":(container_width-div_5_div_width)/2
 			});

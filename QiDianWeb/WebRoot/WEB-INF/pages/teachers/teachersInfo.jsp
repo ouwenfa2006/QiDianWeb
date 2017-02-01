@@ -135,7 +135,5 @@
 
     	</script>
     	<script type="text/javascript" src="../plugins/js/teachersInfo.js"></script>
-    	<script type="text/javascript" src="../plugins/js/findByPage.js"></script>
-    	
   </body>
 </html>
