@@ -4,11 +4,13 @@ function isInteger(obj) {
 }
 //首页
 function index(){
-	window.location.href=iurl;//iurl在页面的js中定义
+	//window.location.href=iurl;//iurl在页面的js中定义
+	window.open(iurl, "t_iframe")
 }
 //前一页
 function prePage(){
-	window.location.href=purl;//在页面的js中定义
+	//window.location.href=purl;//在页面的js中定义
+	window.open(purl, "t_iframe");
 }
 //后一页
 function nextPage(){
@@ -16,7 +18,8 @@ function nextPage(){
 		alert("已经没有更多的数据");
 		return;
 	}
-	window.location.href=nurl;//在页面的js中定义
+	//window.location.href=nurl;//在页面的js中定义
+	window.open(nurl, "t_iframe");
 }
 $(function(){
 	//跳转
@@ -32,7 +35,8 @@ $(function(){
 				alert("已经没有更多的数据");
 				return;
 			}
-			window.location.href=pageUrl+$("#inputPage").val();//pageUrl在页面的js中定义
+			//window.location.href=pageUrl+$("#inputPage").val();//pageUrl在页面的js中定义
+			window.open(pageUrl+$("#inputPage").val(), "t_iframe")
 		}else{
 			alert("输入不合法!");
 		}

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.context.request.WebRequest;
 
 import com.foshan.entity.LearningMaterials;
 import com.foshan.entity.User;
@@ -21,11 +22,6 @@ public class TeacherInfoController extends BaseController{
 	 */
 	@RequestMapping("/getTeachersInfo")
 	public String getTeachersInfo(HttpServletRequest request){
-		//搜索所有结果,以前1500记录作为查询范围
-		List<User> teachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, null, null, "teacher");
-		//保存页面参数,以作分页
-		//savePageInfos(request, teachers);
-		savePageInfos(request, teachers, pageSize);
 		return "/teachers/teachersInfo";
 	}
 	/**
@@ -33,33 +29,49 @@ public class TeacherInfoController extends BaseController{
 	 * @param request
 	 * @return
 	 */
-	@RequestMapping(value="getTeachersFromList")
+	@RequestMapping(value="/getTeachersFromList")
 	public String getTeachersFromList(HttpServletRequest request){
 		getInfosFromList(request, pageSize);
-		return "/teachers/teachersInfo";
+		return "/teachers/teachersInfo_list";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	/**
-	 * 根据搜索的结果集进页显示
+	 * 查询老师
 	 * @param request
-	 * @param teachers
-	 *//*
+	 * @param grade
+	 * @return
+	 */
+	@RequestMapping("/search")
+	public  String search(HttpServletRequest request,String grade,String courseName){
+		//搜索所有结果,以前1500记录作为查询范围
+		String value1=null;
+		String value2=null;
+		List<User> teachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, value1, value2, "teacher");
+		//保存页面参数,以作分页
+		savePageInfos(request, teachers, pageSize);
+		return "/teachers/teachersInfo_list";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * 根据搜索的结果集进页显示
+ * @param request
+ * @param teachers
+ *//*
 	private void savePageInfos(HttpServletRequest request, List<User> teachers) {
 		request.getSession().removeAttribute("list");
 		request.getSession().setAttribute("list", teachers);
@@ -84,7 +96,7 @@ public class TeacherInfoController extends BaseController{
 		}else{
 			getSession().setAttribute("totalPage", teachers.size()/pageSize+1);
 		}
-		
+
 	}*/
-	
+
 }
