@@ -75,11 +75,30 @@
 
 #div_4_right {
 	width: 22.5%;
-	border: 1px solid silver;
 	height: 1087px;
 	margin-top: -1140px;
 	float: right;
 	margin-right: 13px;
+}
+#div_4_right>div {
+	margin-top: 20px;
+}
+
+#div_4_right>div>div>h3 {
+	color: white;
+}
+#div_4_images>div{
+	
+}
+#div_4_images>div>div {
+	width: 85px;
+}
+
+#div_4_images>div>div>img {
+	width: 100%;
+}
+#div_4_images>div>div>h5 {
+	padding-left: 18px;
 }
 
 #div_6 {
@@ -97,7 +116,7 @@
 			<i class="glyphicon glyphicon-play-circle pull-left"></i> <span
 				class="pull-left">&nbsp;&nbsp;当前位置：</span> <a href="#"
 				class="pull-left">启点教育&nbsp;&nbsp;</a> <span class="pull-left">&gt;&nbsp;&nbsp;</span>
-			<a href="#" class="pull-left">启点老师</a>
+			<a class="pull-left" style="color:black;">启点老师</a>
 		</div>
 		<div class="col-md-12" id="div_2">
 			<img alt="" src="../plugins/img/head_1.jpg">
@@ -128,16 +147,40 @@
 			<iframe id="t_iframe" name="t_iframe" frameborder="0" scrolling="no"
 				src="../teacherInfoController/getDatas"></iframe>
 		</div>
-		<div class="col-md-12" id="div_4_right"></div>
-
+		<div class="col-md-12" id="div_4_right">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">启点优秀老师</h3>
+				</div>
+				<div class="panel-body" id="div_4_images">
+					<div style="width:195px;height:283px;">
+						<div class="pull-left">
+							<img alt="" src="../plugins/img/teacher_9.jpg">
+							<h5>简泳琪</h5>
+						</div>
+						<div class="pull-left" style="margin-left:20px;">
+							<img alt="" src="../plugins/img/teacher_9.jpg">
+							<h5>简泳琪</h5>
+						</div>
+						<div class="pull-left">
+							<img alt="" src="../plugins/img/teacher_9.jpg">
+							<h5>简泳琪</h5>
+						</div>
+						<div class="pull-left" style="margin-left:20px;">
+							<img alt="" src="../plugins/img/teacher_9.jpg">
+							<h5>简泳琪</h5>
+						</div>
+					</div>
+					<div class="col-md-12">
+						
+					</div>
+				</div>
+			</div>
+		</div>
 		<div class="col-md-12" id="div_6">
 			<img alt="" src="../plugins/img/head_1.jpg">
 		</div>
 	</div>
-	<form action="${basePath }teacherInfoController/search" method="post"
-		target="t_iframe">
-		<button>button</button>
-	</form>
 	<script type="text/javascript" src="../plugins/js/teachersInfo.js"></script>
 </body>
 </html>

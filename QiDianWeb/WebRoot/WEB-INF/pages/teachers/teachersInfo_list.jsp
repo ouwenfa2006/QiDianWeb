@@ -127,11 +127,11 @@
 			});
 			$("#div_1>div>a").each(function(i){
 				$(this).css({
-					"margin-left":"22px"
+					"margin-left":"20px"
 				});
 				if(i%4==0){
 					$(this).css({
-						"margin-left":"22px"
+						"margin-left":"5px"
 					});
 				}
 			});	

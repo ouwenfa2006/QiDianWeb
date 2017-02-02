@@ -57,9 +57,11 @@ function initMenus_Fixed(){
 				"position":"fixed",
 				"top":10,
 				"z-index":99,
-				"left":toLeft-scrollLeft,
-				
+				"left":toLeft-scrollLeft,	
 			});
+			$("#menus").find("button").css({
+				"font-weight":"bold"
+			});	
 		}else{
 			$("#bg_div").css({
 				"position":"absolute",
@@ -70,6 +72,10 @@ function initMenus_Fixed(){
 			$("#menus").parent("div").css({
 				"position":"static",//恢复到原来的布局
 			});
+			$("#menus").find("button").css({
+				"font-weight":""
+			});
+			
 		}
 		//左边固定层
 		$("#chatDiv").css({

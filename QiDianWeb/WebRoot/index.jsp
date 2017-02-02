@@ -10,16 +10,13 @@
 	width: 100%;
 	padding: 0px;
 }
-
 .container-fluid div {
 	padding: 0px;
 }
-
 #menus>button {
 	padding-left: 2.8%;
 	padding-right: 2.8%;
 }
-
 a[role='qq']:HOVER {
 	color: red;
 }
