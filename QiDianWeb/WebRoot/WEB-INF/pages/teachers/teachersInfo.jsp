@@ -80,6 +80,7 @@
 	float: right;
 	margin-right: 13px;
 }
+
 #div_4_right>div {
 	margin-top: 20px;
 }
@@ -87,20 +88,25 @@
 #div_4_right>div>div>h3 {
 	color: white;
 }
-#div_4_images>div{
+
+#div_4_images>div {
 	
 }
-#div_4_images>div>div {
+
+/* #div_4_images>div>div {
 	width: 85px;
 }
 
 #div_4_images>div>div>img {
 	width: 100%;
 }
+
 #div_4_images>div>div>h5 {
 	padding-left: 18px;
+} */
+#div_4_infos>div{
+	margin-top:10px;
 }
-
 #div_6 {
 	margin-top: 20px;
 }
@@ -154,25 +160,39 @@
 				</div>
 				<div class="panel-body" id="div_4_images">
 					<div style="width:195px;height:283px;">
-						<div class="pull-left">
-							<img alt="" src="../plugins/img/teacher_9.jpg">
-							<h5>简泳琪</h5>
-						</div>
-						<div class="pull-left" style="margin-left:20px;">
-							<img alt="" src="../plugins/img/teacher_9.jpg">
-							<h5>简泳琪</h5>
-						</div>
-						<div class="pull-left">
-							<img alt="" src="../plugins/img/teacher_9.jpg">
-							<h5>简泳琪</h5>
-						</div>
-						<div class="pull-left" style="margin-left:20px;">
-							<img alt="" src="../plugins/img/teacher_9.jpg">
-							<h5>简泳琪</h5>
-						</div>
-					</div>
-					<div class="col-md-12">
 						
+					</div>
+					<div class="col-md-12" id="div_4_infos">
+						<div class="col-md-12">
+							<label class="pull-left">所在年级:&nbsp;</label> <select name="grade" class="pull-left">
+								<option value="小学">小学</option>
+								<option value="初一">初一</option>
+								<option value="初二">初二</option>
+								<option value="初三">初三</option>
+								<option value="高一">高一</option>
+								<option value="高二">高二</option>
+								<option value="高三">高三</option>
+							</select>
+						</div>
+						<div class="col-md-12">
+							<label class="pull-left">报读科目:&nbsp;</label> <select name="courseName" class="pull-left">	
+									<option value="语文">语文</option>
+									<option value="数学">数学</option>
+									<option value="英语">英语</option>
+							</select>
+						</div>
+						<div class="col-md-12">
+							<label class="pull-left">家长姓名:</label>
+							<input type="text" class="pull-left form-control" style="width:126px;height: 30px;">
+						</div>
+						<div class="col-md-12">
+							<label class="pull-left">联系电话:</label>
+							<input type="text" class="pull-left form-control" style="width:126px;height: 30px;">
+						</div>
+						<div class="col-md-12">
+							<button class="pull-left btn btn-danger btn-xs" style="margin-left: 35px;">立即报名</button>
+							<button class="pull-left btn btn-default btn-xs" style="margin-left: 20px;">重填</button>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -182,5 +202,46 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="../plugins/js/teachersInfo.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			//报名科目选择
+			$("#div_4_infos").find("select[name='grade']").change(function(){
+				$("#div_4_infos").find("select[name='courseName']").empty();
+				var string='';
+				if($(this).val()=="小学"){
+					string+='<option value="语文">语文</option>';
+					string+='<option value="数学">数学</option>';
+					string+='<option value="英语">英语</option>';
+				}else{
+					string+='<option value="语文">语文</option>';
+					string+='<option value="数学">数学</option>';
+					string+='<option value="英语">英语</option>';
+					string+='<option value="物理">物理</option>';
+					string+='<option value="化学">化学</option>';
+					string+='<option value="生物">生物</option>';
+					string+='<option value="政治">政治</option>';
+					string+='<option value="历史">历史</option>';
+					string+='<option value="地理">地理</option>';	
+				}
+				$("#div_4_infos").find("select[name='courseName']").append(string);
+			});
+			//初始化样式
+			$("#div_4_infos>div").css({
+				"width":"217px",
+				"margin-left":"-26px"
+			});
+			$.get("../teacherInfoController/findFineTeachers",function(data){
+				var fine_teachers=eval(data);
+				var string='';
+				$(fine_teachers).each(function(){
+					string+='<div class="pull-left" userId="'+this.userId+'" style="margin-left:18px;">';
+					string+='<img alt="" src="..'+this.relativePath+'" style="height:106.25px;">';
+					string+='<h5 style="padding-left: 18px;">'+this.nickName+'</h5>';
+					string+='</div>';
+				});
+				$("#div_4_images>div:eq(0)").append(string);
+			});
+		});
+	</script>
 </body>
 </html>

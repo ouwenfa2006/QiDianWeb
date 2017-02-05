@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+	http://www.springframework.org/schema/context 
+	http://www.springframework.org/schema/context/spring-context-3.1.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+	http://www.springframework.org/schema/mvc 
+	http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+	http://www.springframework.org/schema/util 
+	http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+	
+	<!-- 自动注入对象 ,需要依懒注入的对象都要加注解 -->
+	<context:annotation-config></context:annotation-config>
+	<!-- 加载资源文件 -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${driverClassName}"></property>
+		<property name="jdbcUrl" value="${url}"></property>
+		<property name="user" value="${user}"></property>
+		<property name="password" value="${password}"></property>
+		<!-- 连接池启动时的初始值 -->
+		<property name="initialPoolSize" value="5"></property>
+		<!-- 连接池的最大值 -->
+		<property name="maxPoolSize" value="500"></property>
+		<!-- 最大空间值、当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，直至减少的maxIdle为止 -->
+		<property name="maxIdleTimeExcessConnections" value="5"></property>
+		<!-- 最小空间值，当空间的连接数少于阀值时，连接池就会预申请一些连接，以免洪峰来时 来不及申请 -->
+		<property name="minPoolSize" value="5"></property>
+
+	</bean>
+	 <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="dataSourceTransactionManager">
+	 	<property name="dataSource" ref="dataSource"></property>
+	 </bean>
+	 <!-- 使用注解使事务起作用 -->
+	 <tx:annotation-driven transaction-manager="dataSourceTransactionManager" proxy-target-class="true"/>
+	 <!-- 用配置的文件的方式配置事务，不建议使用 -->
+	 <!-- <aop:config proxy-target-class="true">
+	 	<aop:pointcut expression="com.foshan.service.UserService(*)" id="register"/>
+	 	<aop:advisor advice-ref=""/>
+	 	<aop:aspect>
+	 		<aop:before method=""/>
+	 	</aop:aspect>
+	 </aop:config> -->
+	 <!-- 需要扫描的包 -->
+	<context:component-scan base-package="com.foshan.controller"></context:component-scan>
+	<context:component-scan base-package="com.foshan.dao"></context:component-scan>
+	<context:component-scan base-package="com.foshan.service"></context:component-scan>
+	<!-- 容器初始化要执行的内容 -->
+	<!-- <bean id="webInitService" class="com.foshan.service.WebInitService" init-method="init"></bean> -->
+	<!-- 其他配置 -->
+	<import resource="classpath:srping-mvc.xml"/>
+	<import resource="classpath:srping-mybatis.xml"/>
+	<!-- <import resource="classpath:spring-quartz.xml"/> -->
+	
+</beans>

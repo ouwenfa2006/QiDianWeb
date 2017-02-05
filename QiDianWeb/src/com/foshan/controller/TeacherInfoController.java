@@ -4,11 +4,17 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foshan.entity.User;
+import com.foshan.util.JsonUtil;
+import com.foshan.util.PageUtil;
 
 @Controller
 @RequestMapping(value="/teacherInfoController")
@@ -35,7 +41,7 @@ public class TeacherInfoController extends BaseController{
 	@RequestMapping(value="/getDatas")
 	public  String getDatas(HttpServletRequest request){
 		//搜索所有结果,以前1500记录作为查询范围
-		List<User> teachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, null, null, "teacher");
+		List<User> teachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, null, null, "teacher",null);
 		//保存页面参数,以作分页
 		savePageInfos(request, teachers, pageSize);
 		return "/teachers/teachersInfo_list";
@@ -57,14 +63,33 @@ public class TeacherInfoController extends BaseController{
 		if(courseName!=null&&courseName.equals("全部")){
 			courseName=null;
 		}
-		List<User> teachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, grade, courseName, "teacher");
+		//查询所有
+		List<User> teachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, grade, courseName, "teacher",null);
+
 		//保存页面参数,以作分页
 		savePageInfos(request, teachers, pageSize);
 		return "/teachers/teachersInfo_list";
 	}
-	
-	
-	
+	@RequestMapping(value="/findFineTeachers",produces="text/html;charset=UTF-8")
+	@ResponseBody
+	public String findFineTeachers(HttpServletRequest request) throws JSONException{
+		//查找优秀老师
+		List<User> fineTeachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, null, null, "teacher", 1);
+		System.out.println(fineTeachers.size());
+		JSONArray jsonArray=new JSONArray();
+		for (User user : fineTeachers) {
+			JSONObject jsonObject=new JSONObject();
+			jsonObject.put("nickName", user.getNickName());
+			jsonObject.put("relativePath", user.getImages().get(0).getRelativePath());
+			jsonObject.put("userId", user.getUserId());
+			jsonArray.put(jsonObject);
+		}
+		System.out.println(jsonArray.toString());
+		return jsonArray.toString();
+	}
+
+
+
 
 
 

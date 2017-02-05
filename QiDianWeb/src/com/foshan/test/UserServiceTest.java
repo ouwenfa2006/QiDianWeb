@@ -93,16 +93,16 @@ public class UserServiceTest {
 		System.out.println("======================================================");
 	};
 	public static void test_finadUsersAndImages(){
-		List<User> users=userService.findUsersAndImagesfindUsersAndImages(1, 100, "高中",null,"teacher");
-		for (User user : users) {
+		List<User> fineTeachers=userService.findUsersAndImagesfindUsersAndImages(1, 1500, null, null, "teacher", 1);
+		for (User user : fineTeachers) {
 			System.out.println(user.getUserId());
-			System.out.println(user.getUserName());
+			/*System.out.println(user.getUserName());
 			List<Image> images=user.getImages();
 			for (Image image : images) {
 				System.out.println(image.getImageId());
 				System.out.println(image.getRelativePath());
 			}
-			System.out.println("===========================================");
+			System.out.println("===========================================");*/
 		}
 	}
 	

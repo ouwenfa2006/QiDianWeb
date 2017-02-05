@@ -8,6 +8,7 @@
       	<result property="grade" column="grade"/>
       	<result property="courseName" column="courseName"/>
       	<result property="nickName" column="nickName"/>
+      	<result property="level" column="level"/>
     	<!-- <collection property="roles" ofType="com.foshan.entity.Role" autoMapping="true"></collection> -->
     </resultMap> 
     
@@ -51,6 +52,9 @@
     	</if>
     	<if test="roleName!=null and roleName!=''">
     		and r.name=#{roleName} and u.userId=ur.user_id and r.roleId=ur.role_id
+    	</if>
+    	<if test="level!=null and level!=''">
+    		and u.level=#{level}
     	</if>
     	limit #{start},#{pageSize}
     </select>

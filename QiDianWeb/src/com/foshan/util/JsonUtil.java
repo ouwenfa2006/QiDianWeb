@@ -31,12 +31,12 @@ public class JsonUtil {
 				Method method=o.getClass().getDeclaredMethod(methodName);
 				method.setAccessible(true);
 				Object value=method.invoke(o);
-				if(value.getClass()==Date.class){
-					SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
-					value=dateFormat.format(value);
-				}/*else if(value.getClass()!=String.class&&value.getClass()!=Date.class){
-					value=getJsonObject(value);
-				}*/
+				if(value!=null){
+					if(value.getClass()==Date.class){
+						SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+						value=dateFormat.format(value);
+					}
+				}
 				jsonObject.put(field.getName(), value);
 
 			} catch (Exception e) {

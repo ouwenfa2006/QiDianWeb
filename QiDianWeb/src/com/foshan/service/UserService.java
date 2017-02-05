@@ -17,5 +17,5 @@ public interface UserService {
 	User findUserAndMaterialsById(Integer id);
 	User findUserAndRolesById(Integer id);
 	User findUserAndImageById(Integer id);
-	List<User> findUsersAndImagesfindUsersAndImages(int page, int pageSize, String grade,String courseName,String roleName);
+	List<User> findUsersAndImagesfindUsersAndImages(int page, int pageSize, String grade,String courseName,String roleName,Integer level);
 }

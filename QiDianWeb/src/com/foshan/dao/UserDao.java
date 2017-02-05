@@ -25,6 +25,7 @@ public interface UserDao {
 	 * @param roleName 可为空
 	 * @return
 	 */
-	List<User> findUsersAndImages(int start,int pageSize,String grade,String courseName,String roleName);
+	List<User> findUsersAndImages(int start,int pageSize,String grade,String courseName,String roleName,Integer level);
 	User findUserAndImageById(Integer id);
+	
 }

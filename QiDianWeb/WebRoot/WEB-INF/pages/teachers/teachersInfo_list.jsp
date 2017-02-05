@@ -114,6 +114,17 @@
 	var grade="${courseName}";//搜索的科目
 		$(function(){
 			pageCssInit();
+			/* $.get("../teacherInfoController/findFineTeachers",function(data){
+				var fine_teachers=eval(data);
+				var string='';
+				$(fine_teachers).each(function(){
+					string+='<div class="pull-left" userId="'+this.userId+'">';
+					string+='<img alt="" src="..'+this.relativePath+'">';
+					string+='<h5>'+this.nickName+'</h5>';
+					string+='</div>';
+				});
+				$(window.parent.document).find("#div_4_images>div:eq(0)").append(string);
+			}); */
 		});
 		//页面样式初始化
 		function pageCssInit(){
@@ -135,7 +146,6 @@
 					});
 				}
 			});	
-			
 			var div_5_div_width=$("#div_5>div").width();
 			var container_width=$(window.parent.document).find(".container-fluid").width();
 			$("#div_5>div").css({

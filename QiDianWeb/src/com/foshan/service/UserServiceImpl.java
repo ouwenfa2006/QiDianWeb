@@ -82,9 +82,9 @@ public class UserServiceImpl implements UserService{
 	}
 	@Override
 	public List<User> findUsersAndImagesfindUsersAndImages(int page,
-			int pageSize, String grade, String courseName,String roleName) {
+			int pageSize, String grade, String courseName,String roleName,Integer level) {
 		int start=(page-1)*pageSize;
-		return userDao.findUsersAndImages(start, pageSize, grade, courseName,roleName);
+		return userDao.findUsersAndImages(start, pageSize, grade, courseName,roleName,level);
 	}
 	
 }

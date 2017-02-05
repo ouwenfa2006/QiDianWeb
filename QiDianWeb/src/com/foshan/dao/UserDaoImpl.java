@@ -49,9 +49,10 @@ public class UserDaoImpl implements UserDao{
 	}
 	@Override
 	public List<User> findUsersAndImages(int start, int pageSize, String grade,
-			String courseName,String roleName) {
+			String courseName,String roleName,Integer level) {
 		// TODO Auto-generated method stub
-		return userMapper.findUsersAndImages(start,pageSize,grade,courseName,roleName);
+		return userMapper.findUsersAndImages(start,pageSize,grade,courseName,roleName,level);
 	}
+	
 
 }

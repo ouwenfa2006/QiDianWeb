@@ -12,7 +12,6 @@ $(function(){
 		var url="../teacherInfoController/search";
 		createFormAndSubmit(url);
 	});
-	
 });
 //创建临时提交表单
 function createFormAndSubmit(url){

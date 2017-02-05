@@ -17,6 +17,7 @@ public class User implements Serializable{
 	private String grade;
 	private String courseName;
 	private String nickName;
+	private Integer level;
 	private List<LearningMaterials> learningMaterials_list;//学习资料
 	private List<User> students;
 	private List<Role> roles;
@@ -81,6 +82,12 @@ public class User implements Serializable{
 	}
 	public void setCourseName(String courseName) {
 		this.courseName = courseName;
+	}
+	public Integer getLevel() {
+		return level;
+	}
+	public void setLevel(Integer level) {
+		this.level = level;
 	}
 	
 }
