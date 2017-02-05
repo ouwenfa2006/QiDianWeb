@@ -183,11 +183,11 @@
 						</div>
 						<div class="col-md-12">
 							<label class="pull-left">家长姓名:</label>
-							<input type="text" class="pull-left form-control" style="width:126px;height: 30px;">
+							<input type="text" class="pull-left form-control" style="width:123px;height: 30px;">
 						</div>
 						<div class="col-md-12">
 							<label class="pull-left">联系电话:</label>
-							<input type="text" class="pull-left form-control" style="width:126px;height: 30px;">
+							<input type="text" class="pull-left form-control" style="width:123px;height: 30px;">
 						</div>
 						<div class="col-md-12">
 							<button class="pull-left btn btn-danger btn-xs" style="margin-left: 35px;">立即报名</button>

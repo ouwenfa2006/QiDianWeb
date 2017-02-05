@@ -59,9 +59,9 @@ function initMenus_Fixed(){
 				"z-index":99,
 				"left":toLeft-scrollLeft,	
 			});
-			$("#menus").find("button").css({
+			/* $("#menus").find("button").css({
 				"font-weight":"bold"
-			});	
+			});	 */
 		}else{
 			$("#bg_div").css({
 				"position":"absolute",
