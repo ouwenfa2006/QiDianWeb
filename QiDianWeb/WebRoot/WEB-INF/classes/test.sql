@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mydatabases
-Source Server Version : 50624
+Source Server         : ou
+Source Server Version : 50715
 Source Host           : localhost:3306
 Source Database       : qidianweb
 
 Target Server Type    : MYSQL
-Target Server Version : 50624
+Target Server Version : 50715
 File Encoding         : 65001
 
-Date: 2017-01-31 23:43:20
+Date: 2017-02-06 16:40:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -29,6 +29,38 @@ CREATE TABLE `action` (
 
 -- ----------------------------
 -- Records of action
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `course`
+-- ----------------------------
+DROP TABLE IF EXISTS `course`;
+CREATE TABLE `course` (
+  `courseId` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `grade` varchar(40) DEFAULT NULL COMMENT '年级',
+  `courseName` varchar(40) DEFAULT NULL COMMENT '名称',
+  PRIMARY KEY (`courseId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='科目表';
+
+-- ----------------------------
+-- Records of course
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `course_sutdent`
+-- ----------------------------
+DROP TABLE IF EXISTS `course_sutdent`;
+CREATE TABLE `course_sutdent` (
+  `course_id` int(10) NOT NULL,
+  `student_id` int(10) NOT NULL,
+  PRIMARY KEY (`course_id`,`student_id`),
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `course_sutdent_ibfk_1` FOREIGN KEY (`course_id`) REFERENCES `course` (`courseId`),
+  CONSTRAINT `course_sutdent_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`studentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of course_sutdent
 -- ----------------------------
 
 -- ----------------------------
@@ -155,6 +187,42 @@ CREATE TABLE `learningmaterials` (
   CONSTRAINT `learningmaterials_ibfk_1` FOREIGN KEY (`uploadUserId`) REFERENCES `user` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COMMENT='辅导资料表';
 
+-- ----------------------------
+-- Records of learningmaterials
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `parent`
+-- ----------------------------
+DROP TABLE IF EXISTS `parent`;
+CREATE TABLE `parent` (
+  `parentId` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `parentName` varchar(40) DEFAULT NULL COMMENT '名字',
+  `parentPhone` bigint(20) DEFAULT NULL COMMENT '电话',
+  `createDate` date DEFAULT NULL COMMENT '创建日期',
+  PRIMARY KEY (`parentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='家长表';
+
+-- ----------------------------
+-- Records of parent
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `parent_sutdent`
+-- ----------------------------
+DROP TABLE IF EXISTS `parent_sutdent`;
+CREATE TABLE `parent_sutdent` (
+  `parent_id` int(10) NOT NULL,
+  `student_id` int(10) NOT NULL,
+  PRIMARY KEY (`parent_id`,`student_id`),
+  KEY `student_id` (`student_id`),
+  CONSTRAINT `parent_sutdent_ibfk_1` FOREIGN KEY (`parent_id`) REFERENCES `parent` (`parentId`),
+  CONSTRAINT `parent_sutdent_ibfk_2` FOREIGN KEY (`student_id`) REFERENCES `student` (`studentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of parent_sutdent
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `role`
@@ -172,7 +240,6 @@ CREATE TABLE `role` (
 -- ----------------------------
 INSERT INTO `role` VALUES ('1', 'admin', null);
 INSERT INTO `role` VALUES ('2', 'teacher', null);
-INSERT INTO `role` VALUES ('3', 'student', null);
 
 -- ----------------------------
 -- Table structure for `role_action`
@@ -192,6 +259,26 @@ CREATE TABLE `role_action` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `student`
+-- ----------------------------
+DROP TABLE IF EXISTS `student`;
+CREATE TABLE `student` (
+  `studentId` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `sudentName` varchar(40) DEFAULT NULL COMMENT '名字',
+  `PARENT_ID` int(10) DEFAULT NULL COMMENT '家长',
+  `grade` varchar(40) DEFAULT NULL COMMENT '年级',
+  `school` varchar(40) DEFAULT NULL COMMENT '学校',
+  `studentPhone` bigint(20) DEFAULT NULL COMMENT '电话',
+  PRIMARY KEY (`studentId`),
+  KEY `PARENT_ID` (`PARENT_ID`),
+  CONSTRAINT `student_ibfk_1` FOREIGN KEY (`PARENT_ID`) REFERENCES `parent` (`parentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学生表';
+
+-- ----------------------------
+-- Records of student
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -204,32 +291,32 @@ CREATE TABLE `user` (
   `email` varchar(80) DEFAULT NULL COMMENT '邮箱',
   `job_num` varchar(80) DEFAULT NULL COMMENT '工号',
   `nickName` varchar(30) DEFAULT NULL COMMENT '昵称',
-   level int(1) default 0 comment '等级',
+  `level` int(1) DEFAULT '0' COMMENT '等级',
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'scott', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', null, null, null, null, '管理员',0);
-INSERT INTO `user` VALUES ('2', 'ouwenfa', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '小学', '数学', null, null, '欧晓晴',0);
-INSERT INTO `user` VALUES ('3', 'hello', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '物理', null, null, '简琪琪',0);
-INSERT INTO `user` VALUES ('4', 'jianyongqi', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '语文', null, null, '简泳琪',0);
-INSERT INTO `user` VALUES ('5', 'xiaotianshi', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '数学', null, null, '小天使',0);
-INSERT INTO `user` VALUES ('6', 'liuchu', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '英语', null, null, '刘处',0);
-INSERT INTO `user` VALUES ('7', 'jianjieying', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '英语', null, null, '简洁莹',0);
-INSERT INTO `user` VALUES ('8', 'xiaomogui', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '化学', null, null, '陈三',0);
-INSERT INTO `user` VALUES ('9', 'liudehua', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '政治', null, null, '张五',0);
-INSERT INTO `user` VALUES ('10', 'wangbaoqiang', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '物理', null, null, '刘六',0);
-INSERT INTO `user` VALUES ('11', 'ouwenfa1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '小学', '数学', null, null, '欧静晴',1);
-INSERT INTO `user` VALUES ('12', 'hello1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '物理', null, null, '简颖琪',1);
-INSERT INTO `user` VALUES ('13', 'jianyongqi1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '语文', null, null, '阮琪',1);
-INSERT INTO `user` VALUES ('14', 'xiaotianshi1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '数学', null, null, '小天',1);
-INSERT INTO `user` VALUES ('15', 'liuchu1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '英语', null, null, '刘贵',1);
-INSERT INTO `user` VALUES ('16', 'jianjieying1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '英语', null, null, '简莹',1);
-INSERT INTO `user` VALUES ('17', 'xiaomogui1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '化学', null, null, '张三',0);
-INSERT INTO `user` VALUES ('18', 'liudehua1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '政治', null, null, '李四',0);
-INSERT INTO `user` VALUES ('19', 'wangbaoqiang1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '物理', null, null, '王五',0);
+INSERT INTO `user` VALUES ('1', 'scott', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', null, null, null, null, '管理员', '0');
+INSERT INTO `user` VALUES ('2', 'ouwenfa', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '小学', '数学', null, null, '欧晓晴', '0');
+INSERT INTO `user` VALUES ('3', 'hello', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '物理', null, null, '简琪琪', '0');
+INSERT INTO `user` VALUES ('4', 'jianyongqi', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '语文', null, null, '简泳琪', '0');
+INSERT INTO `user` VALUES ('5', 'xiaotianshi', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '数学', null, null, '小天使', '0');
+INSERT INTO `user` VALUES ('6', 'liuchu', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '英语', null, null, '刘处', '0');
+INSERT INTO `user` VALUES ('7', 'jianjieying', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '英语', null, null, '简洁莹', '0');
+INSERT INTO `user` VALUES ('8', 'xiaomogui', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '化学', null, null, '陈三', '0');
+INSERT INTO `user` VALUES ('9', 'liudehua', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '政治', null, null, '张五', '0');
+INSERT INTO `user` VALUES ('10', 'wangbaoqiang', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '物理', null, null, '刘六', '0');
+INSERT INTO `user` VALUES ('11', 'ouwenfa1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '小学', '数学', null, null, '欧静晴', '1');
+INSERT INTO `user` VALUES ('12', 'hello1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '物理', null, null, '简颖琪', '1');
+INSERT INTO `user` VALUES ('13', 'jianyongqi1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '语文', null, null, '阮琪', '1');
+INSERT INTO `user` VALUES ('14', 'xiaotianshi1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '数学', null, null, '小天', '1');
+INSERT INTO `user` VALUES ('15', 'liuchu1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '英语', null, null, '刘贵', '1');
+INSERT INTO `user` VALUES ('16', 'jianjieying1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '英语', null, null, '简莹', '1');
+INSERT INTO `user` VALUES ('17', 'xiaomogui1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '化学', null, null, '张三', '0');
+INSERT INTO `user` VALUES ('18', 'liudehua1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '政治', null, null, '李四', '0');
+INSERT INTO `user` VALUES ('19', 'wangbaoqiang1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '物理', null, null, '王五', '0');
 
 -- ----------------------------
 -- Table structure for `user_action`
@@ -260,6 +347,7 @@ CREATE TABLE `user_role` (
   CONSTRAINT `user_role_ibfk_1` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`userId`),
   CONSTRAINT `user_role_ibfk_2` FOREIGN KEY (`ROLE_ID`) REFERENCES `role` (`roleId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- ----------------------------
 -- Records of user_role
 -- ----------------------------
@@ -281,4 +369,3 @@ INSERT INTO `user_role` VALUES ('15', '2');
 INSERT INTO `user_role` VALUES ('16', '2');
 INSERT INTO `user_role` VALUES ('17', '2');
 INSERT INTO `user_role` VALUES ('18', '2');
-

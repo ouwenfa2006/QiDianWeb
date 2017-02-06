@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.foshan.service.LearningMaterialsService;
+import com.foshan.service.ModelService;
 import com.foshan.service.UserService;
 import com.foshan.util.PageUtil;
 
@@ -24,6 +25,8 @@ public class BaseController{
 	private UserService userService;
 	@Resource(name="learningMaterialsService")
 	private LearningMaterialsService learningMaterialsService;
+	@Resource(name="modelService")
+	private ModelService modelService;
 	private  HttpServletRequest request; 
 	private HttpServletResponse response;
 	private HttpSession session;
@@ -43,6 +46,12 @@ public class BaseController{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	public void setModelService(ModelService modelService) {
+		this.modelService = modelService;
+	}
+	public ModelService getModelService() {
+		return modelService;
 	}
 	public HttpServletResponse getResponse() {
 		return response;
