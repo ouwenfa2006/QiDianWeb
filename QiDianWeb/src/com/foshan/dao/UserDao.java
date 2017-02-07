@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.foshan.entity.User;
 
-public interface UserDao {
+public interface UserDao extends BaseDao<User>{
 	User findUserById(Integer id);
 	int addUser(User user);
 	User findUserByUserName(String userName);

@@ -3,20 +3,19 @@ package com.foshan.entity;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-
+/**
+ * 家长
+ * @author Administrator
+ *
+ */
 public class Parent implements Serializable{
 	private static final long serialVersionUID = 1L;
-	private String parentId;
+	private Integer parentId;
 	private String parentName;
 	private Long parentPhone;
 	private Date  createDate;
 	private List<Student> childrens;
-	public String getParentId() {
-		return parentId;
-	}
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
-	}
+	
 	public String getParentName() {
 		return parentName;
 	}
@@ -40,6 +39,12 @@ public class Parent implements Serializable{
 	}
 	public void setParentPhone(Long parentPhone) {
 		this.parentPhone = parentPhone;
+	}
+	public Integer getParentId() {
+		return parentId;
+	}
+	public void setParentId(Integer parentId) {
+		this.parentId = parentId;
 	}
 	
 }

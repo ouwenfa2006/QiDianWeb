@@ -4,6 +4,13 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class PageUtil {
+	/**
+	 * 取得某页的数据
+	 * @param all
+	 * @param page
+	 * @param pageSize
+	 * @return
+	 */
 	public static List getShow(List all,int page,int pageSize) {
 		List list=new LinkedList();
 		int start=(page-1)*pageSize;

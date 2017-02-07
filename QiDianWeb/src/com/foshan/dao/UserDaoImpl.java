@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.foshan.entity.User;
 import com.foshan.mapper.UserMapper;
 @Repository(value="userDao")
-public class UserDaoImpl implements UserDao{
+public class UserDaoImpl extends BaseDaoSupport<User> implements UserDao{
 	@Resource(name="userMapper")
 	private UserMapper userMapper;
 	@Override

@@ -8,7 +8,7 @@ import com.foshan.entity.Parent;
 import com.foshan.mapper.ParentMapper;
 import com.foshan.mapper.UserMapper;
 @Repository(value="parentDao")
-public class ParentDaoImpl implements ParentDao{
+public class ParentDaoImpl extends BaseDaoSupport<Parent> implements ParentDao{
 	@Resource(name="parentMapper")
 	private ParentMapper parentMapper;
 	@Override

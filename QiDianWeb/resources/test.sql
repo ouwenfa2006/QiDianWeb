@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : ou
-Source Server Version : 50715
+Source Server         : mysql
+Source Server Version : 50624
 Source Host           : localhost:3306
 Source Database       : qidianweb
 
 Target Server Type    : MYSQL
-Target Server Version : 50715
+Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-02-06 16:40:03
+Date: 2017-02-07 23:58:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -192,6 +192,82 @@ CREATE TABLE `learningmaterials` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `message`
+-- ----------------------------
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE `message` (
+  `messageId` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
+  `text` varchar(2000) DEFAULT NULL COMMENT '内容',
+  `createDate` DATETIME DEFAULT NULL COMMENT '发送时间',
+  `formUser_Id` int(10) DEFAULT NULL,
+  `formParent_Id` int(10) DEFAULT NULL,
+  `formStudent_Id` int(10) DEFAULT NULL,
+  `isNewMessage` int(1) DEFAULT '0' COMMENT '0表示新信息',
+  PRIMARY KEY (`messageId`),
+  KEY `formUser_Id` (`formUser_Id`),
+  KEY `formParent_Id` (`formParent_Id`),
+  KEY `formStudent_Id` (`formStudent_Id`),
+  CONSTRAINT `message_ibfk_1` FOREIGN KEY (`formUser_Id`) REFERENCES `user` (`userId`),
+  CONSTRAINT `message_ibfk_2` FOREIGN KEY (`formParent_Id`) REFERENCES `parent` (`parentId`),
+  CONSTRAINT `message_ibfk_3` FOREIGN KEY (`formStudent_Id`) REFERENCES `student` (`studentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='信息表';
+
+-- ----------------------------
+-- Records of message
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `message_parent`
+-- ----------------------------
+DROP TABLE IF EXISTS `message_parent`;
+CREATE TABLE `message_parent` (
+  `message_id` int(10) NOT NULL,
+  `toParent_id` int(10) NOT NULL,
+  PRIMARY KEY (`message_id`,`toParent_id`),
+  KEY `toParent_id` (`toParent_id`),
+  CONSTRAINT `message_parent_ibfk_1` FOREIGN KEY (`message_id`) REFERENCES `message` (`messageId`),
+  CONSTRAINT `message_parent_ibfk_2` FOREIGN KEY (`toParent_id`) REFERENCES `parent` (`parentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of message_parent
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `message_student`
+-- ----------------------------
+DROP TABLE IF EXISTS `message_student`;
+CREATE TABLE `message_student` (
+  `message_id` int(10) NOT NULL,
+  `toStudent_id` int(10) NOT NULL,
+  PRIMARY KEY (`message_id`,`toStudent_id`),
+  KEY `toStudent_id` (`toStudent_id`),
+  CONSTRAINT `message_student_ibfk_1` FOREIGN KEY (`message_id`) REFERENCES `message` (`messageId`),
+  CONSTRAINT `message_student_ibfk_2` FOREIGN KEY (`toStudent_id`) REFERENCES `student` (`studentId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of message_student
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `message_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `message_user`;
+CREATE TABLE `message_user` (
+  `message_id` int(10) NOT NULL,
+  `toUser_id` int(10) NOT NULL,
+  PRIMARY KEY (`message_id`,`toUser_id`),
+  KEY `toUser_id` (`toUser_id`),
+  CONSTRAINT `message_user_ibfk_1` FOREIGN KEY (`message_id`) REFERENCES `message` (`messageId`),
+  CONSTRAINT `message_user_ibfk_2` FOREIGN KEY (`toUser_id`) REFERENCES `user` (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- ----------------------------
+-- Records of message_user
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `parent`
 -- ----------------------------
 DROP TABLE IF EXISTS `parent`;
@@ -201,11 +277,13 @@ CREATE TABLE `parent` (
   `parentPhone` bigint(20) DEFAULT NULL COMMENT '电话',
   `createDate` date DEFAULT NULL COMMENT '创建日期',
   PRIMARY KEY (`parentId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='家长表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='家长表';
 
 -- ----------------------------
 -- Records of parent
 -- ----------------------------
+INSERT INTO `parent` VALUES ('1', '陈露', '13516553143', '2017-02-07');
+INSERT INTO `parent` VALUES ('2', '王五', '13516553143', '2017-02-07');
 
 -- ----------------------------
 -- Table structure for `parent_sutdent`

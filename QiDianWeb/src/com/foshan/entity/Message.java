@@ -80,5 +80,10 @@ public class Message implements Serializable{
 	public void setIsNewMessage(Integer isNewMessage) {
 		this.isNewMessage = isNewMessage;
 	}
-
+	@Override
+	public String toString() {
+		return "Message [messageId=" + messageId + ", text=" + text
+				+ ", createDate=" + createDate + "]";
+	}
+	
 }
