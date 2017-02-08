@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foshan.mapper.UserMapper">
+    <resultMap type="com.foshan.entity.User" id="userMapper">
+        <id property="userId" column="userId" />
+        <result property="userName" column="userName" />
+      	<result property="password" column="password"></result>
+      	<result property="grade" column="grade"/>
+      	<result property="courseName" column="courseName"/>
+      	<result property="nickName" column="nickName"/>
+      	<result property="level" column="level"/>
+    	<!-- <collection property="roles" ofType="com.foshan.entity.Role" autoMapping="true"></collection> -->
+    </resultMap> 
+    
+    <resultMap type="com.foshan.entity.User" id="userAndMaterialsMapper" extends="userMapper">
+    	<!-- 包装有问题.. -->
+    	<collection property="learningMaterials_list" column="uploadUserId"  ofType="com.foshan.entity.LearningMaterials">
+    		<id property="lId" column="lId"/>
+    		<result property="fileName" column="fileName"/>
+    		<result property="path" column="path"/>
+    		<result property="absoulteFileName" column="absoulteFileName"/>
+    		<result property="uploadTime" column="uploadTime"/>
+    	</collection>
+    </resultMap>
+    <resultMap type="com.foshan.entity.User" id="userAndRolesMapper" extends="userMapper">
+    	<collection property="roles" ofType="com.foshan.entity.Role">
+    		<id property="roleId" column="roleId"/>
+    		<id property="name" column="name"/>
+    	</collection>
+    </resultMap>
+    <resultMap type="com.foshan.entity.User" id="userAndImageMapper" extends="userMapper">
+    	<collection property="images" ofType="com.foshan.entity.Image">
+    		<id property="imageId" column="imageId"/>
+    		<result property="savePath" column="savePath"/>
+    		<result property="relativePath" column="relativePath"/>
+    	</collection>
+    </resultMap>
+    <select id="findUserAndImageById" parameterType="java.lang.Integer" resultMap="userAndImageMapper">
+    	select u.*,i.* from user u,image i where u.userId=#{id} and u.userId=i.user_id
+    </select>
+    <select id="findUsersAndImages" resultMap="userAndImageMapper">
+    	select * from user u,image i,role r
+    	<if test="roleName!=null and roleName!=''">
+    		,user_role ur 
+    	</if>
+    	where u.userId=i.user_id 
+    	<if test="grade!=null and grade!=''">
+    		and u.grade =#{grade} 
+    	</if>
+    	<if test="courseName!=null and courseName!=''">
+   			and u.courseName=#{courseName} 
+    	</if>
+    	<if test="roleName!=null and roleName!=''">
+    		and r.name=#{roleName} and u.userId=ur.user_id and r.roleId=ur.role_id
+    	</if>
+    	<if test="level!=null and level!=''">
+    		and u.level=#{level}
+    	</if>
+    	limit #{start},#{pageSize}
+    </select>
+    <select id="findUserAndMaterialsById"  parameterType="java.lang.Integer" resultMap="userAndMaterialsMapper">
+   		select * from user u,learningMaterials l 
+   		<where>
+   			u.userId=#{id} and u.userId=l.uploadUserId
+   		</where>
+   	</select>
+    <insert id="addUser" parameterType="com.foshan.entity.User">
+    	insert into user(userName,password) values(#{userName},#{password})
+    </insert>
+    <select id="findUserByUserName" parameterType="com.foshan.entity.User" resultMap="userMapper">
+    	select * from user u where u.userName=#{userName}
+    </select>
+    <select id="findUserById" parameterType="java.lang.Integer" resultMap="userMapper">
+    	select * from user u where u.userId=#{id}
+    </select>
+   	<select id="findUserAndRolesById" parameterType="java.lang.Integer" resultMap="userAndRolesMapper">
+   		select * from user u,role r,user_role ur where u.userId=#{id} and u.userId=ur.user_Id and r.roleId=ur.role_id
+   	</select>
+    <delete id="deleteUserById" parameterType="java.lang.Integer">
+    	delete from user where userId=#{id}
+    </delete>
+</mapper>

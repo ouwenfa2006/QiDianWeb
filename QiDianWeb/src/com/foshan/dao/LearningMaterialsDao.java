@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.foshan.entity.LearningMaterials;
 
-public interface LearningMaterialsDao {
+public interface LearningMaterialsDao extends BaseDao<LearningMaterials> {
 	void addLearningMaterials(LearningMaterials learningMaterials);
 	LearningMaterials findById(Integer id);
 	List<LearningMaterials> findAllLearningMaterials(int start,int pageSize);

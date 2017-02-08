@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.foshan.entity.LearningMaterials;
 import com.foshan.mapper.LearningMaterialsMapper;
 @Repository(value="learningMaterialsDao")
-public class LearningMaterialsDaoImpl implements LearningMaterialsDao{
+public class LearningMaterialsDaoImpl extends BaseDaoSupport<LearningMaterials> implements LearningMaterialsDao{
 	@Resource(name="learningMaterialsMapper")
 	private LearningMaterialsMapper learningMaterialsMapper;
 	@Override

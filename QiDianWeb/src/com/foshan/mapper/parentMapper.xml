@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foshan.mapper.ParentMapper">
+    <resultMap type="com.foshan.entity.Parent" id="parentMapper">
+        <id property="parentId" column="parentId" />
+      	<result property="parentName" column="parentName"/>
+      	<result property="parentPhone" column="parentPhone"/>
+      	<result property="createDate" column="createDate"/>
+    </resultMap> 
+    <resultMap type="com.foshan.entity.Parent" id="parentAndChildrenMapper" extends="parentMapper">
+    	<collection property="childrens" ofType="com.foshan.entity.Student">
+    		<id property="studentId" column="studentId"/>
+    		<result property="studentName" column="studentName"/>
+    	</collection>
+    </resultMap>
+    <insert id="addParent" parameterType="com.foshan.entity.Parent">
+    	insert into parent(parentName,parentPhone,createDate) values(#{parentName},#{parentPhone},#{createDate})
+    </insert>
+</mapper>
+

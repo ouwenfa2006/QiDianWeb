@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foshan.mapper.LearningMaterialsMapper">
+    <resultMap type="com.foshan.entity.LearningMaterials" id="learningMaterialsMapper">
+        <id property="lId" column="lId" />
+      	<result property="courseName" column="courseName"/>
+      	<result property="grade" column="grade"/>
+      	<result property="path" column="path"/>
+      	<result property="absoulteFileName" column="absoulteFileName"/>
+      	<result property="fileName" column="fileName"/>
+      	<result property="uploadTime" column="uploadTime"/>
+      	<result property="downloadCount" column="downloadCount"/>
+      	<association property="uploadUser" column="uploadUserId"  javaType="com.foshan.entity.User">
+      		<id property="userId" column="userId"/>
+      		<result property="userName" column="userName"/>
+      	</association>
+    </resultMap> 
+    <insert id="addLearningMaterials" parameterType="com.foshan.entity.LearningMaterials">
+    	insert into LearningMaterials(courseName,grade,path,absoulteFileName,fileName,uploadTime,downloadCount,uploadUserId) values(#{courseName},#{grade},#{path},#{absoulteFileName},#{fileName},#{uploadTime},#{downloadCount},#{uploadUser.userId})
+    </insert>
+    <select id="findById" parameterType="java.lang.Integer" resultMap="learningMaterialsMapper">
+    	select * from LearningMaterials where lid=#{id}	
+    </select>
+    <select id="findAllLearningMaterials" parameterType="java.lang.Integer"  resultMap="learningMaterialsMapper">
+    	select * from LearningMaterials l,user u where l.uploadUserId=u.userId order by l.lId desc limit #{start},#{pageSize}
+    </select>
+    <delete id="deleteByIds" parameterType="java.lang.Integer">
+    	delete from LearningMaterials where lId=#{id}
+    </delete>
+    <select id="findLearningMaterialsByFileName" resultMap="learningMaterialsMapper">
+    	select * from LearningMaterials where fileName like  CONCAT(CONCAT('%', #{fileName}),'%') order by lId desc
+    </select>
+    <select id="findLearningMaterials" resultMap="learningMaterialsMapper">
+    	select * from LearningMaterials l,user u where l.grade=#{grade} and l.courseName=#{courseName} and l.uploadUserId=u.userId order by l.lId desc limit #{start},#{pageSize}
+    </select>
+    <update id="update" parameterType="com.foshan.entity.LearningMaterials" >
+    	update LearningMaterials set downloadCount=#{downloadCount} where lId=#{lId}
+    </update>
+</mapper>
+

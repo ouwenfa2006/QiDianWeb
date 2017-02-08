@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foshan.mapper.MessageMapper">
+	<resultMap type="com.foshan.entity.Message" id="messageMapper">
+		<id property="messageId" column="messageId" />
+		<result property="text" column="text" />
+		<result property="createDate" column="createDate"></result>
+		<!-- <association property="fromUser" column="fromUser_Id"
+			javaType="com.foshan.entity.User">
+			<id property="userId" column="userId" />
+			<result property="userName" column="userName" />
+		</association> -->
+		<association property="fromParent" column="formParent_Id" javaType="com.foshan.entity.Parent">
+      		<id property="parentId" column="parentId"/>
+      		<result property="parentName" column="parentName"/>
+      	</association>
+		<!-- <association property="fromStudent" column="fromStudent_Id"
+			javaType="com.foshan.entity.Student">
+			<id property="studentId" column="studentId" />
+			<result property="studentName" column="studentName" />
+		</association> -->
+	</resultMap>
+	<!-- 家长给管理员发的信息 -->
+	<resultMap type="com.foshan.entity.Message" id="fromParentToUserMapper"
+		extends="messageMapper">
+		<collection property="toUsers" ofType="com.foshan.entity.User">
+			<id property="userId" column="userId" />
+			<result property="userName" column="userName" />
+		</collection>
+	</resultMap>
+	<!-- 家长-管理员 -->
+	<insert id="addMessage" parameterType="com.foshan.entity.Message">
+		insert into message(text,createDate,formParent_Id) values(#{text},#{createDate},#{fromParent.parentId})
+	</insert>
+	<insert id="addMessage_Parent_User">
+		insert into message_user(message_id,toUser_id) values(#{messageId},#{toUserId})
+	</insert>
+	<select id="findMaxId" resultType="int">
+		select max(messageId) from message
+	</select>
+</mapper>

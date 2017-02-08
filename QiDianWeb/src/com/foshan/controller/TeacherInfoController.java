@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -19,6 +20,7 @@ import com.foshan.util.PageUtil;
 @Controller
 @RequestMapping(value="/teacherInfoController")
 public class TeacherInfoController extends BaseController{
+	public static Logger logger=Logger.getLogger(TeacherInfoController.class);
 	private int pageSize=16;
 	/**
 	 * 进入教师信息页面
@@ -70,12 +72,25 @@ public class TeacherInfoController extends BaseController{
 		savePageInfos(request, teachers, pageSize);
 		return "/teachers/teachersInfo_list";
 	}
+	/**
+	 * 取得优秀老师
+	 * @param request
+	 * @return
+	 * @throws JSONException
+	 */
 	@RequestMapping(value="/findFineTeachers",produces="text/html;charset=UTF-8")
 	@ResponseBody
 	public String findFineTeachers(HttpServletRequest request) throws JSONException{
+		String grade=request.getParameter("grade");
+		String courseName=request.getParameter("courseName");
+		if(grade!=null&&grade.equals("全部")){
+			grade=null;
+		}
+		if(courseName!=null&&courseName.equals("全部")){
+			courseName=null;
+		}
 		//查找优秀老师
-		List<User> fineTeachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, null, null, "teacher", 1);
-		System.out.println(fineTeachers.size());
+		List<User> fineTeachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, grade, courseName, "teacher", 1);
 		JSONArray jsonArray=new JSONArray();
 		for (User user : fineTeachers) {
 			JSONObject jsonObject=new JSONObject();
@@ -84,7 +99,6 @@ public class TeacherInfoController extends BaseController{
 			jsonObject.put("userId", user.getUserId());
 			jsonArray.put(jsonObject);
 		}
-		System.out.println(jsonArray.toString());
 		return jsonArray.toString();
 	}
 

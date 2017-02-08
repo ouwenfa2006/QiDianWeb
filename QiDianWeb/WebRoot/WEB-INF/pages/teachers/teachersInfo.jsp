@@ -183,15 +183,15 @@
 						</div>
 						<div class="col-md-12">
 							<label class="pull-left">家长姓名:</label>
-							<input type="text" class="pull-left form-control" style="width:123px;height: 30px;">
+							<input id="parentName" type="text" class="pull-left form-control" style="width:123px;height: 30px;">
 						</div>
 						<div class="col-md-12">
 							<label class="pull-left">联系电话:</label>
-							<input type="text" class="pull-left form-control" style="width:123px;height: 30px;">
+							<input id="parentPhone" type="text" class="pull-left form-control" style="width:123px;height: 30px;">
 						</div>
 						<div class="col-md-12">
-							<button class="pull-left btn btn-danger btn-xs" style="margin-left: 35px;">立即报名</button>
-							<button class="pull-left btn btn-default btn-xs" style="margin-left: 20px;">重填</button>
+							<button id="submit" class="pull-left btn btn-danger btn-xs" style="margin-left: 35px;">立即报名</button>
+							<button id="reset" class="pull-left btn btn-default btn-xs" style="margin-left: 20px;">重填</button>
 						</div>
 					</div>
 				</div>
@@ -224,6 +224,33 @@
 					string+='<option value="地理">地理</option>';	
 				}
 				$("#div_4_infos").find("select[name='courseName']").append(string);
+			});
+			$("#submit").click(function(){
+				var parentName=$("#parentName").val();
+				var parentPhone=$("#parentPhone").val();
+				var pattern1=/[^\u0000-\u00FF]{2,4}/;
+				var result1=pattern1.test(parentName);
+				if(result1==false){
+					alert("请输入正确的名字!");
+					return;
+				}
+				if(parentName.length==1||parentName.length>4){
+					alert("请输入正确的名字!");
+					return;
+				}
+				var pattern2=/^[0-9]{11}$/;
+				var result2=pattern2.test(parentPhone);
+				if(result2==false){
+					alert("联系方式有误，请输入正确的手机号码!");
+					return;
+				}
+				$.post("../messageController/addMessage",{parentName:parentName,parentPhone:parentPhone},function(data){
+					if(data=="success"){
+						alert("报名成功!");
+						$("#parentName").val("");
+						$("#parentPhone").val("");
+					}
+				});
 			});
 			//初始化样式
 			$("#div_4_infos>div").css({

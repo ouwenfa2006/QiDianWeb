@@ -24,7 +24,7 @@
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
 		<property name="dataSource" ref="dataSource"></property>
 		<!-- mybatisConfig.xml文件不是必须配置的选项 -->
-		<!-- <property name="configLocation" value="classpath:mybatis-config.xml /> -->
+		<property name="configLocation" value="classpath:mybatis-config.xml"/>
       	<property name="mapperLocations">
             <list>
                 <value>classpath:com/foshan/mapper/*.xml</value>
