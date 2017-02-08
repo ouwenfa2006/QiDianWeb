@@ -52,12 +52,13 @@ public class LoginController extends BaseController{
 					}
 				}
 			}*/
-			User user2=getUserService().login(user);
+			User user2=getModelService().getUserService().login(user);
 			if(user2!=null){
 				getSession().setAttribute("session_user", user2);
-				getResponse().sendRedirect("/QiDianWeb/index.jsp");
+				//getResponse().sendRedirect("/QiDianWeb/index.jsp");
 				logger.info("operator:"+user2.getUserName()+"登陆系统");
-				return null;
+				
+				return "redirect:/index.jsp";
 			}
 		}	
 		return "/user/login";

@@ -4,12 +4,19 @@ package com.foshan.controller;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.foshan.entity.LearningMaterials;
+import com.foshan.entity.Role;
+import com.foshan.entity.User;
 import com.foshan.util.PageUtil;
 
 @Controller
@@ -85,7 +92,7 @@ public class SystemController extends BaseController{
 		String grade=request.getParameter("grade");
 		String courseName=request.getParameter("courseName");
 		//符合条件的搜索,以前1500条记录作为查询范围
-		List<LearningMaterials> all_learns=getLearningMaterialsService().findAllLearningMaterials(1,1500,grade,courseName);
+		List<LearningMaterials> all_learns=getModelService().getLearningMaterialsService().findAllLearningMaterials(1,3000,grade,courseName);
 		savePageInfos(request, all_learns);
 
 		return "/CounselingInformation/counselingInformations_list";
@@ -95,7 +102,7 @@ public class SystemController extends BaseController{
 		//取得辅导资料页面传过来的参数
 		String searchFile=request.getParameter("searchFile");
 		//符合条件的搜索
-		List<LearningMaterials> all_learns=getLearningMaterialsService().findLearningMaterialsByFileName(searchFile);
+		List<LearningMaterials> all_learns=getModelService().getLearningMaterialsService().findLearningMaterialsByFileName(searchFile);
 		//保存，以作分页操作
 		savePageInfos(request, all_learns);
 		return "/CounselingInformation/counselingInformations_list";
@@ -146,6 +153,27 @@ public class SystemController extends BaseController{
 	@RequestMapping(value="/getLocation")
 	public String getLocation(){
 		return "/qidianInfos/location";
+	}
+	/**
+	 * 判断是否是管理员
+	 * @param request
+	 * @return
+	 */
+	@RequestMapping(value="/isAdmin")
+	@ResponseBody
+	public String isAdmin(HttpServletRequest request){
+		User user=(User) request.getSession().getAttribute("session_user");
+		String value=null;
+		if(user!=null){
+			List<Role> roles=getModelService().getRoleSerivce().findRolesByUserId(user.getUserId());
+			for (Role role : roles) {
+				if(role.getRoleName().equals("admin")){
+					value="0";
+					break;
+				}
+			}
+		}
+		return value;
 	}
 
 

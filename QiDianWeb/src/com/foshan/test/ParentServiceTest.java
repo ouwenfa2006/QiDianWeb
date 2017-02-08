@@ -30,7 +30,12 @@ public class ParentServiceTest {
 		System.out.println(baseDao);
 		baseDao.addOrUpdateOrDelete("insert into parent(parentName,parentPhone,createDate) values(?,?,?)",Parent.class,parent.getParentName(),parent.getParentPhone(),parent.getCreateDate());
 	}
+	public static void test_findMaxId(){
+		Integer integer=parentService.findMaxId();
+		System.out.println(integer);
+	};
 	public static void main(String[] args) {
-		test_addParent();
+		//test_addParent();
+		test_findMaxId();
 	}
 }

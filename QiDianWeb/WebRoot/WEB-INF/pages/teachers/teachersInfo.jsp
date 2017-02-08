@@ -244,11 +244,14 @@
 					alert("联系方式有误，请输入正确的手机号码!");
 					return;
 				}
-				$.post("../messageController/addMessage",{parentName:parentName,parentPhone:parentPhone},function(data){
+				var parms={parentName:parentName,parentPhone:parentPhone,grade:$("select[name='grade']").val(),courseName:$("select[name='courseName']").val()};
+				$.post("../messageController/addMessage",parms,function(data){
 					if(data=="success"){
 						alert("报名成功!");
 						$("#parentName").val("");
 						$("#parentPhone").val("");
+					}else{
+						alert("报名失败!");
 					}
 				});
 			});

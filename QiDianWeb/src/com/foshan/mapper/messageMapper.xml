@@ -38,4 +38,7 @@
 	<select id="findMaxId" resultType="int">
 		select max(messageId) from message
 	</select>
+	<select id="findAllNewMessages" resultMap="messageMapper">
+		select * from message where isNewMessage=0
+	</select>
 </mapper>

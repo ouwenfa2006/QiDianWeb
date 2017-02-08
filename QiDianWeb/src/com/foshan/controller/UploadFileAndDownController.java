@@ -122,7 +122,7 @@ public class UploadFileAndDownController extends BaseController{
 		User uploadUser=(User) getSession().getAttribute("session_user");
 		//================================================
 		learningMaterials.setUploadUser(uploadUser);
-		getLearningMaterialsService().addLearningMaterials(learningMaterials);
+		getModelService().getLearningMaterialsService().addLearningMaterials(learningMaterials);
 
 	}
 	/**
@@ -164,7 +164,7 @@ public class UploadFileAndDownController extends BaseController{
 		//下载的附件类型
 		responseHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		// 下载的附件的名称
-		LearningMaterials materials=getLearningMaterialsService().findById(fileId);
+		LearningMaterials materials=getModelService().getLearningMaterialsService().findById(fileId);
 		String fileName=null;
 		if(materials!=null){
 			fileName=materials.getFileName();
@@ -177,7 +177,7 @@ public class UploadFileAndDownController extends BaseController{
 				//将文件转换成字节流并返回至客户端
 				logger.info("operator:下载文件"+fileName);
 				materials.setDownloadCount(materials.getDownloadCount()+1);
-				getLearningMaterialsService().update(materials);
+				getModelService().getLearningMaterialsService().update(materials);
 				return new ResponseEntity<>(FileUtils.readFileToByteArray(file),responseHeaders,HttpStatus.CREATED);		
 			} catch (Exception e) {
 				e.printStackTrace();

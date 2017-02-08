@@ -144,6 +144,7 @@ $(function() {
 					.click();
 				}
 			});
+	findNewAllMessagesListener();
 });
 
 
@@ -165,5 +166,24 @@ function getProgress(){
 		});  
 	};  
 	var intId = window.setInterval(eventFun, 200);
+}
+//监听新信息
+function findNewAllMessagesListener(){
+	$.get(basePath+"systemController/isAdmin",function(data){
+		alert(data);
+		if(data=="0"){
+			setInterval(function(){
+				$.post(basePath+"messageController/findNewAllMessages",function(m){
+					if(m!=null){
+						var messages=eval(m);
+						$(messages).each(function(){
+							alert(this.text);
+						});
+					}
+				})
+			}, 5000);
+		}
+	});
+	
 }
 

@@ -21,10 +21,6 @@ import com.foshan.service.UserService;
 import com.foshan.util.PageUtil;
 
 public class BaseController{
-	@Resource(name="userService")
-	private UserService userService;
-	@Resource(name="learningMaterialsService")
-	private LearningMaterialsService learningMaterialsService;
 	@Resource(name="modelService")
 	private ModelService modelService;
 	private  HttpServletRequest request; 
@@ -59,9 +55,6 @@ public class BaseController{
 	public HttpSession getSession() {
 		return session;
 	}
-	public UserService getUserService() {
-		return userService;
-	}
 	public HttpServletRequest getRequest() {
 		return request;
 	}
@@ -75,13 +68,6 @@ public class BaseController{
 		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
 		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));  //true:允许输入空值，false:不能为空值  
-	}
-	public LearningMaterialsService getLearningMaterialsService() {
-		return learningMaterialsService;
-	}
-	public void setLearningMaterialsService(
-			LearningMaterialsService learningMaterialsService) {
-		this.learningMaterialsService = learningMaterialsService;
 	}
 	/**
 	 * 根据搜索的结果集分页显示,以page_list保存第一页的数据

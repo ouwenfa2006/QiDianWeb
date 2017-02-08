@@ -43,7 +43,7 @@ public class TeacherInfoController extends BaseController{
 	@RequestMapping(value="/getDatas")
 	public  String getDatas(HttpServletRequest request){
 		//搜索所有结果,以前1500记录作为查询范围
-		List<User> teachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, null, null, "teacher",null);
+		List<User> teachers=getModelService().getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, null, null, "teacher",null);
 		//保存页面参数,以作分页
 		savePageInfos(request, teachers, pageSize);
 		return "/teachers/teachersInfo_list";
@@ -66,7 +66,7 @@ public class TeacherInfoController extends BaseController{
 			courseName=null;
 		}
 		//查询所有
-		List<User> teachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, grade, courseName, "teacher",null);
+		List<User> teachers=getModelService().getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, grade, courseName, "teacher",null);
 
 		//保存页面参数,以作分页
 		savePageInfos(request, teachers, pageSize);
@@ -90,7 +90,7 @@ public class TeacherInfoController extends BaseController{
 			courseName=null;
 		}
 		//查找优秀老师
-		List<User> fineTeachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, grade, courseName, "teacher", 1);
+		List<User> fineTeachers=getModelService().getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, grade, courseName, "teacher", 1);
 		JSONArray jsonArray=new JSONArray();
 		for (User user : fineTeachers) {
 			JSONObject jsonObject=new JSONObject();

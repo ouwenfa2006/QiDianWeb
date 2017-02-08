@@ -1,5 +1,7 @@
 package com.foshan.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -15,7 +17,6 @@ public class MessageServiceImpl implements MessageService{
 	@Override
 	public int addMessageFromParentToUser(Message message) {
 		Integer maxId=messageDao.findMaxId();
-		System.out.println(maxId);
 		if(maxId==null){
 			message.setMessageId(1);
 		}else{
@@ -24,6 +25,11 @@ public class MessageServiceImpl implements MessageService{
 		messageDao.addMessage(message);
 		int n=messageDao.addMessage_Parent_User(message);
 		return n;
+	}
+	@Override
+	public List<Message> findAllNewMessages() {
+		// TODO Auto-generated method stub
+		return messageDao.findAllNewMessages();
 	}
 
 }
