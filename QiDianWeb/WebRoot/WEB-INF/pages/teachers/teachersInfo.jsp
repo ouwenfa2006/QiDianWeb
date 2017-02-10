@@ -250,6 +250,7 @@
 						alert("报名成功!");
 						$("#parentName").val("");
 						$("#parentPhone").val("");
+						window.parent.findLastNewMessage();
 					}else{
 						alert("报名失败!");
 					}
@@ -272,6 +273,7 @@
 				$("#div_4_images>div:eq(0)").append(string);
 			});
 		});
+		
 	</script>
 </body>
 </html>

@@ -38,5 +38,10 @@ public class MessageDaoImpl extends BaseDaoSupport<Message> implements MessageDa
 		// TODO Auto-generated method stub
 		return messageMapper.findAllNewMessages();
 	}
+	@Override
+	public Message findLastNewMessage(Integer maxId) {
+		// TODO Auto-generated method stub
+		return messageMapper.findLastNewMessage(maxId);
+	}
 
 }

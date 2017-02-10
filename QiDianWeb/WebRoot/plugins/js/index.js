@@ -1,3 +1,5 @@
+var browerWidth = $(window).width();
+var browerHeight = $(window).height();
 $(function() {
 	//初始化左边层样式
 	var h = $(window).height();
@@ -20,8 +22,6 @@ $(function() {
 		"width" : bodyWidth
 	});
 	//初始化弹窗
-	var browerWidth = $(window).width();
-	var browerHeight = $(window).height();
 	var upload_div_width = $("#upload_div").width();
 	var upload_div_heigth = $("#upload_div").height();
 	$("#upload_div").css({
@@ -144,7 +144,10 @@ $(function() {
 					.click();
 				}
 			});
-	findNewAllMessagesListener();
+	findNewAllMessages();
+
+	
+	
 });
 
 
@@ -168,22 +171,90 @@ function getProgress(){
 	var intId = window.setInterval(eventFun, 200);
 }
 //监听新信息
-function findNewAllMessagesListener(){
+function findNewAllMessages(){
 	$.get(basePath+"systemController/isAdmin",function(data){
-		alert(data);
 		if(data=="0"){
-			setInterval(function(){
+			setTimeout(function(){
 				$.post(basePath+"messageController/findNewAllMessages",function(m){
 					if(m!=null){
 						var messages=eval(m);
-						$(messages).each(function(){
-							alert(this.text);
+						var length=messages.length;
+						$(messages).each(function(i){
+							var texts=this.text.split("//");
+							var p1=texts[0];
+							var p2=texts[1];
+							var p3=texts[2];
+							var p4=texts[3];
+							var string='';
+							string+='<div id="message" role="message" style="position:fixed;z-index: 999;background-color: white;">';
+							string+='<div style="width:300px;background-color: #3385FF;color: white;line-height: 25px;">&nbsp;新信息提醒';
+							string+='<div style="float:right;margin-right: 1%;cursor: pointer;"id="close_upload_btn">关闭</div></div>';
+							string+='<div id="messageContent" style="width: 100%;">';
+							string+='<h2 style="margin-left: 75px;margin-top: 5px;font-weight: bold;">'+p1+'</h2>';
+							string+='<h5 style="margin-left: 27px;">'+p2+'</h5>';
+							string+='<h5 style="margin-left: 27px;">'+p3+'</h5>';
+							string+='<h5 style="margin-left: 27px;">'+p4+'</h5>';
+							string+='<h5 style="margin-left: 146px;">'+this.createTime+'</h5>';
+							string+='</div></div></div>';
+							$("body").append(string);
+							$("#message").css({
+								"top":browerHeight,
+								"left":browerWidth-$("#message").width()
+							});
+							$("#message").animate({
+								"top":browerHeight-$("#message").height()*($("[role='message']").length)
+							},1500,function(){
+								
+							});
+							$("#message").attr("id","");
 						});
 					}
 				})
-			}, 5000);
+			}, 1000);
 		}
 	});
-	
+}
+//查找最后一条咨询信息
+function findLastNewMessage(){
+	$.get(basePath+"systemController/isAdmin",function(data){
+		if(data=="0"){
+			setTimeout(function(){
+				$.post(basePath+"messageController/findLastNewMessage",function(m){
+					if(m!=null){
+						var messages=eval(m);
+						$(messages).each(function(i){
+							var texts=this.text.split("//");
+							var p1=texts[0];
+							var p2=texts[1];
+							var p3=texts[2];
+							var p4=texts[3];
+							var string='';
+							string+='<div id="message" role="message" style="position:fixed;z-index: 999;background-color: white;">';
+							string+='<div style="width:300px;background-color: #3385FF;color: white;line-height: 25px;">&nbsp;新信息提醒';
+							string+='<div style="float:right;margin-right: 1%;cursor: pointer;"id="close_upload_btn">关闭</div></div>';
+							string+='<div id="messageContent" style="width: 100%;">';
+							string+='<h2 style="margin-left: 75px;margin-top: 5px;font-weight: bold;">'+p1+'</h2>';
+							string+='<h5 style="margin-left: 27px;">'+p2+'</h5>';
+							string+='<h5 style="margin-left: 27px;">'+p3+'</h5>';
+							string+='<h5 style="margin-left: 27px;">'+p4+'</h5>';
+							string+='<h5 style="margin-left: 146px;">'+this.createTime+'</h5>';
+							string+='</div></div></div>';
+							$("body").append(string);
+							$("#message").css({
+								"top":browerHeight,
+								"left":browerWidth-$("#message").width()
+							});
+							$("#message").animate({
+								"top":browerHeight-$("#message").height()*($("[role='message']").length)
+							},1500,function(){
+								
+							});
+							$("#message").attr("id","");
+						});
+					}
+				})
+			}, 1000);
+		}
+	});
 }
 

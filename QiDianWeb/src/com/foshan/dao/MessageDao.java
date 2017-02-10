@@ -14,4 +14,5 @@ public interface MessageDao extends BaseDao<Message>{
 	int addMessage_Parent_User(Message message);
 	Integer findMaxId();
 	List<Message> findAllNewMessages();
+	Message findLastNewMessage(Integer maxId);
 }

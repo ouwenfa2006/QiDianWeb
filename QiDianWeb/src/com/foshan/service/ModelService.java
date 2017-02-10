@@ -91,7 +91,7 @@ public class ModelService {
 		message.setCreateDate(new Date());
 		message.setFromParent(parent);
 		List<User> toUsers=userService.findUsersAndImagesfindUsersAndImages(1, 20, null, null, "admin", null);
-		message.setText("新家长注册!家长姓名:"+parentName+",家长联系方式:"+parentPhone+",报读的科目是:"+grade+courseName+"!");
+		message.setText("新家长注册!//家长姓名:"+parentName+"//家长联系方式:"+parentPhone+"//报读科目:"+grade+courseName+"!");
 		message.setToUsers(toUsers);
 		int n=messageService.addMessageFromParentToUser(message);//添加家长的注册信息
 		return n;

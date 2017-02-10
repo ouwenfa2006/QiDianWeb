@@ -203,6 +203,7 @@ CREATE TABLE `message` (
   `formParent_Id` int(10) DEFAULT NULL,
   `formStudent_Id` int(10) DEFAULT NULL,
   `isNewMessage` int(1) DEFAULT '0' COMMENT '0表示新信息',
+  `type` varchar(20) DEFAULT NULL COMMENT '消息类型',
   PRIMARY KEY (`messageId`),
   KEY `formUser_Id` (`formUser_Id`),
   KEY `formParent_Id` (`formParent_Id`),

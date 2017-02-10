@@ -20,6 +20,13 @@ public class Message implements Serializable{
 	private List<Parent> toParents;
 	private List<Student> toStudents;
 	private Integer isNewMessage;
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	private String type;
 	public Integer getMessageId() {
 		return messageId;
 	}

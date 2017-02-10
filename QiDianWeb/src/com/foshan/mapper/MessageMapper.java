@@ -11,4 +11,5 @@ public interface MessageMapper {
 	int addMessage_Parent_User(@Param("messageId")Integer messageId,@Param("toUserId") Integer toUserId);
 	Integer findMaxId();
 	List<Message> findAllNewMessages();
+	Message findLastNewMessage(@Param("maxId")Integer maxId);
 }

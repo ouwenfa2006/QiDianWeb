@@ -12,4 +12,5 @@ public interface MessageService {
 	 */
 	int addMessageFromParentToUser(Message message);
 	List<Message> findAllNewMessages();
+	Message findLastNewMessage();
 }

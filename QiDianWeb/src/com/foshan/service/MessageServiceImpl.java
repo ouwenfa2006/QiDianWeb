@@ -22,6 +22,7 @@ public class MessageServiceImpl implements MessageService{
 		}else{
 			message.setMessageId(maxId+1);
 		}
+		message.setType("parentToUser");
 		messageDao.addMessage(message);
 		int n=messageDao.addMessage_Parent_User(message);
 		return n;
@@ -30,6 +31,12 @@ public class MessageServiceImpl implements MessageService{
 	public List<Message> findAllNewMessages() {
 		// TODO Auto-generated method stub
 		return messageDao.findAllNewMessages();
+	}
+	@Override
+	public Message findLastNewMessage() {
+		// TODO Auto-generated method stub
+		Integer maxId=messageDao.findMaxId();
+		return messageDao.findLastNewMessage(maxId);
 	}
 
 }
