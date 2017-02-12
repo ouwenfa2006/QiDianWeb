@@ -51,7 +51,7 @@
 	 	<property name="dataSource" ref="dataSource"></property>
 	 </bean>
 	 
-	 <!-- 用配置的文件的方式配置事务，不建议使用 -->
+	 <!-- aop,也可以通过jdk代理或cglib代理实现,去方法进行拦截-->
 	 <!-- <aop:config proxy-target-class="true">
 	 	<aop:pointcut expression="com.foshan.service.UserService(*)" id="register"/>
 	 	<aop:advisor advice-ref=""/>

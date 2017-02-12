@@ -8,7 +8,7 @@ import net.sf.cglib.proxy.MethodProxy;
 
 
 /**
- * 对方法进行拦截,在spring中用tx注解事务的方式已经满足需求，配置文件的aop方式不建议使用
+ * 对方法进行拦截
  * @author Administrator
  *
  */
