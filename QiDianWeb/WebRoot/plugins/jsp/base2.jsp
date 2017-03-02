@@ -19,6 +19,9 @@
 <![endif]-->
 <script type="text/javascript">
 	var basePath = "${basePath}";
+	$(function(){
+		removeBorder();
+	});
 	//判断浏览器的类型
 	function getBrowser() {
 		var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
@@ -36,11 +39,23 @@
 		if (userAgent.indexOf("Safari") > -1) {
 			return "Safari";
 		} //判断是否Safari浏览器
-		if (userAgent.indexOf("compatible") > -1
-				&& userAgent.indexOf("MSIE") > -1 && !isOpera) {
+		if (userAgent.indexOf("compatible") > -1&& userAgent.indexOf("MSIE") > -1 && !isOpera) {
 			return "IE";
 		}
 		; //判断是否IE浏览器
+	}
+	//去除点击后的border
+	function removeBorder(){
+		$("button").focus(function(){
+			if(this.blur){
+				this.blur();
+			}
+		});
+		$("a").focus(function(){
+			if(this.blur){
+				this.blur();
+			}
+		});
 	}
 	
 	

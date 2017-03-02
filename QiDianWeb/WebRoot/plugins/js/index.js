@@ -19,6 +19,7 @@ $(function() {
 		$("#chatDiv").css({
 			"left" : toLeft
 		});
+		$("#chatDiv").hide();
 	}
 	//初始化菜单栏背景色样式
 	$("#bg_div").css({
@@ -217,10 +218,8 @@ function findNewAllMessages(){
 //查找最后一条咨询信息
 function findLastNewMessage(){
 	$.get(basePath+"systemController/isAdmin",function(data){
-		alert(data)
 		if(data=="0"){
 			setTimeout(function(){
-				alert(basePath+"messageController/findLastNewMessage")
 				$.post(basePath+"messageController/findLastNewMessage",function(m){
 					if(m!=null&&m!="-1"){
 						var messages=eval(m);

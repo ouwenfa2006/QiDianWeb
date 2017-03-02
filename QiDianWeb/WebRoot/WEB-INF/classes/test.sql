@@ -48,7 +48,7 @@ insert into course(grade,courseName,adName,text) values ('六年级','数学','2
 insert into course(grade,courseName,adName,text) values ('六年级','语文','2017年小升初语文班','启点教育专业资深教师一对一指导，以多题型的高效训练为主，查漏补缺，注重能力的提升，实现重难点突破');
 insert into course(grade,courseName,adName,text) values ('初一','英语','2017年英语同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。 ');
 insert into course(grade,courseName,adName,text) values ('初一','数学','2017年数学同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
-insert into course(grade,courseName,adName,text) values ('初一','语文','2017年评议同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初一','语文','2017年语文同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
 insert into course(grade,courseName,adName,text) values ('初一','英语','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。 ');
 insert into course(grade,courseName,adName,text) values ('初一','数学','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
 insert into course(grade,courseName,adName,text) values ('初一','语文','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');

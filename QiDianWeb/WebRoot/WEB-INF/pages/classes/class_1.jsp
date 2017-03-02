@@ -37,13 +37,13 @@
 		<div class="col-md-12" style="height:1078px;width:100%;">
 			<c:forEach items="${page_list }" varStatus="i" var="course">
 			<div class="col-md-12">
-					<div style="padding:1%;width: 200px;">
+					<div style="padding:1%;width: 200px;float: left;">
 						<div class="btn btn-lg btn-warning btn-shadow" role="book"
 							style="height:192px;width:98%;box-shadow:5px 5px 5px silver;">
 							<img alt="" src="${basePath }plugins/img/logo.jpg"
 								style="width:50%;">
 							<div class="col-md-12" style="">
-								<h2 class=".courseName" role="courseName"
+								<h2 class="" role="courseName"
 									style="color:white;font-weight:600;">${course.grade }${course.courseName }</h2>
 								<h4>辅导课程</h4>
 								<div class="col-md-12" role=""
@@ -54,13 +54,27 @@
 							</div>
 						</div>
 					</div>
+					<div style="width: 764px;height:203px;float: left;border-bottom: 1px dashed silver;">
+						<div class="col-md-12">
+							<h3 style="color: red;margin-left: 1px;float: left;">${course.adName }</h3>
+							<button class="pull-left btn btn-danger" style="margin-left: 416px;margin-top: 15px;">在线咨询</button>
+						</div>
+						<div class="col-md-12">
+							<span class="pull-left" style="font-weight: bold;font-size: 18px;">适用学员:</span>
+							<span class="pull-left" style="margin-left: 10px;font-size: 18px;">${course.grade }学生</span>
+						</div>
+						<div class="col-md-12">
+							<span class="pull-left" style="font-weight: bold;font-size: 18px;">课程简介:</span>
+							<span class="pull-left" style="margin-left: 90px;font-size: 18px;float: left;margin-top: -26px;">${course.text }</span>
+						</div>
+					</div>
 			</div>
 		</c:forEach>
 		</div>
 		
 		<div class="col-md-12" id="div_5">
     			<div class="pull-left" style="width:100%;">
-    				<a class="btn btn-info pull-left" href="javaScript:void(0)" style="margin-left: 5px;" onclick="index()">首页</a>
+    				<a class="btn btn-info pull-left" href="javaScript:void(0)" style="margin-left: 248px;" onclick="index()">首页</a>
     				<a class="btn btn-info pull-left" href="javaScript:void(0)" style="margin-left: 5px;" onclick="prePage()">上一页</a>
     				<a class="btn btn-info pull-left" href="javaScript:void(0)" style="margin-left: 5px;" onclick="nextPage()">下一页</a>
     				<span class="pull-left" style="margin-left: 5px;margin-top: 5px;">跳转:</span>
@@ -95,12 +109,13 @@
 			 initCss();
 	});
 	function initCss(){
-		var words=$("role='courseName'").html();
-		if(words.length>4){
-			$(".courseName").css({
-				"margin-left":"-29px;"
-			});
-		}
+		$("[role='courseName']").each(function(){
+			if($(this).html().length>4){
+				$(this).css({
+					"margin-left":"-16px"
+				});
+			}
+		});
 	}
 	</script>
 	<script type="text/javascript" src="../plugins/js/findByPage.js"></script>

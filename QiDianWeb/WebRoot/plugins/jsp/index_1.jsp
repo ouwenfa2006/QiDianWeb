@@ -17,9 +17,9 @@
 </div>
 <div class="col-md-12 bg-primary" style="margin-top: -10px;">
 	<div class="btn-group col-md-12" id="menus" style="width:1007px;">
-		<button type="button" class="btn btn-default btn-primary" onclick="index()">首页</button>
+		<button type="button" class="btn btn-default btn-primary" onFocus="if(this.blur)this.blur()" onclick="index()">首页</button>
 <!-- 		<button type="button" class="btn btn-default btn-primary" onclick="getCourses()">启点课程</button> -->
-		<button type="button" class="btn btn-default btn-primary" onclick="getTeachersInfo()">启点老师</button>
+		<button type="button" class="btn btn-default btn-primary"  onclick="getTeachersInfo()">启点老师</button>
 		<button type="button" class="btn btn-default btn-primary" onclick="getActivities()">启点活动</button>
 		<button type="button" class="btn btn-default btn-primary" onclick="getClasses()">启点课程</button>
 		<button type="button" class="btn btn-default btn-primary" onclick="getSchools()">启点校区</button>
