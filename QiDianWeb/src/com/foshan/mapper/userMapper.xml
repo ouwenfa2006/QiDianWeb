@@ -9,12 +9,18 @@
       	<result property="courseName" column="courseName"/>
       	<result property="nickName" column="nickName"/>
       	<result property="level" column="level"/>
+      	<result property="idea" column="idea"/>
+      	<result property="achievement" column="achievement"/>
+      	<result property="tFeatures" column="tFeatures"/>
+      	<result property="tExperience" column="tExperience"/>
+      	<result property="tHonor" column="tHonor"/>
     	<!-- <collection property="roles" ofType="com.foshan.entity.Role" autoMapping="true"></collection> -->
     </resultMap> 
     
     <resultMap type="com.foshan.entity.User" id="userAndMaterialsMapper" extends="userMapper">
     	<!-- 包装有问题.. -->
-    	<collection property="learningMaterials_list" column="uploadUserId"  ofType="com.foshan.entity.LearningMaterials">
+    	<!-- <collection property="learningMaterials_list" column="uploadUserId"  ofType="com.foshan.entity.LearningMaterials"></collection> -->
+    	<collection property="learningMaterials_list" foreignColumn="uploadUserId"  ofType="com.foshan.entity.LearningMaterials">
     		<id property="lId" column="lId"/>
     		<result property="fileName" column="fileName"/>
     		<result property="path" column="path"/>

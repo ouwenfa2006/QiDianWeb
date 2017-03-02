@@ -39,7 +39,14 @@ public class MessageServiceTest {
 		message.setCreateDate(new Date());
 		messageService.addMessageFromParentToUser(message);
 	}
+	public static void test_findAllNewMessages(){
+		List<Message> messages=messageService.findAllNewMessages();
+		for (Message message : messages) {
+			System.out.println(message);
+		}
+	}
 	public static void main(String[] args) {
-		test_addMessageFromParentToUser();
+		//test_addMessageFromParentToUser();
+		test_findAllNewMessages();
 	}
 }

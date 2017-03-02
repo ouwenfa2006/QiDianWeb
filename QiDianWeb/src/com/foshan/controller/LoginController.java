@@ -1,7 +1,11 @@
 package com.foshan.controller;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.foshan.entity.User;
@@ -19,7 +23,7 @@ public class LoginController extends BaseController{
 	 * @throws Exception
 	 */
 	@RequestMapping(value="/login")
-	public String login(User user) throws Exception{
+	public String login(User user,HttpServletRequest request) throws Exception{
 		if(user.getUserName()!=null&&user.getPassword()!=null){
 			/*//由于没有数据库，故所有的用户都在通过IO读取,位置在/QiDianWeb/userInfos/users.txt
 			String basePath=getRequest().getServletContext().getRealPath("");
@@ -52,12 +56,13 @@ public class LoginController extends BaseController{
 					}
 				}
 			}*/
-			User user2=getUserService().login(user);
+			User user2=getModelService().getUserService().login(user);
 			if(user2!=null){
-				getSession().setAttribute("session_user", user2);
-				getResponse().sendRedirect("/QiDianWeb/index.jsp");
+				request.getSession().setAttribute("session_user", user2);
+				//getResponse().sendRedirect("/QiDianWeb/index.jsp");
 				logger.info("operator:"+user2.getUserName()+"登陆系统");
-				return null;
+				
+				return "redirect:/index.jsp";
 			}
 		}	
 		return "/user/login";

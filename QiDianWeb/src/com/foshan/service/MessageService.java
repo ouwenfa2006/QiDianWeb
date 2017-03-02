@@ -1,5 +1,7 @@
 package com.foshan.service;
 
+import java.util.List;
+
 import com.foshan.entity.Message;
 
 public interface MessageService {
@@ -9,4 +11,7 @@ public interface MessageService {
 	 * @return
 	 */
 	int addMessageFromParentToUser(Message message);
+	List<Message> findAllNewMessages();
+	Message findLastNewMessage();
+	void clearNewMessageById(int parseInt);
 }

@@ -16,5 +16,10 @@ public class ParentServiceImpl implements ParentService{
 	public void addParent(Parent parent) {
 		parentDao.addParent(parent);
 	}
+	@Override
+	public Integer findMaxId() {
+		
+		return parentDao.findMaxId("select max(parentId) from parent");
+	}
 
 }

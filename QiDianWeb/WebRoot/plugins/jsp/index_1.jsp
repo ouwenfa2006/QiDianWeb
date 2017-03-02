@@ -21,7 +21,7 @@
 <!-- 		<button type="button" class="btn btn-default btn-primary" onclick="getCourses()">启点课程</button> -->
 		<button type="button" class="btn btn-default btn-primary" onclick="getTeachersInfo()">启点老师</button>
 		<button type="button" class="btn btn-default btn-primary" onclick="getActivities()">启点活动</button>
-		<button type="button" class="btn btn-default btn-primary" onclick="getClasses()">启点课堂</button>
+		<button type="button" class="btn btn-default btn-primary" onclick="getClasses()">启点课程</button>
 		<button type="button" class="btn btn-default btn-primary" onclick="getSchools()">启点校区</button>
 		<button type="button" class="btn btn-default btn-primary" onclick="getCounselingInformation()">辅导资料</button>
 		<button type="button" class="btn btn-default btn-primary" onclick="getEduInfos()">教学资讯</button>

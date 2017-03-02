@@ -9,6 +9,8 @@ import java.util.Date;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;    
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;    
 import org.springframework.http.HttpHeaders;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;    
 import org.springframework.web.multipart.MultipartFile;
+
 import com.foshan.entity.LearningMaterials;
 import com.foshan.entity.User;
 @Controller
@@ -28,13 +31,8 @@ import com.foshan.entity.User;
 /*@Scope("prototype")*/
 public class UploadFileAndDownController extends BaseController{
 	public static Logger logger=Logger.getLogger(UploadFileAndDownController.class);
-	private String message;//上传是否成功的标志
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	public String getMessage() {
-		return message;
-	}
+	private static Integer maxSize=50*1024*1024;
+	private static String uploadPath="D:/upload";
 	/**
 	 * 上传文件
 	 * @param file 从jsp页面取得的要上传的文件
@@ -57,25 +55,27 @@ public class UploadFileAndDownController extends BaseController{
 			String grade,HttpServletRequest request){
 		try {
 			//清空判断标志
-			setMessage(null);
+			request.getSession().removeAttribute("message");
 			// 1获得上传的文件内容
-			byte[] bytes = file.getBytes();
+			//byte[] bytes = file.getBytes();
 			// 2获得upload的绝对路径
 			String path = request.getServletContext().getRealPath("/WEB-INF/upload_files");//发布路径
 			//String path=request.getServletContext().getInitParameter("uploadPath");//在web.xml中配置的路径
-			//System.out.println("上传的路径是:"+path);
+			//checkPath(path);
 			// 3在服务器的upload_files目录下创建File对象
+			
 			String oname = file.getOriginalFilename(); // 上传文件的原始名字
 			String newName = UUID.randomUUID().toString()+"_"+oname;	 
 			File file2=new File(path,newName); // 4将上传的文件拷贝到指定的目录
 			//FileUtils.writeByteArrayToFile(file2, bytes);等价于下面的IO操作
 			//===================================================
 			int length=0;
-			byte[] b=new byte[1024];
+			byte[] b=new byte[1*1024*1024];
 			double percent=0;
 			long totalSize=file.getSize();
-			if(totalSize>(50*1024*1024)){
-				setMessage("overMax");
+			//Integer maxSize=Integer.parseInt(request.getServletContext().getInitParameter("maxSize"));
+			if(totalSize>(maxSize)){
+				request.getSession().setAttribute("message","overMax");
 				return;
 			}
 			BufferedInputStream in=new BufferedInputStream(file.getInputStream());
@@ -84,22 +84,22 @@ public class UploadFileAndDownController extends BaseController{
 				percent+=length/(double)totalSize*100D;        //计算上传文件的百分比
 				//System.out.println("已经上传了:"+percent);
 				out.write(b,0,length);                      //向文件输出流写读取的数据
-				getSession().setAttribute("percent",Math.round(percent));    //将上传百分比保存到Session中
-				//Thread.sleep(20);
+				request.getSession().setAttribute("percent",Math.round(percent)+"");    //将上传百分比保存到Session中
+				Thread.sleep(1000);
 			
 			}
 			out.flush();
 			out.close();
 			in.close();
 			//==================================================
-			setMessage("success");
-			createLearningMaterials(courseName, grade, path, newName,oname);
+			request.getSession().setAttribute("message","success");
+			createLearningMaterials(request,courseName, grade, path, newName,oname);
 			logger.info("operator:上传文件"+newName);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			logger.error("error:上传文件失败"+e.getMessage());
-			setMessage("fail");
+			request.getSession().setAttribute("message","fail");
 		}
 	}
 	/**
@@ -109,7 +109,7 @@ public class UploadFileAndDownController extends BaseController{
 	 * @param path
 	 * @param newName
 	 */
-	private void createLearningMaterials(String courseName, String grade,
+	private void createLearningMaterials(HttpServletRequest request,String courseName, String grade,
 			String path, String newName,String oname) {
 		LearningMaterials learningMaterials=new LearningMaterials();
 		learningMaterials.setCourseName(courseName);
@@ -119,37 +119,59 @@ public class UploadFileAndDownController extends BaseController{
 		learningMaterials.setAbsoulteFileName(newName);
 		learningMaterials.setUploadTime(new Date());
 		//===================================================
-		User uploadUser=(User) getSession().getAttribute("session_user");
+		User uploadUser=(User) request.getSession().getAttribute("session_user");
 		//================================================
 		learningMaterials.setUploadUser(uploadUser);
-		getLearningMaterialsService().addLearningMaterials(learningMaterials);
+		getModelService().getLearningMaterialsService().addLearningMaterials(learningMaterials);
 
 	}
 	/**
 	 * 判断上传文件是否成功
 	 * @throws IOException
 	 */
-	@RequestMapping(value="/upload_isOver",method=RequestMethod.POST)
+	@RequestMapping(value="/upload_isOver")
 	@ResponseBody
-	public void upload_isOver() throws IOException{
+	public String upload_isOver(HttpServletRequest request,HttpServletResponse response) throws IOException{
+		String message=(String) request.getSession().getAttribute("message");
 		if(message!=null){	
-			PrintWriter printWriter=getResponse().getWriter();
-			printWriter.write(message);
-			setMessage(null);
-			printWriter.flush();
-			printWriter.close();
+			return message;
 		}
+		return "-1";
 	}
 	/**
 	 * 取得文件的上传进度
 	 * @return 返回上传进度
 	 */
-	@RequestMapping(value="/getPercent")
+	@RequestMapping(value="/getPercent",method=RequestMethod.GET)
 	@ResponseBody
-	public String getPercent(){
-		Long percent=(Long) getSession().getAttribute("percent");
-		//System.out.println("get:"+percent);
-		return percent+"";
+	public String getPercent(HttpServletRequest request){
+		String percent=(String) request.getSession().getAttribute("percent");
+		if(percent==null){
+			return "0";
+		}
+		System.out.println("get:"+percent);
+		return percent;
+	}
+	/**
+	 * 重置文件上传进度
+	 * @return 返回上传进度
+	 */
+	@RequestMapping(value="/resetPercent",method=RequestMethod.GET)
+	@ResponseBody
+	public String resetPercent(HttpServletRequest request){
+		request.getSession().removeAttribute("percent");
+		return "success";
+	}
+	/**
+	 * 检查路径是否存在，不存在则创建
+	 * @param path
+	 */
+	private boolean checkPath(String path) {
+		File file=new File(path);
+		if(file.exists()==false){
+			return file.mkdirs();
+		}
+		return true;
 	}
 	/**
 	 * 文件下载
@@ -164,7 +186,7 @@ public class UploadFileAndDownController extends BaseController{
 		//下载的附件类型
 		responseHeaders.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		// 下载的附件的名称
-		LearningMaterials materials=getLearningMaterialsService().findById(fileId);
+		LearningMaterials materials=getModelService().getLearningMaterialsService().findById(fileId);
 		String fileName=null;
 		if(materials!=null){
 			fileName=materials.getFileName();
@@ -177,7 +199,7 @@ public class UploadFileAndDownController extends BaseController{
 				//将文件转换成字节流并返回至客户端
 				logger.info("operator:下载文件"+fileName);
 				materials.setDownloadCount(materials.getDownloadCount()+1);
-				getLearningMaterialsService().update(materials);
+				getModelService().getLearningMaterialsService().update(materials);
 				return new ResponseEntity<>(FileUtils.readFileToByteArray(file),responseHeaders,HttpStatus.CREATED);		
 			} catch (Exception e) {
 				e.printStackTrace();

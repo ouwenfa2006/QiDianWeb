@@ -18,6 +18,7 @@
 
 #div_1 {
 	line-height: 40px;
+	visibility:hidden;
 }
 
 #div_1>i {
@@ -92,18 +93,6 @@
 #div_4_images>div {
 	
 }
-
-/* #div_4_images>div>div {
-	width: 85px;
-}
-
-#div_4_images>div>div>img {
-	width: 100%;
-}
-
-#div_4_images>div>div>h5 {
-	padding-left: 18px;
-} */
 #div_4_infos>div{
 	margin-top:10px;
 }
@@ -182,16 +171,15 @@
 							</select>
 						</div>
 						<div class="col-md-12">
-							<label class="pull-left">家长姓名:</label>
+							<label class="pull-left" style="margin-top: 3px;">家长姓名:</label>
 							<input id="parentName" type="text" class="pull-left form-control" style="width:123px;height: 30px;">
 						</div>
 						<div class="col-md-12">
-							<label class="pull-left">联系电话:</label>
+							<label class="pull-left" style="margin-top: 3px;">联系电话:</label>
 							<input id="parentPhone" type="text" class="pull-left form-control" style="width:123px;height: 30px;">
 						</div>
 						<div class="col-md-12">
-							<button id="submit" class="pull-left btn btn-danger btn-xs" style="margin-left: 35px;">立即报名</button>
-							<button id="reset" class="pull-left btn btn-default btn-xs" style="margin-left: 20px;">重填</button>
+							<button id="submit" class="pull-left btn btn-danger btn-xs" style="margin-left: 47px;width: 100px;">立即报名</button>			
 						</div>
 					</div>
 				</div>
@@ -244,11 +232,15 @@
 					alert("联系方式有误，请输入正确的手机号码!");
 					return;
 				}
-				$.post("../messageController/addMessage",{parentName:parentName,parentPhone:parentPhone},function(data){
+				var parms={parentName:parentName,parentPhone:parentPhone,grade:$("select[name='grade']").val(),courseName:$("select[name='courseName']").val()};
+				$.post("../messageController/addMessage",parms,function(data){
 					if(data=="success"){
 						alert("报名成功!");
 						$("#parentName").val("");
 						$("#parentPhone").val("");
+						window.parent.findLastNewMessage();
+					}else{
+						alert("报名失败!");
 					}
 				});
 			});
@@ -257,18 +249,34 @@
 				"width":"217px",
 				"margin-left":"-26px"
 			});
+			//优秀老师
 			$.get("../teacherInfoController/findFineTeachers",function(data){
 				var fine_teachers=eval(data);
 				var string='';
 				$(fine_teachers).each(function(){
-					string+='<div class="pull-left" userId="'+this.userId+'" style="margin-left:18px;">';
+					string+='<div class="pull-left fineTeachers" role="fineTeachers" userId="'+this.userId+'" style="margin-left:18px;cursor:pointer;">';
 					string+='<img alt="" src="..'+this.relativePath+'" style="height:106.25px;">';
 					string+='<h5 style="padding-left: 18px;">'+this.nickName+'</h5>';
-					string+='</div>';
+					string+='</div>';			
 				});
 				$("#div_4_images>div:eq(0)").append(string);
+				$("div[role='fineTeachers']").click(function(){
+					var userId=$(this).attr("userId");
+					window.open(basePath+"teacherInfoController/getTeacherInfosById?userId="+userId,"t_iframe");
+				});
+				$("div[role='fineTeachers']").mouseover(function(){
+					$(this).find("h5").css({
+						"color":"red"
+					});
+				}).mouseout(function(){
+					$(this).find("h5").css({
+						"color":"black"
+					});
+				});
+				
 			});
 		});
+		
 	</script>
 </body>
 </html>

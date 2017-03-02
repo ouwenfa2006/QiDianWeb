@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foshan.mapper.RoleMapper">
+    <resultMap type="com.foshan.entity.Role" id="roleMapper">
+        <id property="roleId" column="roleId" />
+      	<result property="roleName" column="name"/>
+    </resultMap> 
+   	<select id="findRolesByUserId" parameterType="java.lang.Integer" resultMap="roleMapper">
+   		select * from role r,user u,user_role ur where r.roleId=ur.role_id and u.userId=ur.user_id and u.userId=#{userId}
+   	</select>
+</mapper>
+

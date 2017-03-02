@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foshan.mapper.CourseMapper">
+    <resultMap type="com.foshan.entity.Course" id="courseMapper">
+        <id property="courseId" column="courseId" />
+        <result property="grade" column="grade" />
+      	<result property="courseName" column="courseName"></result>
+      	<result property="adName" column="adName"/>
+      	<result property="text" column="text"/>
+    </resultMap> 
+    
+    <select id="findCourses"  resultMap="courseMapper">
+   		select * from course where 1=1
+   		<if test="grade!=null and grade!=''">
+    		and grade=#{grade}
+    	</if>
+    	<if test="courseName!=null and courseName!=''">
+    		and courseName=#{courseName}
+    	</if>
+    	limit #{start},#{size}
+    </select>
+    <select id="findCourse" resultMap="courseMapper">
+    	select * from course c where 1=1
+    	<if test="grade!=null and grade!=''">
+    		and grade=#{grade}
+    	</if>
+    	<if test="courseName!=null and courseName!=''">
+    		and grade=#{courseName}
+    	</if>
+    	limit #{start},#{size}
+    </select>
+</mapper>

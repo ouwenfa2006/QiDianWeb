@@ -21,49 +21,13 @@ import com.foshan.service.UserService;
 import com.foshan.util.PageUtil;
 
 public class BaseController{
-	@Resource(name="userService")
-	private UserService userService;
-	@Resource(name="learningMaterialsService")
-	private LearningMaterialsService learningMaterialsService;
 	@Resource(name="modelService")
 	private ModelService modelService;
-	private  HttpServletRequest request; 
-	private HttpServletResponse response;
-	private HttpSession session;
-	/**
-	 * 封装request response及session
-	 * @param request
-	 * @param response
-	 */
-	@ModelAttribute
-	public void setReqAndRes(HttpServletRequest request,HttpServletResponse response){
-		this.request=request;
-		this.response=response;
-		this.session=request.getSession();
-		try {
-			request.setCharacterEncoding("utf-8");
-			response.setContentType("text/html;UTF-8");
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 	public void setModelService(ModelService modelService) {
 		this.modelService = modelService;
 	}
 	public ModelService getModelService() {
 		return modelService;
-	}
-	public HttpServletResponse getResponse() {
-		return response;
-	}
-	public HttpSession getSession() {
-		return session;
-	}
-	public UserService getUserService() {
-		return userService;
-	}
-	public HttpServletRequest getRequest() {
-		return request;
 	}
 	@InitBinder(value="user")
 	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss")
@@ -75,13 +39,6 @@ public class BaseController{
 		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
 		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));  //true:允许输入空值，false:不能为空值  
-	}
-	public LearningMaterialsService getLearningMaterialsService() {
-		return learningMaterialsService;
-	}
-	public void setLearningMaterialsService(
-			LearningMaterialsService learningMaterialsService) {
-		this.learningMaterialsService = learningMaterialsService;
 	}
 	/**
 	 * 根据搜索的结果集分页显示,以page_list保存第一页的数据
@@ -121,7 +78,7 @@ public class BaseController{
 		if(page.equals("0")){
 			page="1";
 		}
-		List list=(List) getSession().getAttribute("list");
+		List list=(List) request.getSession().getAttribute("list");
 		List page_list=PageUtil.getShow(list,Integer.parseInt(page),pageSize);
 		request.setAttribute("page", Integer.parseInt(page));
 		request.setAttribute("page_list", page_list);

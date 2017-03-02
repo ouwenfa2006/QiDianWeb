@@ -58,7 +58,6 @@
 }
 </style>
 </head>
-
 <body>
 	<div class="container-fluid">
 		<div class="col-md-12" id="div_1">
@@ -66,7 +65,7 @@
 				<div class="col-md-12">
 					<c:forEach items="${page_list }" var="teacher"
 						begin="${i.index*4 }" end="${i.index*4+3 }">
-						<a href="#" class="thumbnail pull-left"> <img alt=""
+						<a href="${basePath }teacherInfoController/getTeacherInfosById?userId=${teacher.userId}" class="thumbnail pull-left"> <img alt=""
 							src="..${teacher.images[0].relativePath }"> <span
 							class="col-md-12"> ${teacher.nickName }<br>
 								科目：${teacher.courseName }老师
@@ -114,17 +113,6 @@
 	var grade="${courseName}";//搜索的科目
 		$(function(){
 			pageCssInit();
-			/* $.get("../teacherInfoController/findFineTeachers",function(data){
-				var fine_teachers=eval(data);
-				var string='';
-				$(fine_teachers).each(function(){
-					string+='<div class="pull-left" userId="'+this.userId+'">';
-					string+='<img alt="" src="..'+this.relativePath+'">';
-					string+='<h5>'+this.nickName+'</h5>';
-					string+='</div>';
-				});
-				$(window.parent.document).find("#div_4_images>div:eq(0)").append(string);
-			}); */
 		});
 		//页面样式初始化
 		function pageCssInit(){

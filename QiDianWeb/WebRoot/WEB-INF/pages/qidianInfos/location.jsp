@@ -17,6 +17,7 @@ body{height:100%;margin:0px;padding:0px}
 </script>
 </head>  
 <body>  
+
 <div id="container"></div> 
 <script type="text/javascript"> 
 var map = new BMap.Map("container");    //实例化地图

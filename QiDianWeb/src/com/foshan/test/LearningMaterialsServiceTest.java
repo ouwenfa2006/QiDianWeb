@@ -30,10 +30,13 @@ public class LearningMaterialsServiceTest {
 		System.out.println(learningMaterials.getUploadUser().getUserName());
 	}
 	public static void test_findAll(){
-//		List<LearningMaterials> learningMaterials=learningMaterialsService.findAllLearningMaterials(2,3);
-//		for (LearningMaterials learningMaterials2 : learningMaterials) {
-//			System.out.println(learningMaterials2.getId());
-//		}
+		List<LearningMaterials> learningMaterials=learningMaterialsService.findAllLearningMaterials(1, 20, null, null);
+		for (int i = 0; i < 200; i++) {
+			for (LearningMaterials learningMaterials2 : learningMaterials) {
+				learningMaterialsService.addLearningMaterials(learningMaterials2);
+			}
+		}
+
 	}
 	public static void test_findByFileName(){
 		List<LearningMaterials> learningMaterials=learningMaterialsService.findLearningMaterialsByFileName("数学");
@@ -56,11 +59,13 @@ public class LearningMaterialsServiceTest {
 		List<LearningMaterials> learningMaterials=learningMaterialsService.findAllLearningMaterials(1, 10, "初三", "数学");
 		for (LearningMaterials learningMaterials2 : learningMaterials) {
 			System.out.println(learningMaterials2.getFileName());
+			
 		}
 	}
 	public static void main(String[] args) {
 		//test_findAllLearningMaterials();
-		test_findByFileName();
+		//test_findByFileName();
 		//test_findByGradeAndCourseName();
+		test_findAll();
 	}
 }

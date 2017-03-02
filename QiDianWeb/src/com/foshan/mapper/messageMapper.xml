@@ -4,6 +4,7 @@
 	<resultMap type="com.foshan.entity.Message" id="messageMapper">
 		<id property="messageId" column="messageId" />
 		<result property="text" column="text" />
+		<result property="type" column="type"/>
 		<result property="createDate" column="createDate"></result>
 		<!-- <association property="fromUser" column="fromUser_Id"
 			javaType="com.foshan.entity.User">
@@ -30,7 +31,7 @@
 	</resultMap>
 	<!-- 家长-管理员 -->
 	<insert id="addMessage" parameterType="com.foshan.entity.Message">
-		insert into message(text,createDate,formParent_Id) values(#{text},#{createDate},#{fromParent.parentId})
+		insert into message(text,createDate,formParent_Id,type) values(#{text},#{createDate},#{fromParent.parentId},#{type})
 	</insert>
 	<insert id="addMessage_Parent_User">
 		insert into message_user(message_id,toUser_id) values(#{messageId},#{toUserId})
@@ -38,4 +39,13 @@
 	<select id="findMaxId" resultType="int">
 		select max(messageId) from message
 	</select>
+	<select id="findAllNewMessages" resultMap="messageMapper">
+		select * from message where isNewMessage=0 order by createDate desc
+	</select>
+	<select id="findLastNewMessage" resultMap="messageMapper">
+		select * from message where messageId=#{maxId} and type='parentToUser'
+	</select>
+	 <update id="clearNewMessageById">
+	 	update message set isNewMessage=1 where messageId=#{messageId}
+	 </update>
 </mapper>

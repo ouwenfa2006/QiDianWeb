@@ -22,6 +22,11 @@ public class User implements Serializable{
 	private List<User> students;
 	private List<Role> roles;
 	private List<Image> images;
+	private String idea;
+	private String achievement;
+	private String tFeatures;
+	private String tExperience;
+	private String tHonor;
 	public String getUserName() {
 		return userName;
 	}
@@ -89,5 +94,36 @@ public class User implements Serializable{
 	public void setLevel(Integer level) {
 		this.level = level;
 	}
+	public String getIdea() {
+		return idea;
+	}
+	public void setIdea(String idea) {
+		this.idea = idea;
+	}
+	public String getAchievement() {
+		return achievement;
+	}
+	public void setAchievement(String achievement) {
+		this.achievement = achievement;
+	}
+	public String gettFeatures() {
+		return tFeatures;
+	}
+	public void settFeatures(String tFeatures) {
+		this.tFeatures = tFeatures;
+	}
+	public String gettExperience() {
+		return tExperience;
+	}
+	public void settExperience(String tExperience) {
+		this.tExperience = tExperience;
+	}
+	public String gettHonor() {
+		return tHonor;
+	}
+	public void settHonor(String tHonor) {
+		this.tHonor = tHonor;
+	}
+	
 	
 }

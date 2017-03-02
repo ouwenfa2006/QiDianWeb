@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.foshan.entity.Image;
 import com.foshan.entity.User;
 import com.foshan.util.JsonUtil;
 import com.foshan.util.PageUtil;
@@ -21,7 +22,7 @@ import com.foshan.util.PageUtil;
 @RequestMapping(value="/teacherInfoController")
 public class TeacherInfoController extends BaseController{
 	public static Logger logger=Logger.getLogger(TeacherInfoController.class);
-	private int pageSize=16;
+	private static int pageSize=16;
 	/**
 	 * 进入教师信息页面
 	 * @return
@@ -40,16 +41,22 @@ public class TeacherInfoController extends BaseController{
 		getInfosFromList(request, pageSize);
 		return "/teachers/teachersInfo_list";
 	}
+	/**
+	 * 查询所有老师
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping(value="/getDatas")
 	public  String getDatas(HttpServletRequest request){
 		//搜索所有结果,以前1500记录作为查询范围
-		List<User> teachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, null, null, "teacher",null);
+		List<User> teachers=getModelService().getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, null, null, "teacher",null);
 		//保存页面参数,以作分页
 		savePageInfos(request, teachers, pageSize);
+		logger.info("查询所有教师");
 		return "/teachers/teachersInfo_list";
 	}
 	/**
-	 * 查询老师
+	 * 根据条件查询教师
 	 * @param request
 	 * @param grade
 	 * @return
@@ -66,7 +73,7 @@ public class TeacherInfoController extends BaseController{
 			courseName=null;
 		}
 		//查询所有
-		List<User> teachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, grade, courseName, "teacher",null);
+		List<User> teachers=getModelService().getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, grade, courseName, "teacher",null);
 
 		//保存页面参数,以作分页
 		savePageInfos(request, teachers, pageSize);
@@ -90,7 +97,7 @@ public class TeacherInfoController extends BaseController{
 			courseName=null;
 		}
 		//查找优秀老师
-		List<User> fineTeachers=getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, grade, courseName, "teacher", 1);
+		List<User> fineTeachers=getModelService().getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, grade, courseName, "teacher", 1);
 		JSONArray jsonArray=new JSONArray();
 		for (User user : fineTeachers) {
 			JSONObject jsonObject=new JSONObject();
@@ -100,6 +107,18 @@ public class TeacherInfoController extends BaseController{
 			jsonArray.put(jsonObject);
 		}
 		return jsonArray.toString();
+	}
+	/**
+	 * 查看某个教师的具体信息
+	 * @param request
+	 * @param userId
+	 * @return
+	 */
+	@RequestMapping(value="/getTeacherInfosById",method=RequestMethod.GET)
+	public  String getTeacherInfosById(HttpServletRequest request,String userId){
+		User teacher=getModelService().getUserService().findUserAndImageById(Integer.parseInt(userId));
+		request.setAttribute("teacher", teacher);
+		return "/teachers/teacherInfo_1";
 	}
 
 

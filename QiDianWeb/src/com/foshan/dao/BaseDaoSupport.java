@@ -64,6 +64,11 @@ public class BaseDaoSupport<T> implements BaseDao<T> {
 		}
 		return num;
 	}
+	@Override
+	public Integer findMaxId(String sql) {
+		// TODO Auto-generated method stub
+		return jdbcTemplate.queryForInt(sql);
+	}
 
 
 

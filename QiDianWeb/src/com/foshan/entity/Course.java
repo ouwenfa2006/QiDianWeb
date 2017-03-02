@@ -7,7 +7,9 @@ public class Course implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private Integer courseId;
 	private String grade;
-	private String couseName;
+	private String courseName;
+	private String adName;
+	private String text;
 	private List<Student> students;//这个课程的报读学生
 	public Integer getCourseId() {
 		return courseId;
@@ -21,16 +23,28 @@ public class Course implements Serializable{
 	public void setGrade(String grade) {
 		this.grade = grade;
 	}
-	public String getCouseName() {
-		return couseName;
+	public void setCourseName(String courseName) {
+		this.courseName = courseName;
 	}
-	public void setCouseName(String couseName) {
-		this.couseName = couseName;
+	public String getCourseName() {
+		return courseName;
 	}
 	public List<Student> getStudents() {
 		return students;
 	}
 	public void setStudents(List<Student> students) {
 		this.students = students;
+	}
+	public String getAdName() {
+		return adName;
+	}
+	public void setAdName(String adName) {
+		this.adName = adName;
+	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
 	}
 }

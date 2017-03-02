@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-02-07 23:58:14
+Date: 2017-02-21 23:01:14
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,9 +39,67 @@ CREATE TABLE `course` (
   `courseId` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `grade` varchar(40) DEFAULT NULL COMMENT '年级',
   `courseName` varchar(40) DEFAULT NULL COMMENT '名称',
+  `adName` varchar(40) DEFAULT NULL COMMENT '全称',
+  `text` varchar(1000) DEFAULT NULL COMMENT '简介',
   PRIMARY KEY (`courseId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='科目表';
-
+insert into course(grade,courseName,adName,text) values ('六年级','英语','2017年小升初英语班','启点教育专业资深教师一对一指导，以多题型的高效训练为主，查漏补缺，注重能力的提升，实现重难点突破');
+insert into course(grade,courseName,adName,text) values ('六年级','数学','2017年小升初数学班','启点教育专业资深教师一对一指导，以多题型的高效训练为主，查漏补缺，注重能力的提升，实现重难点突破');
+insert into course(grade,courseName,adName,text) values ('六年级','语文','2017年小升初语文班','启点教育专业资深教师一对一指导，以多题型的高效训练为主，查漏补缺，注重能力的提升，实现重难点突破');
+insert into course(grade,courseName,adName,text) values ('初一','英语','2017年英语同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。 ');
+insert into course(grade,courseName,adName,text) values ('初一','数学','2017年数学同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初一','语文','2017年评议同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初一','英语','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。 ');
+insert into course(grade,courseName,adName,text) values ('初一','数学','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初一','语文','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初二','物理','2017年物理同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初二','英语','2017年英语同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。 ');
+insert into course(grade,courseName,adName,text) values ('初二','数学','2017年数学同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初二','语文','2017年语文同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初二','英语','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。 ');
+insert into course(grade,courseName,adName,text) values ('初二','数学','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初二','语文','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初二','物理','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初三','化学','2017年化学同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初三','物理','2017年物理同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初三','英语','2017年英语同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。 ');
+insert into course(grade,courseName,adName,text) values ('初三','数学','2017年数学同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初三','语文','2017年语文同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初三','英语','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。 ');
+insert into course(grade,courseName,adName,text) values ('初三','数学','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初三','语文','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初三','物理','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('初三','化学','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高一','化学','2017年化学同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高一','物理','2017年物理同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高一','英语','2017年英语同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。 ');
+insert into course(grade,courseName,adName,text) values ('高一','数学','2017年数学同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高一','语文','2017年语文同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高一','英语','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。 ');
+insert into course(grade,courseName,adName,text) values ('高一','数学','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高一','语文','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高一','物理','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高一','化学','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高二','化学','2017年化学同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高二','物理','2017年物理同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高二','英语','2017年英语同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。 ');
+insert into course(grade,courseName,adName,text) values ('高二','数学','2017年数学同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高二','语文','2017年语文同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高二','英语','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。 ');
+insert into course(grade,courseName,adName,text) values ('高二','数学','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高二','语文','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高二','物理','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高二','化学','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高三','化学','2017年化学同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高三','物理','2017年物理同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高三','英语','2017年英语同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。 ');
+insert into course(grade,courseName,adName,text) values ('高三','数学','2017年数学同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高三','语文','2017年语文同步班','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高三','英语','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。 ');
+insert into course(grade,courseName,adName,text) values ('高三','数学','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高三','语文','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高三','物理','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
+insert into course(grade,courseName,adName,text) values ('高三','化学','2017年一对一同步课程','以讲授数学重要知识点和常见典型题目为主。通过高度提炼的知识讲解和题目归纳，巩固知识，并高效预习初一下学期知识点。帮助学生做好衔接与过渡。');
 -- ----------------------------
 -- Records of course
 -- ----------------------------
@@ -198,11 +256,12 @@ DROP TABLE IF EXISTS `message`;
 CREATE TABLE `message` (
   `messageId` int(10) NOT NULL AUTO_INCREMENT COMMENT '主键ID',
   `text` varchar(2000) DEFAULT NULL COMMENT '内容',
-  `createDate` DATETIME DEFAULT NULL COMMENT '发送时间',
+  `createDate` datetime DEFAULT NULL COMMENT '发送时间',
   `formUser_Id` int(10) DEFAULT NULL,
   `formParent_Id` int(10) DEFAULT NULL,
   `formStudent_Id` int(10) DEFAULT NULL,
   `isNewMessage` int(1) DEFAULT '0' COMMENT '0表示新信息',
+  `type` varchar(20) DEFAULT NULL COMMENT '消息类型',
   PRIMARY KEY (`messageId`),
   KEY `formUser_Id` (`formUser_Id`),
   KEY `formParent_Id` (`formParent_Id`),
@@ -370,31 +429,36 @@ CREATE TABLE `user` (
   `job_num` varchar(80) DEFAULT NULL COMMENT '工号',
   `nickName` varchar(30) DEFAULT NULL COMMENT '昵称',
   `level` int(1) DEFAULT '0' COMMENT '等级',
+  `idea` varchar(1000) DEFAULT NULL COMMENT '理念',
+  `achievement` varchar(1000) DEFAULT NULL COMMENT '教学成果',
+  `tFeatures` varchar(1000) DEFAULT NULL COMMENT '教学特点',
+  `tExperience` varchar(1000) DEFAULT NULL COMMENT '教学经验',
+  `tHonor` varchar(1000) DEFAULT NULL COMMENT '教学荣誉',
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'scott', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', null, null, null, null, '管理员', '0');
-INSERT INTO `user` VALUES ('2', 'ouwenfa', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '小学', '数学', null, null, '欧晓晴', '0');
-INSERT INTO `user` VALUES ('3', 'hello', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '物理', null, null, '简琪琪', '0');
-INSERT INTO `user` VALUES ('4', 'jianyongqi', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '语文', null, null, '简泳琪', '0');
-INSERT INTO `user` VALUES ('5', 'xiaotianshi', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '数学', null, null, '小天使', '0');
-INSERT INTO `user` VALUES ('6', 'liuchu', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '英语', null, null, '刘处', '0');
-INSERT INTO `user` VALUES ('7', 'jianjieying', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '英语', null, null, '简洁莹', '0');
-INSERT INTO `user` VALUES ('8', 'xiaomogui', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '化学', null, null, '陈三', '0');
-INSERT INTO `user` VALUES ('9', 'liudehua', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '政治', null, null, '张五', '0');
-INSERT INTO `user` VALUES ('10', 'wangbaoqiang', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '物理', null, null, '刘六', '0');
-INSERT INTO `user` VALUES ('11', 'ouwenfa1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '小学', '数学', null, null, '欧静晴', '1');
-INSERT INTO `user` VALUES ('12', 'hello1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '物理', null, null, '简颖琪', '1');
-INSERT INTO `user` VALUES ('13', 'jianyongqi1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '语文', null, null, '阮琪', '1');
-INSERT INTO `user` VALUES ('14', 'xiaotianshi1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '数学', null, null, '小天', '1');
-INSERT INTO `user` VALUES ('15', 'liuchu1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '英语', null, null, '刘贵', '1');
-INSERT INTO `user` VALUES ('16', 'jianjieying1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '英语', null, null, '简莹', '1');
-INSERT INTO `user` VALUES ('17', 'xiaomogui1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '化学', null, null, '张三', '0');
-INSERT INTO `user` VALUES ('18', 'liudehua1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '政治', null, null, '李四', '0');
-INSERT INTO `user` VALUES ('19', 'wangbaoqiang1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '物理', null, null, '王五', '0');
+INSERT INTO `user` VALUES ('1', 'scott', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', null, null, null, null, '管理员', '0', null,null,null,null,null);
+INSERT INTO `user` VALUES ('2', 'ouwenfa', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '小学', '数学', null, null, '欧晓晴', '0', '教育不是要改变学生，而是要从本质上帮助学生。','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('3', 'hello', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '物理', null, null, '简琪琪', '0', '构建知识网络，强化兴趣学习。','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('4', 'jianyongqi', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '语文', null, null, '简泳琪', '0', '勤能补拙是良训，一分辛苦一分才','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('5', 'xiaotianshi', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '数学', null, null, '小天使', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('6', 'liuchu', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '英语', null, null, '刘处', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('7', 'jianjieying', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '英语', null, null, '简洁莹', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('8', 'xiaomogui', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '化学', null, null, '陈三', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('9', 'liudehua', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '政治', null, null, '张五', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('10', 'wangbaoqiang', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '物理', null, null, '刘六', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('11', 'ouwenfa1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '小学', '数学', null, null, '欧静晴', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('12', 'hello1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '物理', null, null, '简颖琪', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('13', 'jianyongqi1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '语文', null, null, '阮琪', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('14', 'xiaotianshi1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '数学', null, null, '小天', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('15', 'liuchu1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '英语', null, null, '刘贵', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('16', 'jianjieying1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '英语', null, null, '简莹', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('17', 'xiaomogui1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '化学', null, null, '张三', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('18', 'liudehua1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '政治', null, null, '李四', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('19', 'wangbaoqiang1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '物理', null, null, '王五', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任','所带学生均有不同程度提高，并得到家长的一致认可和好评。','授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。','8年','曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
 
 -- ----------------------------
 -- Table structure for `user_action`
