@@ -29,7 +29,7 @@
 		<div class="col-md-12"  style="height: 600px;overflow: auto;border-bottom: 1px dashed silver;">
 			<div class="message">
 				<fmt:formatDate value="${chatTime }" pattern="yyyy-MM-dd HH:mm:ss"/><br>
-				管理员：你好！请问有什么可以帮到你的了?
+				${chat_admin_text }
 			</div>
 			
 			
