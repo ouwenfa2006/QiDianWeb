@@ -56,7 +56,7 @@
 				<h5 style="line-height: 18px;"><span>教学理念:</span><span style="width: 455px;">${teacher.idea }</span></h5>
 				<h5 style="line-height: 25px;margin-top: 52px;"><span>受欢迎程度:</span><span>&nbsp;&nbsp;<i class="glyphicon glyphicon-star" style="color: red;font-size: 24px;"></i><i class="glyphicon glyphicon-star" style="color: red;font-size: 24px;"></i><i class="glyphicon glyphicon-star" style="color: red;font-size: 24px;"></i><i class="glyphicon glyphicon-star" style="color: red;font-size: 24px;"></i><i class="glyphicon glyphicon-star" style="color: red;font-size: 24px;"></i></span></h5>
 				<hr style="margin-top: 24px;margin-left: 32px;">
-				<button class="pull-left btn btn-info" style="margin-left:6%;">在线咨询</button> <button class="btn btn-danger pull-left" style="margin-left:5%;">在线报名</button>
+				<button id="btn1" teacher="${teacher.userId }" class="pull-left btn btn-info" style="margin-left:6%;">在线咨询</button> <button class="btn btn-danger pull-left" style="margin-left:5%;">在线报名</button>
 			</div>
 		</div>
 		<div id="div2" class="panel panel-info col-md-12" style="height:211px;">
@@ -93,5 +93,16 @@
 		</div>
 		
 	</div>
+	<script type="text/javascript">
+		$(function(){
+			btn1Click();
+		});
+		function btn1Click(){
+			$("#btn1").click(function(){
+				var url="../chat/"+$(this).attr("teacher");
+				window.open(url,"chat");
+			});
+		};
+	</script>
 </body>
 </html>
