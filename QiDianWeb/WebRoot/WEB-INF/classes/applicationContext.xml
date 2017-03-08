@@ -32,13 +32,14 @@
 		<property name="user" value="${user}"></property>
 		<property name="password" value="${password}"></property>
 		<!-- 连接池启动时的初始值 -->
-		<property name="initialPoolSize" value="5"></property>
+		<property name="initialPoolSize" value="${initialPoolSize}"></property>
 		<!-- 连接池的最大值 -->
-		<property name="maxPoolSize" value="500"></property>
+		<property name="maxPoolSize" value="${maxPoolSize}"></property>
 		<!-- 最大空间值、当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接慢慢释放一部分，直至减少的maxIdle为止 -->
-		<property name="maxIdleTimeExcessConnections" value="5"></property>
+		<property name="maxIdleTimeExcessConnections" value="${maxIdleTimeExcessConnections}"></property>
 		<!-- 最小空间值，当空间的连接数少于阀值时，连接池就会预申请一些连接，以免洪峰来时 来不及申请 -->
-		<property name="minPoolSize" value="5"></property>
+		<property name="minPoolSize" value="${minPoolSize}"></property>
+		
 
 	</bean>
 	<!-- 通用dao -->

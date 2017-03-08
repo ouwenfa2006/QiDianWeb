@@ -26,7 +26,7 @@ a[role='qq']:HOVER {
 </style>
 </head>
 <jsp:include page="plugins/jsp/base3.jsp"></jsp:include>
-<body style="overflow: visible;/* width:1400px; */">
+<body style="overflow: visible;width:1400px;">
 	<div class="container-fluid" style="width:1007px;">
 		<jsp:include page="plugins/jsp/index_1.jsp"></jsp:include>
 		<iframe width="100%" src="${basePath }plugins/jsp/iframe_init.jsp"
