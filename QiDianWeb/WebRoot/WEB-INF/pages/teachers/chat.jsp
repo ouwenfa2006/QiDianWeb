@@ -26,7 +26,7 @@
 </head>
 <body>
 	<div class="container-fluid">
-		<div class="col-md-12"  style="height: 600px;overflow: auto;border-bottom: 1px dashed silver;">
+		<div class="col-md-12"  style="height: 450px;overflow: auto;border-bottom: 1px dashed silver;">
 			<div class="message">
 				<fmt:formatDate value="${chatTime }" pattern="yyyy-MM-dd HH:mm:ss"/><br>
 				${chat_admin_text }

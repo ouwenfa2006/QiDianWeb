@@ -2,6 +2,7 @@ package com.foshan.service;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.ejb.FinderException;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.foshan.entity.Message;
 import com.foshan.entity.Parent;
 import com.foshan.entity.User;
+import com.foshan.util.Constant;
 /**
  * 综合业务类
  * @author Administrator
@@ -20,64 +22,31 @@ import com.foshan.entity.User;
 @Service(value="modelService")
 @Transactional(value="dataSourceTransactionManager")
 public class ModelService {
-	@Resource(name="parentService")
-	private ParentService parentService;
+	@Resource(name="serviceMap")
+	private Map serviceMap;//封装service
 	public RoleSerivce getRoleSerivce() {
-		return roleSerivce;
-	}
-	public void setRoleSerivce(RoleSerivce roleSerivce) {
-		this.roleSerivce = roleSerivce;
-	}
-	@Resource(name="userRoleService")
-	private UserRoleService userRoleService;
-	@Resource(name="userService")
-	private UserService userService;
-	@Resource(name="learningMaterialsService")
-	private LearningMaterialsService learningMaterialsService;
-	@Resource(name="messageService")
-	private MessageService messageService;
-	@Resource(name="roleService")
-	private RoleSerivce roleSerivce;
-	@Resource(name="courseService")
-	private CourseService courseService;
-	public void setCourseService(CourseService courseService) {
-		this.courseService = courseService;
+		return (RoleSerivce) serviceMap.get(Constant.ROLE_SERVICE);
 	}
 	public CourseService getCourseService() {
-		return courseService;
+		return (CourseService) serviceMap.get(Constant.COURSE_SERVICE);
 	}
 	public ParentService getParentService() {
-		return parentService;
-	}
-	public void setParentService(ParentService parentService) {
-		this.parentService = parentService;
+		return (ParentService) serviceMap.get(Constant.PARENT_SERVICE);
 	}
 	public UserRoleService getUserRoleService() {
-		return userRoleService;
-	}
-	public void setUserRoleService(UserRoleService userRoleService) {
-		this.userRoleService = userRoleService;
+		return (UserRoleService) serviceMap.get(Constant.USER_ROLE_SERVICE);
 	}
 	public UserService getUserService() {
-		return userService;
+		return (UserService) serviceMap.get(Constant.USER_SERVICE);
 	}
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
+	
 	public MessageService getMessageService() {
-		return messageService;
-	}
-	public void setMessageService(MessageService messageService) {
-		this.messageService = messageService;
+		return (MessageService) serviceMap.get(Constant.MESSAGE_SERVICE);
 	}
 	public LearningMaterialsService getLearningMaterialsService() {
-		return learningMaterialsService;
+		return (LearningMaterialsService) serviceMap.get(Constant.LEARNINGMATERIALS_SERVICCE);
 	}
-	public void setLearningMaterialsService(
-			LearningMaterialsService learningMaterialsService) {
-		this.learningMaterialsService = learningMaterialsService;
-	}
-	/**
+	/**添加咨询家长
 	 * @param parentName
 	 * @param parentPhone
 	 * @param courseName 
@@ -86,7 +55,7 @@ public class ModelService {
 	public int addParent(String parentName, String parentPhone, String grade, String courseName) {
 		// TODO Auto-generated method stub
 		Parent parent=new Parent();
-		Integer maxId=parentService.findMaxId();
+		Integer maxId=getParentService().findMaxId();
 		if(maxId==null){
 			maxId=1;
 		}
@@ -94,15 +63,23 @@ public class ModelService {
 		parent.setParentName(parentName);
 		parent.setParentPhone(Long.parseLong(parentPhone));
 		parent.setCreateDate(new Date());
-		parentService.addParent(parent);//添加家长
+		getParentService().addParent(parent);//添加家长
 		Message message=new Message();
 		message.setCreateDate(new Date());
 		message.setFromParent(parent);
-		List<User> toUsers=userService.findUsersAndImagesfindUsersAndImages(1, 20, null, null, "admin", null);
+		List<User> toUsers=getUserService().findUsersAndImagesfindUsersAndImages(1, 20, null, null, "admin", null);
 		message.setText("新家长注册!//家长姓名:"+parentName+"//家长联系方式:"+parentPhone+"//报读科目:"+grade+courseName+"!");
 		message.setToUsers(toUsers);
-		int n=messageService.addMessageFromParentToUser(message);//添加家长的注册信息
+		int n=getMessageService().addMessageFromParentToUser(message);//添加家长的注册信息
 		return n;
+	}
+	/**
+	 * 更新在线人数
+	 * @param size
+	 */
+	public void updateChatPersons(int size) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

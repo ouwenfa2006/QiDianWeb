@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.foshan.entity.LearningMaterials;
 import com.foshan.entity.Role;
 import com.foshan.entity.User;
+import com.foshan.service.RoleSerivce;
 import com.foshan.util.PageUtil;
 
 @Controller
@@ -157,7 +158,7 @@ public class SystemController extends BaseController{
 		return "/qidianInfos/location";
 	}
 	/**
-	 * 判断是否是管理员
+	 * 检查用户是否是管理员,如果是则开启监听临时会话线程及监听家长报名信息线程
 	 * @param request
 	 * @return
 	 */
@@ -167,10 +168,11 @@ public class SystemController extends BaseController{
 		User user=(User) request.getSession().getAttribute("session_user");
 		String value=null;
 		if(user!=null){
-			List<Role> roles=getModelService().getRoleSerivce().findRolesByUserId(user.getUserId());
+			RoleSerivce roleSerivce = getModelService().getRoleSerivce();
+			List<Role> roles=roleSerivce.findRolesByUserId(user.getUserId());
 			for (Role role : roles) {
 				if(role.getRoleName().equals("admin")){
-					value="0";
+					value="0";//是管理员
 					return value;
 				}
 			}

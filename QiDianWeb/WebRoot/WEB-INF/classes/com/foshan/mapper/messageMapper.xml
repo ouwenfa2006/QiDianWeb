@@ -43,7 +43,7 @@
 		select * from message where isNewMessage=0 order by createDate desc
 	</select>
 	<select id="findLastNewMessage" resultMap="messageMapper">
-		select * from message where messageId=#{maxId} and type='parentToUser'
+		select * from message where messageId=#{maxId} and type='parentToUser' and isNewMessage=0
 	</select>
 	 <update id="clearNewMessageById">
 	 	update message set isNewMessage=1 where messageId=#{messageId}

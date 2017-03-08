@@ -46,6 +46,15 @@
 	 <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="dataSourceTransactionManager">
 	 	<property name="dataSource" ref="dataSource"></property>
 	 </bean>
+	 <util:map id="serviceMap" map-class="java.util.HashMap">
+	 	<entry key="parentService" value-ref="parentService"></entry>
+	 	<entry key="userRoleService" value-ref="userRoleService"></entry>
+	 	<entry key="userService" value-ref="userService"></entry>
+	 	<entry key="messageService" value-ref="messageService"></entry>
+	 	<entry key="roleService" value-ref="roleService"></entry>
+	 	<entry key="courseService" value-ref="courseService"></entry>
+	 	<entry key="learningMaterialsService" value-ref="learningMaterialsService"></entry>
+	 </util:map>
 	 <!-- 使用注解使事务起作用 -->
 	 <tx:annotation-driven transaction-manager="dataSourceTransactionManager" proxy-target-class="true"/>
 	 <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">

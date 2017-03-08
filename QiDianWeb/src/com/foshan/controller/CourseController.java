@@ -27,6 +27,7 @@ public class CourseController extends BaseController{
 		if(courseName!=null&&courseName.equals("全部")){
 			courseName=null;
 		}
+		
 		List<Course> courses = getModelService().getCourseService().findCourses(grade, courseName, 1, 1500);
 		if(courses!=null&&courses.size()>0){
 			savePageInfos(request, courses, pageSize);

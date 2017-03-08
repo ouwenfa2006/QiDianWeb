@@ -57,7 +57,9 @@ public class MessageController extends BaseController{
 				jsonObject.put("text", message.getText());
 				jsonObject.put("createTime",new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(message.getCreateDate()));
 				jsonArray.put(jsonObject);
+				getModelService().getMessageService().clearNewMessageById(message.getMessageId());
 			}
+			System.out.println(jsonArray.toString());
 			return jsonArray.toString();
 		}
 		return "-1";
@@ -78,10 +80,18 @@ public class MessageController extends BaseController{
 			jsonObject.put("text", message.getText());
 			jsonObject.put("createTime",new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(message.getCreateDate()));
 			jsonArray.put(jsonObject);
+			getModelService().getMessageService().clearNewMessageById(message.getMessageId());
+			System.out.println(jsonArray.toString());
 			return jsonArray.toString();
 		}
-		return null;
+		return "-1";
 	}
+	/**
+	 * 清除看过的信息
+	 * @param request
+	 * @param params
+	 * @return
+	 */
 	@RequestMapping(value="/clearNewMessages")
 	@ResponseBody
 	public String clearNewMessages(HttpServletRequest request,String params){
