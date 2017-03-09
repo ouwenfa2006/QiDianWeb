@@ -238,7 +238,14 @@ function findNewAllMessages(){
 //监听临时会话线程
 function startChatListener(){
 	setInterval(function(){
-		
+		$.get(basePath+"chat/checkSet",function(data){
+			if(data!=null&&data!="-1"){
+				var sessions=eval(data);
+				$(sessions).each(function(i){
+					window.open(basePath+"chat/new/"+this.sessionId);
+				});
+			}
+		});
 	},10000);
 }
 /*开启监听报名信息进程*/
