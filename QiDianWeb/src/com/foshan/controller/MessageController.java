@@ -45,7 +45,7 @@ public class MessageController extends BaseController{
 	 * @return
 	 * @throws JSONException
 	 */
-	@RequestMapping(value="/findNewAllMessages")
+	@RequestMapping(value="findNewAllMessages")
 	@ResponseBody
 	public String findNewAllMessages() throws JSONException{
 		List<Message> messages=getModelService().getMessageService().findAllNewMessages();
@@ -59,7 +59,6 @@ public class MessageController extends BaseController{
 				jsonArray.put(jsonObject);
 				getModelService().getMessageService().clearNewMessageById(message.getMessageId());
 			}
-			System.out.println(jsonArray.toString());
 			return jsonArray.toString();
 		}
 		return "-1";
@@ -69,7 +68,7 @@ public class MessageController extends BaseController{
 	 * @return
 	 * @throws JSONException
 	 */
-	@RequestMapping(value="/findLastNewMessage")
+	@RequestMapping(value="findLastNewMessage")
 	@ResponseBody
 	public String findLastNewMessage() throws JSONException{
 		Message message=getModelService().getMessageService().findLastNewMessage();
@@ -81,7 +80,6 @@ public class MessageController extends BaseController{
 			jsonObject.put("createTime",new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(message.getCreateDate()));
 			jsonArray.put(jsonObject);
 			getModelService().getMessageService().clearNewMessageById(message.getMessageId());
-			System.out.println(jsonArray.toString());
 			return jsonArray.toString();
 		}
 		return "-1";
@@ -92,7 +90,7 @@ public class MessageController extends BaseController{
 	 * @param params
 	 * @return
 	 */
-	@RequestMapping(value="/clearNewMessages")
+	@RequestMapping(value="clearNewMessages")
 	@ResponseBody
 	public String clearNewMessages(HttpServletRequest request,String params){
 		String[] arrays=params.split(",");

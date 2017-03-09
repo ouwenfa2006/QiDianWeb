@@ -183,6 +183,7 @@ function resetPercent(){
 //监听家长报名信息及临时会话信息
 function findNewAllMessages(){
 	$.get(basePath+"systemController/isAdmin",function(data){
+		//如果是管理员
 		if(data=="0"){
 			setTimeout(function(){
 				$.post(basePath+"messageController/findNewAllMessages",function(m){
@@ -209,24 +210,42 @@ function findNewAllMessages(){
 						},1000,function(){
 							
 						});
+						var time=1;
+						var id=setInterval(function(){
+							if(time%2==0){
+								$("#message_title").css({
+									"color":"red"
+								});
+							}else{
+								$("#message_title").css({
+									"color":"white"
+								});
+							}
+							time++;
+							if(time==10){
+								clearInterval(id);
+							}
+						},500);
 					}
 				})
 			}, 1000);
-			//监听临时会话线程
-			setInterval(function(){
-				
-			},5000);
+			startChatListener();
 			startFindNewMessage();
 			
 		}
 	});
 }
+//监听临时会话线程
+function startChatListener(){
+	setInterval(function(){
+		
+	},10000);
+}
 /*开启监听报名信息进程*/
 function startFindNewMessage(){
 	setInterval(function(){
-		$.post(basePath+"messageController/findLastNewMessage",function(m){
+		$.post(basePath+"messageController/findNewAllMessages",function(m){
 			if(m!=null&&m!="-1"){
-				
 				var messages=eval(m);
 				var length=messages.length;
 				$(messages).each(function(i){
@@ -276,67 +295,9 @@ function startFindNewMessage(){
 				
 			}
 		})
-	}, 5000);
+	}, 15000);
 }
-//查找最后一条咨询信息
-function findLastNewMessage(){
-	$.get(basePath+"systemController/isAdmin",function(data){
-		if(data=="0"){
-			setTimeout(function(){
-				$.post(basePath+"messageController/findLastNewMessage",function(m){
-					if(m!=null&&m!="-1"){
-						var messages=eval(m);
-						var length=messages.length;
-						$(messages).each(function(i){
-							var texts=this.text.split("//");
-							var p1=texts[0];
-							var p2=texts[1];
-							var p3=texts[2];
-							var p4=texts[3];
-							var string='';
-							string+='<h2 messageId='+this.messageId+'  role="messageTitle" style="margin-left: 75px;margin-top: 5px;font-weight: bold;">'+p1+'</h2>';
-							string+='<h5 style="margin-left: 27px;">'+p2+'</h5>';
-							string+='<h5 style="margin-left: 27px;">'+p3+'</h5>';
-							string+='<h5 style="margin-left: 27px;">'+p4+'</h5>';
-							string+='<h5 style="margin-left: 140px;">'+this.createTime+'</h5>';
-							string+='<hr style="border:1px solid #31B0D5;">';
-							var ms=$("[role='messageTile']");
-							if($("#messageContent>h2").length>0){
-								$(string).insertBefore($("#messageContent>h2:eq(0)"));
-							}else{
-								$("#messageContent").append(string);
-							}
-							
-							if(ms.length==0){
-								$("#message").animate({
-									"top":browerHeight-$("#message").height()
-								},1000,function(){
-									
-								});
-							}
-							var time=1;
-							var id=setInterval(function(){
-								if(time%2==0){
-									$("#message_title").css({
-										"color":"red"
-									});
-								}else{
-									$("#message_title").css({
-										"color":"white"
-									});
-								}
-								time++;
-								if(time==10){
-									clearInterval(id);
-								}
-							},500);
-						});
-					}				
-				})
-			}, 5000);
-		}
-	});
-}
+
 function closeNewMessage(){
 	$("#message").find("#close_btn").click(function(){
 		$("#message").css({
@@ -348,13 +309,6 @@ function closeNewMessage(){
 			params+=$(this).attr("messageId")+","
 		});
 		$("#messageContent").html("");
-		/*$.get(basePath+"messageController/clearNewMessages?params="+params,function(data){
-			if(data=="success"){
-				$("#messageContent").html("");
-			}
-		});*/
-		
-		
 	});
 }
 //判断上传文件大小

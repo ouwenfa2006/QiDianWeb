@@ -238,7 +238,7 @@
 						alert("报名成功!");
 						$("#parentName").val("");
 						$("#parentPhone").val("");
-						//window.parent.findLastNewMessage();
+						
 					}else{
 						alert("报名失败!");
 					}
