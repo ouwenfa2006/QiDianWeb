@@ -21,6 +21,7 @@ import com.foshan.util.JsonUtil;
 @RequestMapping(value="/messageController",produces="text/html;charset=UTF-8")
 public class MessageController extends BaseController{
 	public static Logger logger=Logger.getLogger(MessageController.class);
+	private static Integer limit=1000000;
 	/**
 	 * 添加家长咨询信息
 	 * @param request

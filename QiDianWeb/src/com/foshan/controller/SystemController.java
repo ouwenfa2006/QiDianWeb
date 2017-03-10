@@ -26,6 +26,7 @@ import com.foshan.util.PageUtil;
 public class SystemController extends BaseController{
 	public static Logger logger=Logger.getLogger(SystemController.class);
 	private static int pageSize=45;
+	private static Integer limit=1000000;
 	/**
 	 * 回到主页
 	 */
@@ -95,7 +96,7 @@ public class SystemController extends BaseController{
 		String grade=request.getParameter("grade");
 		String courseName=request.getParameter("courseName");
 		//符合条件的搜索,以前1500条记录作为查询范围
-		List<LearningMaterials> all_learns=getModelService().getLearningMaterialsService().findAllLearningMaterials(1,3000,grade,courseName);
+		List<LearningMaterials> all_learns=getModelService().getLearningMaterialsService().findAllLearningMaterials(1,limit,grade,courseName);
 		savePageInfos(request, all_learns);
 
 		return "/CounselingInformation/counselingInformations_list";

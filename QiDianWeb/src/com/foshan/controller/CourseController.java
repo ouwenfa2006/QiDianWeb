@@ -19,6 +19,7 @@ import com.foshan.entity.Course;
 public class CourseController extends BaseController{
 	public static Logger logger=Logger.getLogger(CourseController.class);
 	private static Integer pageSize=5;
+	private static Integer limit=1000000;
 	@RequestMapping(value="/search")
 	public String search(HttpServletRequest request,String grade,String courseName){
 		if(grade!=null&&grade.equals("全部")){
@@ -28,7 +29,7 @@ public class CourseController extends BaseController{
 			courseName=null;
 		}
 		
-		List<Course> courses = getModelService().getCourseService().findCourses(grade, courseName, 1, 1500);
+		List<Course> courses = getModelService().getCourseService().findCourses(grade, courseName, 1, limit);
 		if(courses!=null&&courses.size()>0){
 			savePageInfos(request, courses, pageSize);
 		}

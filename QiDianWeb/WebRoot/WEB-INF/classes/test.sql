@@ -41,10 +41,10 @@ CREATE TABLE `course` (
   `courseName` varchar(40) DEFAULT NULL COMMENT '名称',
   `adName` varchar(40) DEFAULT NULL COMMENT '全称',
   `text` varchar(1000) DEFAULT NULL COMMENT '简介',
-  PRIMARY KEY (`courseId`),
-  KEY `index_grade_courseName` (`grade`,`courseName`)
+  PRIMARY KEY (`courseId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 COMMENT='科目表';
-
+alter table course add index index_grade_courseName(grade,courseName);
+alter table course add index index_courseName(courseName);
 -- ----------------------------
 -- Records of course
 -- ----------------------------
@@ -203,10 +203,10 @@ CREATE TABLE `image` (
   `DESCRIPTION` varchar(200) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`imageId`),
   KEY `USER_ID` (`USER_ID`),
-  KEY `index_userId` (`USER_ID`),
   CONSTRAINT `image_ibfk_1` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='图片表';
-
+alter table image add index index_USER_ID(USER_ID);
+alter table image add index index_imageId_userId(imageId,USER_ID);
 -- ----------------------------
 -- Records of image
 -- ----------------------------
@@ -245,10 +245,10 @@ CREATE TABLE `learningmaterials` (
   `downloadCount` int(10) DEFAULT '0',
   PRIMARY KEY (`lId`),
   KEY `uploadUserId` (`uploadUserId`),
-  KEY `index_grade_courseName_fileName` (`grade`,`courseName`,`fileName`),
   CONSTRAINT `learningmaterials_ibfk_1` FOREIGN KEY (`uploadUserId`) REFERENCES `user` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COMMENT='辅导资料表';
-
+alter table learningmaterials add index index_grade_courseName_fileName(grade,courseName,fileName);
+alter table learningmaterials add index index_courseName_fileName(courseName,fileName);
 -- ----------------------------
 -- Records of learningmaterials
 -- ----------------------------
@@ -270,12 +270,12 @@ CREATE TABLE `message` (
   KEY `formUser_Id` (`formUser_Id`),
   KEY `formParent_Id` (`formParent_Id`),
   KEY `formStudent_Id` (`formStudent_Id`),
-  KEY `index_createDate` (`createDate`),
   CONSTRAINT `message_ibfk_1` FOREIGN KEY (`formUser_Id`) REFERENCES `user` (`userId`),
   CONSTRAINT `message_ibfk_2` FOREIGN KEY (`formParent_Id`) REFERENCES `parent` (`parentId`),
   CONSTRAINT `message_ibfk_3` FOREIGN KEY (`formStudent_Id`) REFERENCES `student` (`studentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='信息表';
-
+alter table message add index index_createDate(createDate);
+alter table message add index index_isNewMessage(isNewMessage);
 -- ----------------------------
 -- Records of message
 -- ----------------------------
@@ -413,10 +413,9 @@ CREATE TABLE `student` (
   `studentPhone` bigint(20) DEFAULT NULL COMMENT '电话',
   PRIMARY KEY (`studentId`),
   KEY `PARENT_ID` (`PARENT_ID`),
-  KEY `index_studentName` (`sudentName`),
   CONSTRAINT `student_ibfk_1` FOREIGN KEY (`PARENT_ID`) REFERENCES `parent` (`parentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学生表';
-
+alter table student add index index_sudentName(sudentName);
 -- ----------------------------
 -- Records of student
 -- ----------------------------
@@ -440,10 +439,11 @@ CREATE TABLE `user` (
   `tFeatures` varchar(1000) DEFAULT NULL COMMENT '教学特点',
   `tExperience` varchar(1000) DEFAULT NULL COMMENT '教学经验',
   `tHonor` varchar(1000) DEFAULT NULL COMMENT '教学荣誉',
-  PRIMARY KEY (`userId`),
-  KEY `index_userName` (`userName`)
+  PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='用户表';
-
+alter table user add index index_userName(userName);
+alter table user add index index_grade_courseName(grade,courseName);
+alter table user add index index_courseName(courseName);
 -- ----------------------------
 -- Records of user
 -- ----------------------------

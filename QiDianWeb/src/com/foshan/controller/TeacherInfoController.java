@@ -23,6 +23,7 @@ import com.foshan.util.PageUtil;
 public class TeacherInfoController extends BaseController{
 	public static Logger logger=Logger.getLogger(TeacherInfoController.class);
 	private static int pageSize=16;
+	private static Integer limit=1000000;
 	/**
 	 * 进入教师信息页面
 	 * @return
@@ -49,7 +50,7 @@ public class TeacherInfoController extends BaseController{
 	@RequestMapping(value="/getDatas")
 	public  String getDatas(HttpServletRequest request){
 		//搜索所有结果,以前1500记录作为查询范围
-		List<User> teachers=getModelService().getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, null, null, "teacher",null);
+		List<User> teachers=getModelService().getUserService().findUsersAndImagesfindUsersAndImages(1, limit, null, null, "teacher",null);
 		//保存页面参数,以作分页
 		savePageInfos(request, teachers, pageSize);
 		logger.info("查询所有教师");
@@ -73,7 +74,7 @@ public class TeacherInfoController extends BaseController{
 			courseName=null;
 		}
 		//查询所有
-		List<User> teachers=getModelService().getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, grade, courseName, "teacher",null);
+		List<User> teachers=getModelService().getUserService().findUsersAndImagesfindUsersAndImages(1, limit, grade, courseName, "teacher",null);
 
 		//保存页面参数,以作分页
 		savePageInfos(request, teachers, pageSize);
@@ -97,7 +98,7 @@ public class TeacherInfoController extends BaseController{
 			courseName=null;
 		}
 		//查找优秀老师
-		List<User> fineTeachers=getModelService().getUserService().findUsersAndImagesfindUsersAndImages(1, 1500, grade, courseName, "teacher", 1);
+		List<User> fineTeachers=getModelService().getUserService().findUsersAndImagesfindUsersAndImages(1,limit, grade, courseName, "teacher", 1);
 		JSONArray jsonArray=new JSONArray();
 		for (User user : fineTeachers) {
 			JSONObject jsonObject=new JSONObject();

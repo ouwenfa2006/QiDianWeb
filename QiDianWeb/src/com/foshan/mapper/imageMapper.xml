@@ -10,7 +10,7 @@
       	</association>
     </resultMap> 
     <select id="" parameterType="java.lang.Integer" resultMap="imageMapper">
-    	select u.*,i.* from user u,image i where i.imageId=#{id} and i.user_id=u.userId
+    	select u.*,i.* from user u,image i where i.user_id=u.userId and i.imageId=#{id}
     </select>
 </mapper>
 

@@ -11,6 +11,7 @@ import com.foshan.entity.Role;
 import com.foshan.entity.User;
 import com.foshan.service.UserRoleService;
 import com.foshan.service.UserService;
+import com.foshan.util.Constant;
 
 public class UserServiceTest {
 	private static ApplicationContext applicationContext=new ClassPathXmlApplicationContext("applicationContext.xml");
@@ -105,11 +106,20 @@ public class UserServiceTest {
 			System.out.println("===========================================");*/
 		}
 	}
-	
+	public static void test_addTeachers(){
+		List<User> users=userService.findUsersAndImagesfindUsersAndImages(1, 100, null, null, "teacher", null);
+		System.out.println(users.size());
+		for(int i=0;i<60000;i++){
+			for (User user : users) {
+				userService.addUser(user);
+			}
+		}
+	};
 	public static void main(String[] agrs){
 		//test_userService_findUserAndMaterialsById();
 		//test_findUserAndImageById();
-		test_finadUsersAndImages();
+		//test_finadUsersAndImages();
+		test_addTeachers();
 	}
 
 }
