@@ -5,12 +5,13 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.foshan.dao.LearningMaterialsDao;
 import com.foshan.entity.LearningMaterials;
 @Service(value="learningMaterialsService")
-@Transactional(value="dataSourceTransactionManager")
+@Transactional(value="dataSourceTransactionManager",rollbackFor=Exception.class)
 public class LearningMaterialsServiceImpl implements LearningMaterialsService{
 	@Resource(name="learningMaterialsDao")
 	private LearningMaterialsDao learningMaterialsDao;
@@ -19,14 +20,14 @@ public class LearningMaterialsServiceImpl implements LearningMaterialsService{
 		// TODO Auto-generated method stub
 		learningMaterialsDao.addLearningMaterials(learningMaterials);
 	}
-
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public LearningMaterials findById(Integer id) {
 		// TODO Auto-generated method stub
 		return learningMaterialsDao.findById(id);
 		
 	}
-
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public List<LearningMaterials> findAllLearningMaterials(int page,int pageSize,String grade,String courseName) {
 		// TODO Auto-generated method stub
@@ -36,7 +37,7 @@ public class LearningMaterialsServiceImpl implements LearningMaterialsService{
 		}
 		return learningMaterialsDao.findAllLearningMaterials(start,pageSize);
 	}
-
+	
 	@Override
 	public void deleteByIds(Integer... ids) {
 		// TODO Auto-generated method stub
@@ -44,7 +45,7 @@ public class LearningMaterialsServiceImpl implements LearningMaterialsService{
 			learningMaterialsDao.deleteByIds(id);
 		}
 	}
-
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	@Override
 	public List<LearningMaterials> findLearningMaterialsByFileName(
 			String fileName) {

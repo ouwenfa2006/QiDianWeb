@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.foshan.dao.UserRoleDao;
 
 @Service(value="userRoleService")
-@Transactional(value="dataSourceTransactionManager")
+@Transactional(value="dataSourceTransactionManager",rollbackFor=Exception.class)
 public class UserRoleServiceImpl implements UserRoleService {
 	@Resource(name="userRoleDao")
 	private UserRoleDao userRoleDao;

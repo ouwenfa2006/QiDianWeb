@@ -7,19 +7,20 @@ import javax.annotation.Resource;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.jasypt.util.password.PasswordEncryptor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.foshan.dao.UserDao;
 import com.foshan.entity.User;
 @Service(value="userService")
-@Transactional(value="dataSourceTransactionManager")
+@Transactional(value="dataSourceTransactionManager",rollbackFor=Exception.class)
 public class UserServiceImpl implements UserService{
 	@Resource(name="userDao")
 	private UserDao userDao;
 	
 
 	@Override
-	@Transactional(readOnly=true)
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public User findUserById(Integer id) {
 		// TODO Auto-generated method stub
 		return userDao.findUserById(id);
@@ -35,6 +36,7 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public User findUserByUserName(String userName) {
 		// TODO Auto-generated method stub
 		return userDao.findUserByUserName(userName);
@@ -66,21 +68,25 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public User findUserAndMaterialsById(Integer id) {
 		// TODO Auto-generated method stub
 		return userDao.findUserAndMaterialsById(id);
 	}
 	@Override
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public User findUserAndRolesById(Integer id) {
 		// TODO Auto-generated method stub
 		return userDao.findUserAndRolesById(id);
 	}
 	@Override
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public User findUserAndImageById(Integer id) {
 		// TODO Auto-generated method stub
 		return userDao.findUserAndImageById(id);
 	}
 	@Override
+	@Transactional(propagation=Propagation.NOT_SUPPORTED)
 	public List<User> findUsersAndImagesfindUsersAndImages(int page,
 			int pageSize, String grade, String courseName,String roleName,Integer level) {
 		int start=(page-1)*pageSize;

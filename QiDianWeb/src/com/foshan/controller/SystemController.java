@@ -19,6 +19,7 @@ import com.foshan.entity.LearningMaterials;
 import com.foshan.entity.Role;
 import com.foshan.entity.User;
 import com.foshan.service.RoleSerivce;
+import com.foshan.util.Constant;
 import com.foshan.util.PageUtil;
 
 @Controller
@@ -174,6 +175,7 @@ public class SystemController extends BaseController{
 			for (Role role : roles) {
 				if(role.getRoleName().equals("admin")){
 					value="0";//是管理员
+					request.getSession().setAttribute(Constant.ADMIN, user);
 					return value;
 				}
 			}
