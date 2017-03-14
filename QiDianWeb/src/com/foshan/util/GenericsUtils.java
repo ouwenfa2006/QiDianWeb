@@ -2,7 +2,11 @@ package com.foshan.util;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-
+/**
+ * 泛型参数工具类
+ * @author Administrator
+ *
+ */
 public class GenericsUtils {
 	/**
 	 * 通过反射,获得定义Class时声明的父类的范型参数的类型.    
