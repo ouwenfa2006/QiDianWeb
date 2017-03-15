@@ -26,7 +26,7 @@
 	<context:annotation-config></context:annotation-config>
 	<!-- 加载资源文件 -->
 	<context:property-placeholder location="classpath:jdbc.properties" />
-	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<bean id="dataSourceTarget" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="driverClass" value="${driverClassName}"></property>
 		<property name="jdbcUrl" value="${url}"></property>
 		<property name="user" value="${user}"></property>
@@ -39,6 +39,9 @@
 		<property name="maxIdleTimeExcessConnections" value="${maxIdleTimeExcessConnections}"></property>
 		<!-- 最小空间值，当空间的连接数少于阀值时，连接池就会预申请一些连接，以免洪峰来时 来不及申请 -->
 		<property name="minPoolSize" value="${minPoolSize}"></property>
+	</bean>
+	<bean id="dataSource" class="com.p6spy.engine.spy.P6DataSource">
+		<constructor-arg ref="dataSourceTarget"></constructor-arg>
 	</bean>
 	 <!-- 使用注解使事务起作用 -->
 	 <bean class="org.springframework.jdbc.datasource.DataSourceTransactionManager" id="dataSourceTransactionManager">
