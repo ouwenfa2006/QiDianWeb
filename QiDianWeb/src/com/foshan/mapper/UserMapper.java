@@ -15,4 +15,5 @@ public interface UserMapper {
 	User findUserAndRolesById(Integer id);
 	User findUserAndImageById(Integer id);
 	List<User> findUsersAndImages(@Param("start")int start,@Param("pageSize") int pageSize,@Param("grade") String grade,@Param("courseName")String courseName,@Param("roleName")String roleName,@Param("level")Integer level);
+	void updateUserLoginState(User user);
 }

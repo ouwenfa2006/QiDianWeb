@@ -57,7 +57,7 @@
 					<div style="width: 764px;height:203px;float: left;border-bottom: 1px dashed silver;">
 						<div class="col-md-12">
 							<h3 style="color: red;margin-left: 1px;float: left;">${course.adName }</h3>
-							<button class="pull-left btn btn-danger" style="margin-left: 416px;margin-top: 15px;">在线咨询</button>
+							<button class="pull-right btn btn-danger" style="margin-top: 15px;" onclick="openChat()">在线咨询</button>
 						</div>
 						<div class="col-md-12">
 							<span class="pull-left" style="font-weight: bold;font-size: 18px;">适用学员:</span>
@@ -90,7 +90,6 @@
     						<span class="pull-left" style="color: red;">${totalPage }</span>
     						<span class="pull-left">页</span>
     				</div>
-    				
     			</div>
     		</div>
 	</div>
@@ -116,6 +115,10 @@
 				});
 			}
 		});
+	}
+	function openChat(){
+		var url=basePath+"/chat/newAdmin/"+99;
+		window.open(url,"chat");
 	}
 	</script>
 	<script type="text/javascript" src="../plugins/js/findByPage.js"></script>

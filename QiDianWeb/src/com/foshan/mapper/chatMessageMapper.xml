@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.foshan.mapper.ChatMessageMapper">
+    <resultMap type="com.foshan.entity.ChatMessage" id="chatMessageMapper">
+        <id property="chatMessageId" column="chatMessageId" />
+        <result property="createTime" column="createTime" />
+      	<result property="sessionId" column="sessionId"></result>
+      	<result property="token" column="token"/>
+      	<result property="text" column="text"/>
+      	<result property="toChaterId" column="toChaterId"/>
+      	<result property="chatKey" column="chatKey"/>
+    </resultMap> 
+  
+    <insert id="addChatMessage" parameterType="com.foshan.entity.ChatMessage">
+    	insert into chatMessage(sessionId,text,toChaterId,chatKey) values(#{sessionId},#{text},#{toChaterId},#{chatKey})
+    </insert>
+    <select id="findMessageFromClient" resultMap="chatMessageMapper">
+    	select * from chatMessage where sessionId=#{sessionId} and token=#{token} and toChaterId=#{toChaterId} and chatKey=0;
+    </select>
+    <select id="findMessageFromAdmin" resultMap="chatMessageMapper">
+    	select * from chatMessage where sessionId=#{sessionId} and token=#{token} and toChaterId=#{toChaterId} and chatKey=1;
+    </select>
+    <update id="updateMessageFromAdmin">
+    	update chatMessage set token=1 where sessionId=#{sessionId} and toChaterId=#{toChaterId} and chatKey=1;
+    </update>
+    <update id="updateMessageFromClient">
+    	update chatMessage set token=1 where sessionId=#{sessionId} and toChaterId=#{toChaterId} and chatKey=0;
+    </update>
+</mapper>

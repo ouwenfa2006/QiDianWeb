@@ -26,7 +26,7 @@
 
 	</div>
 </div>
-<div class="col-md-12"
+<!-- <div class="col-md-12"
 	style="padding-left:0.8%;padding-right:0.5%;margin-top: 15px;"
 	id="ontToOne">
 	<div class="btn-group col-md-12">
@@ -56,4 +56,4 @@
 		</button>
 
 	</div>
-</div>
+</div> -->

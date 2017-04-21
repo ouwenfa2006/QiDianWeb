@@ -33,7 +33,7 @@ public class JsonUtil {
 				Object value=method.invoke(o);
 				if(value!=null){
 					if(value.getClass()==Date.class){
-						SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+						SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 						value=dateFormat.format(value);
 					}
 				}

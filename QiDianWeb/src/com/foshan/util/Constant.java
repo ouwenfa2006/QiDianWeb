@@ -13,6 +13,10 @@ public class Constant {
 	public static final String MESSAGE_SERVICE="messageService";
 	public static final String ROLE_SERVICE="roleService";
 	public static final String COURSE_SERVICE="courseService";
+	public static final String CHATMESSAGE_SERVICE="chatMessageService";
 	public static final String SESSION_USER="session_user";//登陆的用户
+	public static final String SESSION_USER_SESSION="session_user_session";
 	public static final String ADMIN="admin";
+	public static final String LOGIN_ERROR="login_orror";//登陆错误
+
 }

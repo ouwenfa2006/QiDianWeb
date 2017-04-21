@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.ejb.FinderException;
+
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -46,6 +46,9 @@ public class ModelService {
 	public LearningMaterialsService getLearningMaterialsService() {
 		return (LearningMaterialsService) serviceMap.get(Constant.LEARNINGMATERIALS_SERVICCE);
 	}
+	public ChatMessageService getChatMessageService(){
+		return (ChatMessageService) serviceMap.get(Constant.CHATMESSAGE_SERVICE);
+	}
 	/**添加咨询家长
 	 * @param parentName
 	 * @param parentPhone
@@ -81,5 +84,6 @@ public class ModelService {
 		// TODO Auto-generated method stub
 		
 	}
+	
 	
 }

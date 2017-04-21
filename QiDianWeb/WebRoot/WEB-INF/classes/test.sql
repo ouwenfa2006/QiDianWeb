@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : mydatabases
-Source Server Version : 50624
+Source Server         : mysql
+Source Server Version : 50717
 Source Host           : localhost:3306
 Source Database       : qidianweb
 
 Target Server Type    : MYSQL
-Target Server Version : 50624
+Target Server Version : 50717
 File Encoding         : 65001
 
-Date: 2017-03-08 22:28:33
+Date: 2017-04-11 09:08:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,6 +32,28 @@ CREATE TABLE `action` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `chatmessage`
+-- ----------------------------
+DROP TABLE IF EXISTS `chatmessage`;
+CREATE TABLE `chatmessage` (
+  `chatMessageId` int(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `createTime` datetime DEFAULT NULL COMMENT '创建时间',
+  `sessionId` varchar(200) DEFAULT NULL COMMENT '游客sessionId',
+  `token` tinyint(4) DEFAULT '0' COMMENT '读取次数',
+  `text` varchar(200) DEFAULT NULL COMMENT '内容',
+  `toChaterId` int(20) DEFAULT NULL COMMENT '管理员id',
+  `chatKey` tinyint(4) DEFAULT NULL COMMENT '0发给管理员，1发给游客',
+  PRIMARY KEY (`chatMessageId`),
+  KEY `sessionId` (`sessionId`),
+  KEY `toChaterId` (`toChaterId`),
+  CONSTRAINT `chatmessage_ibfk_1` FOREIGN KEY (`toChaterId`) REFERENCES `user` (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='临时会话信息';
+
+-- ----------------------------
+-- Records of chatmessage
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `course`
 -- ----------------------------
 DROP TABLE IF EXISTS `course`;
@@ -41,10 +63,11 @@ CREATE TABLE `course` (
   `courseName` varchar(40) DEFAULT NULL COMMENT '名称',
   `adName` varchar(40) DEFAULT NULL COMMENT '全称',
   `text` varchar(1000) DEFAULT NULL COMMENT '简介',
-  PRIMARY KEY (`courseId`)
+  PRIMARY KEY (`courseId`),
+  KEY `index_grade_courseName` (`grade`,`courseName`),
+  KEY `index_courseName` (`courseName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8 COMMENT='科目表';
-alter table course add index index_grade_courseName(grade,courseName);
-alter table course add index index_courseName(courseName);
+
 -- ----------------------------
 -- Records of course
 -- ----------------------------
@@ -203,10 +226,11 @@ CREATE TABLE `image` (
   `DESCRIPTION` varchar(200) DEFAULT NULL COMMENT '描述',
   PRIMARY KEY (`imageId`),
   KEY `USER_ID` (`USER_ID`),
+  KEY `index_USER_ID` (`USER_ID`),
+  KEY `index_imageId_userId` (`imageId`,`USER_ID`),
   CONSTRAINT `image_ibfk_1` FOREIGN KEY (`USER_ID`) REFERENCES `user` (`userId`)
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='图片表';
-alter table image add index index_USER_ID(USER_ID);
-alter table image add index index_imageId_userId(imageId,USER_ID);
+
 -- ----------------------------
 -- Records of image
 -- ----------------------------
@@ -245,10 +269,11 @@ CREATE TABLE `learningmaterials` (
   `downloadCount` int(10) DEFAULT '0',
   PRIMARY KEY (`lId`),
   KEY `uploadUserId` (`uploadUserId`),
+  KEY `index_grade_courseName_fileName` (`grade`,`courseName`,`fileName`),
+  KEY `index_courseName_fileName` (`courseName`,`fileName`),
   CONSTRAINT `learningmaterials_ibfk_1` FOREIGN KEY (`uploadUserId`) REFERENCES `user` (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COMMENT='辅导资料表';
-alter table learningmaterials add index index_grade_courseName_fileName(grade,courseName,fileName);
-alter table learningmaterials add index index_courseName_fileName(courseName,fileName);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='辅导资料表';
+
 -- ----------------------------
 -- Records of learningmaterials
 -- ----------------------------
@@ -270,12 +295,13 @@ CREATE TABLE `message` (
   KEY `formUser_Id` (`formUser_Id`),
   KEY `formParent_Id` (`formParent_Id`),
   KEY `formStudent_Id` (`formStudent_Id`),
+  KEY `index_createDate` (`createDate`),
+  KEY `index_isNewMessage` (`isNewMessage`),
   CONSTRAINT `message_ibfk_1` FOREIGN KEY (`formUser_Id`) REFERENCES `user` (`userId`),
   CONSTRAINT `message_ibfk_2` FOREIGN KEY (`formParent_Id`) REFERENCES `parent` (`parentId`),
   CONSTRAINT `message_ibfk_3` FOREIGN KEY (`formStudent_Id`) REFERENCES `student` (`studentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='信息表';
-alter table message add index index_createDate(createDate);
-alter table message add index index_isNewMessage(isNewMessage);
+
 -- ----------------------------
 -- Records of message
 -- ----------------------------
@@ -375,7 +401,7 @@ CREATE TABLE `role` (
   `name` varchar(20) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`roleId`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 -- ----------------------------
 -- Records of role
@@ -413,9 +439,10 @@ CREATE TABLE `student` (
   `studentPhone` bigint(20) DEFAULT NULL COMMENT '电话',
   PRIMARY KEY (`studentId`),
   KEY `PARENT_ID` (`PARENT_ID`),
+  KEY `index_sudentName` (`sudentName`),
   CONSTRAINT `student_ibfk_1` FOREIGN KEY (`PARENT_ID`) REFERENCES `parent` (`parentId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='学生表';
-alter table student add index index_sudentName(sudentName);
+
 -- ----------------------------
 -- Records of student
 -- ----------------------------
@@ -439,33 +466,35 @@ CREATE TABLE `user` (
   `tFeatures` varchar(1000) DEFAULT NULL COMMENT '教学特点',
   `tExperience` varchar(1000) DEFAULT NULL COMMENT '教学经验',
   `tHonor` varchar(1000) DEFAULT NULL COMMENT '教学荣誉',
-  PRIMARY KEY (`userId`)
+  `isLogin` int(1) DEFAULT '0' COMMENT '是否登陆',
+  PRIMARY KEY (`userId`),
+  KEY `index_userName` (`userName`),
+  KEY `index_grade_courseName` (`grade`,`courseName`),
+  KEY `index_courseName` (`courseName`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='用户表';
-alter table user add index index_userName(userName);
-alter table user add index index_grade_courseName(grade,courseName);
-alter table user add index index_courseName(courseName);
+
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'scott', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', null, null, null, null, '管理员', '0', null, null, null, null, null);
-INSERT INTO `user` VALUES ('2', 'ouwenfa', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '小学', '数学', null, null, '欧晓晴', '0', '教育不是要改变学生，而是要从本质上帮助学生。', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('3', 'hello', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '物理', null, null, '简琪琪', '0', '构建知识网络，强化兴趣学习。', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('4', 'jianyongqi', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '语文', null, null, '简泳琪', '0', '勤能补拙是良训，一分辛苦一分才', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('5', 'xiaotianshi', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '数学', null, null, '小天使', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('6', 'liuchu', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '英语', null, null, '刘处', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('7', 'jianjieying', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '英语', null, null, '简洁莹', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('8', 'xiaomogui', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '化学', null, null, '陈三', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('9', 'liudehua', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '政治', null, null, '张五', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('10', 'wangbaoqiang', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '物理', null, null, '刘六', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('11', 'ouwenfa1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '小学', '数学', null, null, '欧静晴', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('12', 'hello1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '物理', null, null, '简颖琪', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('13', 'jianyongqi1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '语文', null, null, '阮琪', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('14', 'xiaotianshi1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '数学', null, null, '小天', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('15', 'liuchu1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '英语', null, null, '刘贵', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('16', 'jianjieying1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '英语', null, null, '简莹', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('17', 'xiaomogui1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '化学', null, null, '张三', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('18', 'liudehua1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '政治', null, null, '李四', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
-INSERT INTO `user` VALUES ('19', 'wangbaoqiang1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '物理', null, null, '王五', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。');
+INSERT INTO `user` VALUES ('1', 'scott', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', null, null, null, null, '管理员', '0', null, null, null, null, null, '0');
+INSERT INTO `user` VALUES ('2', 'ouwenfa', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '小学', '数学', null, null, '欧晓晴', '0', '教育不是要改变学生，而是要从本质上帮助学生。', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('3', 'hello', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '物理', null, null, '简琪琪', '0', '构建知识网络，强化兴趣学习。', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('4', 'jianyongqi', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '语文', null, null, '简泳琪', '0', '勤能补拙是良训，一分辛苦一分才', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('5', 'xiaotianshi', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '数学', null, null, '小天使', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('6', 'liuchu', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '英语', null, null, '刘处', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('7', 'jianjieying', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '英语', null, null, '简洁莹', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('8', 'xiaomogui', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '化学', null, null, '陈三', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('9', 'liudehua', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '政治', null, null, '张五', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('10', 'wangbaoqiang', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '物理', null, null, '刘六', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('11', 'ouwenfa1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '小学', '数学', null, null, '欧静晴', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('12', 'hello1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '物理', null, null, '简颖琪', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('13', 'jianyongqi1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '语文', null, null, '阮琪', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('14', 'xiaotianshi1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '数学', null, null, '小天', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('15', 'liuchu1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '英语', null, null, '刘贵', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('16', 'jianjieying1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '英语', null, null, '简莹', '1', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('17', 'xiaomogui1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '化学', null, null, '张三', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('18', 'liudehua1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '初中', '政治', null, null, '李四', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
+INSERT INTO `user` VALUES ('19', 'wangbaoqiang1', ' DSSkitM2mP7JjUWZ1k4GK2yoRJyumdoQ', '高中', '物理', null, null, '王五', '0', '我一直用自己的学生去筛选适合学生的教法，于是筛出了一些不合格的教法，从而改进教法，因材施教，让学生成才。坚信教学的艺术不在于传授的本领，而在于激励、唤醒、鼓舞。教育不是要改变一个人，而是要帮助一个人。认真做教育，不怕负责任', '所带学生均有不同程度提高，并得到家长的一致认可和好评。', '授课风趣、善于引导；重视培养学生分析问题、解决问题的能力；在学习过程中培养学生认真负责的学习态度和细心计算的好习惯；熟悉考纲，能做到有目的教学。', '8年', '曾获“优秀教师”，“教育之星”，“骨干教师”等荣誉称号。', '0');
 
 -- ----------------------------
 -- Table structure for `user_action`

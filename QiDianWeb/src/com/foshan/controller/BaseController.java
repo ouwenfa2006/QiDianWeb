@@ -1,5 +1,7 @@
 package com.foshan.controller;
 
+import java.beans.PropertyEditorSupport;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -10,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.beans.propertyeditors.PropertiesEditor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -34,12 +37,70 @@ public class BaseController{
 	public void getUser(WebDataBinder webDataBinder){
 		webDataBinder.setFieldDefaultPrefix("user.");
 	}
-	@InitBinder
+	/**
+	 * 用于VO的绑定，VO的成员变量必须都是String
+	 * @param webDataBinder
+	 */
+	@InitBinder(value="cmsg")
+	public void getChatMessage(WebDataBinder binder){
+		binder.setFieldDefaultPrefix("cmsg.");
+		binder.registerCustomEditor(Date.class, new MyDateEditor());
+	    binder.registerCustomEditor(Double.class, new DoubleEditor()); 
+	    binder.registerCustomEditor(Integer.class, new IntegerEditor());
+	}
+	 private class MyDateEditor extends PropertyEditorSupport {
+	        @Override
+	        public void setAsText(String text) throws IllegalArgumentException {
+	            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	            Date date = null;
+	            try {
+	                date = format.parse(text);
+	            } catch (ParseException e) {
+	                format = new SimpleDateFormat("yyyy-MM-dd");
+	                try {
+	                    date = format.parse(text);
+	                } catch (ParseException e1) {
+	                }
+	            }
+	            setValue(date);
+	        }
+	    }
+	    
+	    public class DoubleEditor extends PropertiesEditor  {    
+	        @Override    
+	        public void setAsText(String text) throws IllegalArgumentException {    
+	            if (text == null || text.equals("")) {    
+	                text = "0";    
+	            }    
+	            setValue(Double.parseDouble(text));    
+	        }    
+	        
+	        @Override    
+	        public String getAsText() {    
+	            return getValue().toString();    
+	        }    
+	    }  
+	    
+	    public class IntegerEditor extends PropertiesEditor {    
+	        @Override    
+	        public void setAsText(String text) throws IllegalArgumentException {    
+	            if (text == null || text.equals("")) {    
+	                text = "0";    
+	            }    
+	            setValue(Integer.parseInt(text));    
+	        }    
+	        
+	        @Override    
+	        public String getAsText() {    
+	            return getValue().toString();    
+	        }    
+	    }  
+	/*@InitBinder
 	public void convertDate(WebDataBinder webDataBinder){
 		SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
 		dateFormat.setLenient(false);
 		webDataBinder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));  //true:允许输入空值，false:不能为空值  
-	}
+	}*/
 	/**
 	 * 根据搜索的结果集分页显示,以page_list保存第一页的数据
 	 * @param request

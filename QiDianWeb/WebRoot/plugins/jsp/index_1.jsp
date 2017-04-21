@@ -3,7 +3,7 @@
 	<div class="col-md-3" style="padding:1%;">
 		<div>
 			<img alt="" src="${basePath }plugins/img/logo.jpg"
-				style="width:100%;">
+				style="width:231px;">
 		</div>
 	</div>
 	<div class="col-md-9">
@@ -131,7 +131,7 @@ function getEduInfos(){
 }
 function getQiDianInfos(){
 	
-	window.open(basePath+"systemController/getQiDianInfos");
+	window.open(basePath+"systemController/getQiDianInfos","mainIframe");
 }
 </script>
 

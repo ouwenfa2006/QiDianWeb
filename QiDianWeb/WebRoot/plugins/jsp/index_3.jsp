@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<div class="col-md-12"
+<div class="col-md-12 courses"
 	style="padding-left:2%;padding-right:2%;padding-top: 15px;">
 	<div class="col-md-12"
 		style="border:1px solid silver;line-height:50px;">
@@ -157,6 +157,12 @@ $(function(){
 	}
 	$("[role='courseVersion']").css({
 		"width":$("[role='book']").parent("div").width()
+	});
+	$(".courses").find(".btn").click(function(){
+		window.open(basePath+"systemController/getClasses","mainIframe");
+	});
+	$(".courses").find("a").click(function(){
+		window.open(basePath+"systemController/getClasses","mainIframe");
 	});
 });
 </script>

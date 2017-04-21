@@ -70,4 +70,12 @@
   	<param-name>imgPath</param-name>
   	<param-value>C:/Documents and Settings/Administrator/git/QiDianWeb/QiDianWeb/WebRoot/plugins/img</param-value>
   </context-param>
+  <listener>
+  	<display-name>sessionListner</display-name>
+  	<listener-class>com.foshan.listener.SessionListener</listener-class>
+  </listener>
+  <error-page>
+  	<error-code>404</error-code>
+  	<location>/error.jsp</location>
+  </error-page>
 </web-app>

@@ -14,6 +14,7 @@
       	<result property="tFeatures" column="tFeatures"/>
       	<result property="tExperience" column="tExperience"/>
       	<result property="tHonor" column="tHonor"/>
+      	<result property="isLogin" column="isLogin"/>
     	<!-- <collection property="roles" ofType="com.foshan.entity.Role" autoMapping="true"></collection> -->
     </resultMap> 
     
@@ -85,4 +86,7 @@
     <delete id="deleteUserById" parameterType="java.lang.Integer">
     	delete from user where userId=#{id}
     </delete>
+    <update id="updateUserLoginState" parameterType="com.foshan.entity.User">
+    	update user set isLogin=#{isLogin} where userName=#{userName}
+    </update>
 </mapper>

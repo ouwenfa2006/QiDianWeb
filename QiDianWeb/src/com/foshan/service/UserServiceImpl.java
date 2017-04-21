@@ -92,5 +92,16 @@ public class UserServiceImpl implements UserService{
 		int start=(page-1)*pageSize;
 		return userDao.findUsersAndImages(start, pageSize, grade, courseName,roleName,level);
 	}
+	@Override
+	public List<User> findAdminOnline() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	@Override
+	public void updateUserLoginState(User user) {
+		// TODO Auto-generated method stub
+		userDao.updateUserLoginState(user);
+	}
+
 	
 }

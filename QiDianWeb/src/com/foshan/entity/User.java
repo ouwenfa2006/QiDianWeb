@@ -27,6 +27,13 @@ public class User implements Serializable{
 	private String tFeatures;
 	private String tExperience;
 	private String tHonor;
+	private Integer isLogin;
+	public void setIsLogin(Integer isLogin) {
+		this.isLogin = isLogin;
+	}
+	public Integer getIsLogin() {
+		return isLogin;
+	}
 	public String getUserName() {
 		return userName;
 	}

@@ -27,5 +27,6 @@ public interface UserDao extends BaseDao<User>{
 	 */
 	List<User> findUsersAndImages(int start,int pageSize,String grade,String courseName,String roleName,Integer level);
 	User findUserAndImageById(Integer id);
+	void updateUserLoginState(User user);
 	
 }

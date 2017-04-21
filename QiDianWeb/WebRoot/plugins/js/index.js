@@ -13,9 +13,9 @@ $(function() {
 		"left" : toLeft - chatDivWidth
 	});
 	if ($("body").width() <= 1007) {
-	/*	$("body").css({
+		$("body").css({
 			"width":$("body").width()+chatDivWidth
-		});*/
+		});
 		$("#chatDiv").css({
 			"left" : toLeft
 		});
@@ -154,7 +154,7 @@ $(function() {
 	});
 	findNewAllMessages();
 	closeNewMessage();
-
+	initModalCss();
 	
 	
 });
@@ -242,11 +242,11 @@ function startChatListener(){
 			if(data!=null&&data!="-1"){
 				var sessions=eval(data);
 				$(sessions).each(function(i){
-					window.open(basePath+"chat/new/"+this.sessionId);
+					window.open(basePath+"chat/newClient/"+this.client_sessionId,this.client_sessionId);
 				});
 			}
 		});
-	},10000);
+	},5000);
 }
 /*开启监听报名信息进程*/
 function startFindNewMessage(){
@@ -304,7 +304,7 @@ function startFindNewMessage(){
 		})
 	}, 15000);
 }
-
+//关闭新消息
 function closeNewMessage(){
 	$("#message").find("#close_btn").click(function(){
 		$("#message").css({
@@ -336,5 +336,15 @@ function checkSize(target) {
 		alert("上传文件过大");	
 		return false;
 	}
-} 
+}
+//初始化界面样式
+function initModalCss(){
+	var top=(browerHeight-$(".modal-dialog").height())/2-20;
+	var left=(browerWidth-$(".modal-dialog").width())/2;
+	$(".modal-dialog").css({
+		"position":"fixed",
+		"top":top,
+		"left":left
+	});
+};
 

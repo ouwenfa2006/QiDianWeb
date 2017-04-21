@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.Resource;
-
 /*import org.hibernate.Criteria;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.DetachedCriteria;
@@ -107,6 +106,15 @@ public class HibernateDaoSupport{
 		int firstResult=(page-1)*pageSize;
 		DetachedCriteria criteria2=(DetachedCriteria) criteria;
 		return hibernateTemplate.findByCriteria(criteria2, firstResult, pageSize);
-	}*/
+	}
+	public List<T> findBySql(String sql,Class<T> entityClass ,Object... objects) {
+		// TODO Auto-generated method stub
+		 NativeQuery nq = hibernateTemplate.getSessionFactory().getCurrentSession().createSQLQuery(sql).addEntity(entityClass);
+		for (int i = 0; i < objects.length; i++) {
+			nq.setParameter(i, objects[i]);
+		}
+		return nq.getResultList();
+	}
+	*/
 	
 }

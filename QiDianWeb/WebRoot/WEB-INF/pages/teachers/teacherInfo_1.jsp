@@ -56,7 +56,7 @@
 				<h5 style="line-height: 18px;"><span>教学理念:</span><span style="width: 455px;">${teacher.idea }</span></h5>
 				<h5 style="line-height: 25px;margin-top: 52px;"><span>受欢迎程度:</span><span>&nbsp;&nbsp;<i class="glyphicon glyphicon-star" style="color: red;font-size: 24px;"></i><i class="glyphicon glyphicon-star" style="color: red;font-size: 24px;"></i><i class="glyphicon glyphicon-star" style="color: red;font-size: 24px;"></i><i class="glyphicon glyphicon-star" style="color: red;font-size: 24px;"></i><i class="glyphicon glyphicon-star" style="color: red;font-size: 24px;"></i></span></h5>
 				<hr style="margin-top: 24px;margin-left: 32px;">
-				<button id="btn1" teacher="${teacher.userId }" class="pull-left btn btn-info" style="margin-left:6%;">在线咨询</button> <button class="btn btn-danger pull-left" style="margin-left:5%;">在线报名</button>
+				<button id="btn1" teacher="${teacher.userId }" class="pull-left btn btn-info" style="margin-left:6%;">在线咨询</button> <button id="btn2" class="btn btn-danger pull-left" style="margin-left:5%;">在线报名</button>
 			</div>
 		</div>
 		<div id="div2" class="panel panel-info col-md-12" style="height:211px;">
@@ -90,19 +90,34 @@
 				<div class="panel-body" id="">
 					<h5>${teacher.tHonor}</h5>
 				</div>
-		</div>
-		
+		</div>	
 	</div>
+
+	
 	<script type="text/javascript">
 		$(function(){
 			btn1Click();
+			btn2Click();
 		});
+		//在线咨询
 		function btn1Click(){
 			$("#btn1").click(function(){
-				var url="../chat/"+$(this).attr("teacher");
+				var url="../chat/newAdmin/"+$(this).attr("teacher");
 				window.open(url,"chat");
 			});
 		};
+		//在线报名
+		function btn2Click(){
+			$("#btn2").click(function(){
+				var modal=$("#zixunModal",top.window.document);
+				modal.modal('show');
+				var backgroundDiv=$(window.parent.parent.document).find("#top_bg_div");
+				backgroundDiv.show();
+				modal.on('hidden.bs.modal',function(e){
+					backgroundDiv.hide();
+				});
+			});
+		}
 	</script>
 </body>
 </html>

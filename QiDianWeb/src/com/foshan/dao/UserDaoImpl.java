@@ -53,6 +53,11 @@ public class UserDaoImpl extends BaseDaoSupport<User> implements UserDao{
 		// TODO Auto-generated method stub
 		return userMapper.findUsersAndImages(start,pageSize,grade,courseName,roleName,level);
 	}
+	@Override
+	public void updateUserLoginState(User user) {
+		// TODO Auto-generated method stub
+		userMapper.updateUserLoginState(user);
+	}
 	
 
 }

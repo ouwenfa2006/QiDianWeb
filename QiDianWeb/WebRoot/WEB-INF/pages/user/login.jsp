@@ -26,10 +26,18 @@
         </div>
         <br><br>
        
-
+		<input id="login_error" hidden="hidden" value="${login_orror }">
         <!-- Javascript -->
         <script src="${basePath }plugins/other/assets/js/supersized.3.2.7.min.js"></script>
-        <script src="${basePath }/plugins/other/assets/js/supersized-init.js"></script>
+        <script src="${basePath }plugins/other/assets/js/supersized-init.js"></script>
         <script src="${basePath }plugins/other/assets/js/scripts.js"></script>
+       
+        <script type="text/javascript">
+        	$(function(){
+				if($("#login_error").val()=="-1"){
+					alert("你的账户已经在别处登陆了!");
+				}
+        	});
+        </script>
 </body>
 </html>

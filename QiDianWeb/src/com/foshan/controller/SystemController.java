@@ -35,7 +35,7 @@ public class SystemController extends BaseController{
 	public void index(HttpServletRequest  request,HttpServletResponse response){
 
 		try {
-			response.sendRedirect("/QiDianWeb/index.jsp");
+			response.sendRedirect("../index.jsp");
 			//return "redirect:/QiDianWeb/index.jsp";
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

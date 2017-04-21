@@ -49,3 +49,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 
 </div>
+<script type="text/javascript">
+$(function(){
+	$("a[role='qq']").click(function(){
+		var url=basePath+"/chat/newAdmin/"+99;
+		window.open(url,"chat");
+	});
+});
+</script>

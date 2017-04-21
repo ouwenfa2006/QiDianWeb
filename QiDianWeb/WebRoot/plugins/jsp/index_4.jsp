@@ -6,7 +6,7 @@
 		<div class="pull-left"
 			style="font-size:30px;margin-left: 2%;color: red;">资讯</div>
 		<div class="pull-left" style="margin-left: 3%;">
-			<div class="btn-group" id="courses">
+			<div class="btn-group" id="courses1">
 				<button type="button" class="btn btn-default" style="border: 0px;">小学</button>
 				<button type="button" class="btn btn-default" style="border: 0px;">初中</button>
 				<button type="button" class="btn btn-default" style="border: 0px;">高中</button>
@@ -26,7 +26,7 @@
 					<h4 style="float:left;margin-left:-5%;margin-top:20px;">小学六年级数学学习方法推荐</h4>
 					<div>
 						<h5
-							style="margin-left:-5%;float:left;color:silver;margin-top:0px;">做任何事都是有方法的，对于小学六年级的学生来说，数学期末的复习很重要，在复习的时候大家要掌......</h5>
+							style="margin-left:-5%;float:left;color:silver;margin-top:0px;">做任何事都是有方法的，对于小学六年级的学生来说，数学期末的复习很重要，在复习......</h5>
 						<a class="pull-left" style="margin-top:-5px;" href="#">[更多]</a>
 					</div>
 				</div>
@@ -44,7 +44,7 @@
 					<h4 style="float:left;margin-left:-5%;margin-top:20px;">小学语文期末怎么备考更有效</h4>
 					<div>
 						<h5
-							style="margin-left:-5%;float:left;color:silver;margin-top:0px;">做任何事都是有方法的，对于小学六年级的学生来说，数学期末的复习很重要，在复习的时候大家要掌......</h5>
+							style="margin-left:-5%;float:left;color:silver;margin-top:0px;">做任何事都是有方法的，对于小学六年级的学生来说，数学期末的复习很重要......</h5>
 						<a class="pull-left" style="margin-top:-5px;" href="#">[更多]</a>
 					</div>
 				</div>
@@ -63,7 +63,7 @@
 					<h4 style="float:left;margin-left:-5%;margin-top:20px;">孩子在小学里最重要的5件事</h4>
 					<div>
 						<h5
-							style="margin-left:-5%;float:left;color:silver;margin-top:0px;">做任何事都是有方法的，对于小学六年级的学生来说，数学期末的复习很重要，在复习的时候大家要掌......</h5>
+							style="margin-left:-5%;float:left;color:silver;margin-top:0px;">做任何事都是有方法的，对于小学六年级的学生来说，数学期末的复习很重要......</h5>
 						<a class="pull-left" style="margin-top:-5px;" href="#">[更多]</a>
 					</div>
 				</div>
@@ -82,7 +82,7 @@
 					<h4 style="float:left;margin-left:-5%;margin-top:20px;">小学六年级数学学习方法推荐</h4>
 					<div>
 						<h5
-							style="margin-left:-5%;float:left;color:silver;margin-top:0px;">做任何事都是有方法的，对于小学六年级的学生来说，数学期末的复习很重要，在复习的时候大家要掌......</h5>
+							style="margin-left:-5%;float:left;color:silver;margin-top:0px;">做任何事都是有方法的，对于小学六年级的学生来说，数学期末的复习很重要......</h5>
 						<a class="pull-left" style="margin-top:-5px;" href="#">[更多]</a>
 					</div>
 				</div>
@@ -101,7 +101,7 @@
 					<h4 style="float:left;margin-left:-5%;margin-top:20px;">初中生不养成这三个习惯，再努力也没用</h4>
 					<div>
 						<h5
-							style="margin-left:-5%;float:left;color:silver;margin-top:0px;">做任何事都是有方法的，对于小学六年级的学生来说，数学期末的复习很重要，在复习的时候大家要掌......</h5>
+							style="margin-left:-5%;float:left;color:silver;margin-top:0px;">做任何事都是有方法的，对于小学六年级的学生来说，数学期末的复习很重要......</h5>
 						<a class="pull-left" style="margin-top:-5px;" href="#">[更多]</a>
 					</div>
 				</div>
@@ -112,4 +112,9 @@
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+$("#courses1>button").click(function(){
+	window.open(basePath+"systemController/getQiDianInfos","mainIframe");
+});
+</script>
 
